@@ -1,0 +1,110 @@
+---
+title: "*spmapper*: uses, caveats & limitations"
+output: html_document
+date: "`r Sys.Date()`"
+---
+
+<style>
+p {
+  text-align: justify;
+  text-align-last: left;
+}
+</style>
+
+
+# ***spmapper*: An R package spatial planning tool to indicate the foraging value of marine areas to breeding seabirds**
+
+<br>
+
+# Summary
+The purpose of this document is to summarise the purpose, methodology, caveats and limitations of the spatial planning tool *R* package *spmapper*. The tool is underpinned by seabird time-activity budget and energetics data collated for Black-legged kittiwake *Rissa tridactyla*, Common guillemot *Uria aalge*, and Razorbill *Alca torda*, published via the NERC Environmental Information Data Centre (Leedham et al. 2025). *spmapper* was written in the programming language R (R Core Team, 2017). Information on how to cite *spmapper* is included at the end of this document. 
+
+<br>
+
+# Background 
+Offshore wind energy is central to the UK's renewable energy strategy and is projected to expand substantially in terms of generation capacity, and in the number and area coverage of offshore windfarms (OWFs). OWFs have the potential for adverse impacts on marine wildlife, including seabirds, which travel through and forage in offshore areas. Among other possible impact mechanisms, OWFs may impact seabirds via displacement from foraging habitat, that is, seabirds may avoid windfarms in areas that they might otherwise forage. Because of this, displacement from windfarms may correspond to a loss of access to prey for foraging seabirds. 
+
+The breeding season—in particular the period where breeding adults are rearing chicks—is an energetically demanding time for seabirds. Seabirds must acquire sufficient prey to sustain their own energetic requirements, and for the provisioning of their chicks to fledging. Breeding outcomes are important for seabird population dynamics and their long-term resilience. Because of this—and because seabirds must forage in areas centred on the breeding colony—the impacts of OWFs during the breeding season are critical for seabird conservation.
+
+It is not possible to observe foraging success at sufficient scales to empirically map seabird prey consumption, and so describe the energetic value of marine areas to specific seabird species. To address this, we developed *spmapper*, a spatial planning tool to indicate the foraging value of marine areas to key seabird species that breed on the coasts and islands of the UK (Black-legged Kittiwake *Rissa tridactyla*, Common guillemot *Uria aalge*, and Razorbill *Alca torda*).
+
+<br>
+
+# Purpose & applications
+*spmapper* is a spatial planning tool that generates maps of seabird prey consumption by chick-rearing seabirds. The tool generates these maps by calculating the mass of fish prey taken by a seabird species network according to species-specific behaviour, physiology, diet, demography and population size; and then estimates the spatial origin of seabird prey removal according to models of marine space use (utilisation distributions, UDs). 
+[Define population of interest].<<<<<<<<<<<<<<<<<<<<<
+ 
+The central function of *spmapper* is to retrieve estimates for the absolute and proportional quantities of prey taken by focal species from within areas of interest to the user. In other words, the aim of the tool is to indicate the energetic or foraging value of marine areas to seabirds in terms of their prey consumption at the shelf-seas scale. The primary applications of these outputs include comparison of the total prey consumption in candidate areas for offshore renewable developments, and areas for protective conservation measures. 
+
+[…to assist with marine spatial planning]<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+Recommendation of spatial scale? <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+<br>
+
+# Caveats & Limitations
+
+### *The consequences of developing in areas evaluated using* spmapper *are not indicated.*
+Outputs do not indicate displacement rates or demographic impacts, *i.e.* how much of the indicated prey consumption will be lost to seabirds should an input area be developed, nor the subsequent impacts to breeding performance via energetic effects. We emphasise the use of *spmapper* as a *comparative* tool for candidate areas for development or protective measures. 
+
+<br>
+### *Treatment of prey intake mass estimates*
+Values of prey mass intake by seabird species network chick-rearing adults provided by *spmapper* an expected range (95% intervals), representing uncertainty in prey mass consumption estimates.
+
+<br>
+
+### *Uncertainty estimates concern prey masses only, not proportions of consumption, which are fixed.* 
+Spatial estimations of prey consumption (*i.e.* the underlying utilisation distributions) are fixed proportional estimates of space use. Uncertainty was estimated for the *mass* of prey consumed by species 
+[paper], <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+but no variation in the spatial component was assumed.
+
+<br>
+
+### *Prey consumption estimates are derived from a provided dataset*
+Values for the parameters underpin estimates of prey consumption masses are provided as a baseline and correspond to the Future of the Atlantic Marine Environment (FAME) seabird tracking study period (2010-2014) to align with space use estimates (Wakefield et al. 2017). Intake model parameters and their sources are published as a dataset (Leedham et al. 2025). Note, mass change (parameter: *mass_change*) for Razorbill was assumed as equivalent to Guillemot (Leedham et al. 2025).
+
+### *Modifying input parameters may impact prey mass estimates.*
+Users may modify the input parameters for the prey intake model, but users must indicate these changes... 
+[in any eventual publications or releases]. <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+<br>
+
+
+### *Seabird space use varies through time* 
+There is evidence that seabirds of a given colony can use marine space quite differently across years 
+[cite paper, others?]. <<<<<<<<<<<<<<<<
+
+*spmapper* concerns space use at a broad, shelf-seas scale, for seabird species networks for the UK and Ireland. 
+
+[See paper for single-colony maps, and details as to why this approach is not applicable for prey consumption at the colony level]. 
+<<<<<<<<<<<<<<<<<<<<<<
+
+Understanding drivers of this variation is challenging, but these patterns may indicate that the potential consequences of spatial planning (*i.e.* at the level of individual developments or protection areas) may vary year on year.
+
+At the broader spatial scale used in *spmapper*, we apply utilisation distributions to provide a representative, predicted distribution of marine space use for each species. The space use estimates are derived from models that predict space use based on GPS tracking data. The predicted use of marine space by each species was modelled according to environmental and spatial characteristics, including distance from colonies, and the suitability of habitat (see Wakefield et al., 2017 for details of space use modelling). This tool does not include temporal variation in prey consumption, which can be substantial at the level of individual colonies 
+[paper]. <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+<br>
+
+### *Windfarms may alter the quantity and distribution of prey available to seabirds.* 
+Any realised impacts of OWFs on seabird foraging dynamics and energetics may also depend on the responses of their prey to OWFs and OWF-mediated changes to geophyisical and biological processes. *spmapper* does not indicate prey redistribution or altered productivity dynamics in post-OWF areas. Any impact of displacement from OWFs may be mediated, positively or negatively, by any post-OWF changes to the distribution and productivity of prey fish... 
+[relevant citation?]<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+<br>
+
+# How to cite *spmapper*
+
+Leedham, O.; Searle, K.; Daunt, F.; Butler, A. "Spmapper: An R package spatial planning tool to indicate the foraging value of marine areas to breeding seabirds."
+
+
+
+## Reference list
+
+Leedham, O., Searle, K. R., Harris, M. P., Newell, M., Wanless, S., Mobbs, D. C., Butler, A. and Daunt, F. (2025) "Time-activity budgets and energetics of common guillemot, razorbill, Atlantic puffin, and black-legged kittiwake”, *NERC EDS Environmental Information Data Centre*. doi: 10.5285/07b1105a-4a14-47e3-b491-9af59be90aff.
+
+R Core Team, R. (2013) *R: A language and environment for statistical computing*. Vienna, Austria.
+
+Wakefield, E. D., Owen, E., Baer, J., Carroll, M. J., Daunt, F., Dodd, S. G., Green, J. A., Guilford, T., Mavor, R. A., Miller, P. I., Newell, M. A., Newton, S. F., Robertson, G. S., Shoji, A., Soanes, L. M., Votier, S. C., Wanless, S. and Bolton, M. (2017) “Breeding density, fine-scale tracking, and large-scale modeling reveal the regional distribution of four seabird species.,” *Ecological Applications*, 27(7), pp. 2074–2091. doi: 10.1002/eap.1591. 
+
+<br>
+
