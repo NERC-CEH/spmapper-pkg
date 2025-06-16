@@ -1,8 +1,21 @@
+
 ---
 title: "*spmapper*: uses, caveats & limitations"
-output: html_document
+output: rmarkdown::html_vignette
 date: "`r Sys.Date()`"
+vignette: >
+  %\VignetteIndexEntry{Overview of ecowings}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
+
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
 
 <style>
 p {

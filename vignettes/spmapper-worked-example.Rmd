@@ -4,22 +4,32 @@ output: html_document
 date: "2025-05-20"
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
 ```
 
 # Load packages and functions
 
-```{r echo=FALSE}
+```{r setup, echo=FALSE}
+library(ecowings)
 library(terra) ## note: needed in 'fpudoverlap'
 library(sf)
 library(knitr)
 
-tooldir <- file.path("/data", "notebooks", "rstudio-spmapper")
+#tooldir <- file.path("/data", "notebooks", "rstudio-spmapper")
+#tooldir <- file.path("R", package = "ecowings")
+tooldir <- system.file("scripts", package = "ecowings")
 
-source(file.path(tooldir, "R", "functions_preymodel.R"))
-source(file.path(tooldir, "R", "functions_spmapper.R"))
-source(file.path(tooldir, "R", "functions_fpudoverlap.R"))
+
+system.file("R", "functions_preymodel.R", package = "ecowings")
+system.file("R", "functions_spmapper.R", package = "ecowings")
+system.file("R", "functions_fpudoverlap.R", package = "ecowings")
+#source(file.path(tooldir, "R", "functions_preymodel.R"))
+#source(file.path(tooldir, "R", "functions_spmapper.R"))
+#source(file.path(tooldir, "R", "functions_fpudoverlap.R"))
 ```
 
 # Worked example - NnG and Berwick Bank
@@ -29,7 +39,8 @@ source(file.path(tooldir, "R", "functions_fpudoverlap.R"))
 NOTE: TEMPORARY
 
 ```{r echo=FALSE}
-fppolys <- sf::st_read(file.path(tooldir, "ExampleData", "North_Sea_OWF_2030_polygons"))
+fppolys <- sf::st_read(system.file("demo/North_Sea_OWF_2030_polygons", package = "ecowings"))
+#fppolys <- sf::st_read(file.path(tooldir, "ExampleData", #"North_Sea_OWF_2030_polygons"))
 
 fppolys <- fppolys[c(112,116),] ## NnG and Berwick Bank
 ```
@@ -43,6 +54,8 @@ out_cogu <- spmapper(spname = "Guillemot", fppolys = fppolys, popscen = "baselin
 
 out_razo <- spmapper(spname = "Razorbill", fppolys = fppolys, popscen = "baseline", tooldir = tooldir)
 ```
+
+
 
 ## Show UD map
 

@@ -5,6 +5,7 @@
 # spmapper
 # last extracted 16/06/2025, 11.30am
 
+# moved the scripts from R to inst>scripts
 #############################
 
 # run devtools & roxygen
@@ -91,7 +92,7 @@ usethis::use_vignette("introduction")
 # if ready, install the package in your R system library
 devtools::install()
 # then load it
-library(spmapper)
+library(ecowings)
 
 # render the vignettes
 # GitHub won’t directly render the .html file, but you can use the GitHub HTML Preview service.
@@ -135,6 +136,18 @@ devtools::clean_dll()
 #```{r, fig.width=8, fig.height=8}
 
 
-
-# to push
+# to create repo
+# open gitbash and navigate to pkg folder
+# type git init
+# add files to git repo (after it confirms creation): git add .
+# git commit -m "date, initials, my description of changes"
+# git remote add origin https://github.com/NERC-CEH/ecowings-Rpkg.git
+# git push -u origin branchnamehere
+# git push -u origin master # back to master branch
+# create a branch/change locally e.g. a branch called test will be created
+# git checkout -b test
+# to go back to master branch.
+# remember to edit the .gitignore file to add files in the ignore folder
+# you don't want to be uploaded
+# git checkout master
 
