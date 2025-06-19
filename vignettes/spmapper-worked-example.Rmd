@@ -1,10 +1,14 @@
 ---
 title: "Worked example for 'spmapper'"
-output: html_document
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Worked example for 'spmapper'}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 date: "2025-05-20"
 ---
 
-```{r, include = FALSE}
+```{r setup, include=FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -13,20 +17,26 @@ knitr::opts_chunk$set(
 
 # Load packages and functions
 
-```{r setup, echo=FALSE}
-library(ecowings)
+```{r echo=FALSE}
+library(spmapper)
 library(terra) ## note: needed in 'fpudoverlap'
 library(sf)
 library(knitr)
+library(rnaturalearth)
+library(viridis)
+library(ggplot2)
+library(patchwork)
 
-#tooldir <- file.path("/data", "notebooks", "rstudio-spmapper")
+#tooldir <- file.path("/data", "notebooks", "rstudio-spmapper2","spmapper")
 #tooldir <- file.path("R", package = "ecowings")
-tooldir <- system.file("scripts", package = "ecowings")
+#tooldir <- system.file("scripts", package = "ecowings")
+tooldir <- system.file("extdata", package = "spmapper")
 
 
-system.file("R", "functions_preymodel.R", package = "ecowings")
-system.file("R", "functions_spmapper.R", package = "ecowings")
-system.file("R", "functions_fpudoverlap.R", package = "ecowings")
+system.file("R", "functions_preymodel.R", package = "spmapper")
+system.file("R", "functions_spmapper.R", package = "spmapper")
+system.file("R", "functions_fpudoverlap.R", package = "spmapper")
+system.file("R", "functions_spmapplot.R", package = "spmapper")
 #source(file.path(tooldir, "R", "functions_preymodel.R"))
 #source(file.path(tooldir, "R", "functions_spmapper.R"))
 #source(file.path(tooldir, "R", "functions_fpudoverlap.R"))
@@ -39,11 +49,29 @@ system.file("R", "functions_fpudoverlap.R", package = "ecowings")
 NOTE: TEMPORARY
 
 ```{r echo=FALSE}
-fppolys <- sf::st_read(system.file("demo/North_Sea_OWF_2030_polygons", package = "ecowings"))
-#fppolys <- sf::st_read(file.path(tooldir, "ExampleData", #"North_Sea_OWF_2030_polygons"))
+fppolys <- sf::st_read(system.file("demo/UK_OWF_polygons_by_status", package = "spmapper"))
+fppolys <- fppolys %>% dplyr::filter(country == "United Kingdom")
+fppolys <- fppolys %>% dplyr::filter(status %in% c("Approved", "Construction", "Planned", "Production" )) 
+fppolys <- fppolys %>% dplyr::filter(!grepl("OFTO", name)) # exclude cable polygons
+proj.laea <- '+proj=laea +lat_0=-7.947 +lon_0=-14.30 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84  +units=m +no_defs'
+fppolys <-  st_transform(fppolys, crs = proj.laea)
 
-fppolys <- fppolys[c(112,116),] ## NnG and Berwick Bank
+fppolys <-  fppolys %>% dplyr::filter(name == "SeaGreen Alpha") # filter for one OWF for now <<<<<<<<<<<<<<<<<<<<<<<<<<<<<< REMOVE/REPLACE
+
+# Union of polygons to avoid double counting within overlapping polygons
+fppolys <- st_union(fppolys) # combine overlapping elements 
+fppolys <- st_sf(geometry = st_cast(fppolys, "POLYGON"))  # return to sfc
+
+
+# Example BLKI UD for testing code
+file_udmap <- system.file("extdata", paste0("FAME_UD_standardised_", "BLKI", ".tif"), package = "spmapper")
+udmap <- terra::rast(file_udmap)
+terra::crs(udmap) <- '+proj=laea +lat_0=-7.947 +lon_0=-14.30 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs +towgs84=0,0,0'
+  
+spmapplot(udmap,fppolys) # this colour scale wont work for raster as this is UD values, much less than prey map values, just used to test 
+
 ```
+
 
 ## Run tool for each species
 
@@ -55,21 +83,25 @@ out_cogu <- spmapper(spname = "Guillemot", fppolys = fppolys, popscen = "baselin
 out_razo <- spmapper(spname = "Razorbill", fppolys = fppolys, popscen = "baseline", tooldir = tooldir)
 ```
 
-
-
 ## Show UD map
 
 ```{r}
 par(mfrow=c(2,2))
-plot(out_kitt$udmap, main="Kittiwake")
-plot(out_cogu$udmap, main="Guillemot")
-plot(out_razo$udmap, main="Razorbill")
+par(mar=c(2,2,2,2))  # bottom, left, top, right
+(spmapplot(out_kitt$prey_cons_map, fppolys) + ggtitle("Kittiwake")) +
+(spmapplot(out_cogu$prey_cons_map, fppolys) + ggtitle("Guillemot")) +
+(spmapplot(out_razo$prey_cons_map, fppolys) + ggtitle("Razorbill")) + 
+  patchwork::plot_layout(ncol = 2)
+
+# SPACING ISSUE
 ```
 
 ## Visualize outputs
 
-```{r}
+
+```{r, out.width="50%"}
 par(mfrow=c(2,2))
+par(mar=c(2,2,2,2))  # bottom, left, top, right
 
 hist(out_kitt$allbirds_prey_sim, breaks=50, col=gray(0.6), main="Kittiwake")
 lines(rep(out_kitt$allbirds_prey_est,2),c(0,10000),lwd=2)
@@ -79,11 +111,13 @@ lines(rep(out_cogu$allbirds_prey_est,2),c(0,10000),lwd=2)
 
 hist(out_razo$allbirds_prey_sim, breaks=50, col=gray(0.6), main="Razorbill")
 lines(rep(out_razo$allbirds_prey_est,2),c(0,10000),lwd=2)
+
 ```
 
 ## Tables
 
 ```{r}
+dev.off()
 tab_kitt <- data.frame(
   Species = "Kittiwake",
   Estimate = out_kitt$allbirds_prey_est, 
@@ -144,8 +178,8 @@ The tool runs three checks for consistency between polygons and the UD map
 ### Footprints smaller than one grid cell
 
 ```{r error=TRUE}
-fppolys <- sf::st_read(file.path(tooldir, "ExampleData", "North_Sea_OWF_2030_polygons"))
-
+#fppolys <- sf::st_read(file.path(tooldir, "ExampleData", "North_Sea_OWF_2030_polygons"))
+fppolys <- sf::st_read(system.file("demo/North_Sea_OWF_2030_polygons", package = "spmapper"))
 fppolys <- fppolys[which.min(sf::st_area(fppolys)),]
 
 spmapper(spname = "Kittiwake", fppolys = fppolys, popscen = "baseline", tooldir = tooldir)
@@ -155,7 +189,8 @@ spmapper(spname = "Kittiwake", fppolys = fppolys, popscen = "baseline", tooldir 
 Note: the extent of the UD maps varies between species
 
 ```{r error=TRUE}
-fppolys <- sf::st_read(file.path(tooldir, "ExampleData", "North_Sea_OWF_2030_polygons"))
+#fppolys <- sf::st_read(file.path(tooldir, "ExampleData", "North_Sea_OWF_2030_polygons"))
+fppolys <- sf::st_read(system.file("demo/North_Sea_OWF_2030_polygons", package = "spmapper"))
 
 fppolys <- fppolys[1,]
 
@@ -167,7 +202,8 @@ spmapper(spname = "Guillemot", fppolys = fppolys, popscen = "baseline", tooldir 
 Note: this may be footprints on land, but it could also be footprints in areas that are within extent but have missing values as weren't included in the original modelling in Wakefield et al. (2017)
 
 ```{r error=TRUE}
-fppolys <- sf::st_read(file.path(tooldir, "ExampleData", "North_Sea_OWF_2030_polygons"))
+#fppolys <- sf::st_read(file.path(tooldir, "ExampleData", "North_Sea_OWF_2030_polygons"))
+fppolys <- sf::st_read(system.file("demo/North_Sea_OWF_2030_polygons", package = "spmapper"))
 
 fppolys <- fppolys[155,]
 

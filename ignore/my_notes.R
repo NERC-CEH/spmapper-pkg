@@ -15,7 +15,7 @@ library(roxygen2)
 
 # run this in the console with the path you have chosen it will create and open a new project, even if the
 # folder doesn't eist
- create_package("N:/ecowings")
+create_package("N:/ecowings")
 # this spmapper folder is an R source package and a Rstudio project
 # we now make a git repository
 use_git()
@@ -83,7 +83,6 @@ devtools::build()
 # Creates a “tarball” (.tar.gz), which is the format used for sharing and submitting packages around like on CRAN.
 # But basically, when doing so, it ensures the package is structured correctly.
 
-
 # not sure if devtools::build() is interchangeable with the below as it also creates a vignette folder
 # but maybe not a template introduction.Rmd?
 # and vignette for creating page on github
@@ -92,7 +91,7 @@ usethis::use_vignette("introduction")
 # if ready, install the package in your R system library
 devtools::install()
 # then load it
-library(ecowings)
+library(spmapper)
 
 # render the vignettes
 # GitHub won’t directly render the .html file, but you can use the GitHub HTML Preview service.
@@ -105,8 +104,6 @@ library(ecowings)
 ?spmapper
 ?fn.tot.prey
 spmapper()
-fn.tot.prey()
-spmapper::fn.tot.prey()
 
 # errors:
 
@@ -114,13 +111,13 @@ spmapper::fn.tot.prey()
 
 # file_popsize <- file.path(tooldir, "Data", "fame_population_ests.csv")
 # repleace this (and similar files) with:
-# file_popsize <- system.file("extdata", "fame_population_ests.csv", package = "ecowings")
+# file_udmap <- system.file("extdata", paste0("FAME_UD_standardised_", "BLKI", ".tif"), package = "spmapper")
 
 # exception:
 file_energypars_sim <- file.path(tooldir, "Data", paste(spcode, "sampled", "params", "csv", sep="."))
 # to:
 file_energypars_sim <- system.file(
-  "extdata",
+  tooldir, # previously it was "extdata", but this would make it hardcoded
   paste(spcode, "sampled", "params", "csv", sep = "."),
   package = "mypkg"
 )
@@ -138,10 +135,17 @@ devtools::clean_dll()
 
 # to create repo
 # open gitbash and navigate to pkg folder
-# type git init
+# type git init # SKIP THIS IF YOU HAVE ALREADY CREATED IT
 # add files to git repo (after it confirms creation): git add .
-# git commit -m "date, initials, my description of changes"
+# git commit -m "date, initials: my description of changes"
+
+
+# IGNORE THIS LINE BELOW IF REPO ALREADY EXISTS ######
 # git remote add origin https://github.com/NERC-CEH/ecowings-Rpkg.git
+#########################################
+
+
+##### if doing major edit use another branch
 # git push -u origin branchnamehere
 # git push -u origin master # back to master branch
 # create a branch/change locally e.g. a branch called test will be created
@@ -151,3 +155,38 @@ devtools::clean_dll()
 # you don't want to be uploaded
 # git checkout master
 
+# if simple edits just use
+# git push -u origin master
+
+
+#####################################
+# final checks of package
+devtools::check()
+
+# for testing create a token (if don't have it already) on github
+# https://github.com/settings/tokens
+
+#Click "Classic token" (for devtools, classic tokens are easier)
+
+# Select scopes:  repo (for private repo access)
+# Copy and save the token.
+
+# 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
+Sys.setenv(GITHUB_PAT = "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")
+# test package installation from github
+devtools::install_github("NERC-CEH/spmapper-Rpkg")
+
+
+# or even better
+
+devtools::install_github("NERC-CEH/spmapper-Rpkg", auth_token = "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")
+
+# pending:
+# DESCRIPTION NEEDS TO BE UPDATED, See SEABORD
+# also how does the vignette package is called?
+
+# build package site
+
+library(pkgdown)
+pkgdown::build_site()
+# this will create a website for the package in docs folder

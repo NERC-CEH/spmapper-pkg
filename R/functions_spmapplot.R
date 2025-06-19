@@ -28,6 +28,10 @@ spmapplot <- function(rast, polyg = NULL){
   # ensure laea projection
   rast <- project(rast, proj.laea)
 
+  # raster resolution for mass per area plot
+  rast.res.km <- 2 # UDs proivided in 2000m * 2000m (2 km resolution)
+  #rast.res.km <- res(rast)[1] / 1000 # needs raster units to be in metres
+
   # Convert to spatial dataframe
   rastdf <- as.data.frame(rast, xy = T)
 
@@ -36,11 +40,13 @@ spmapplot <- function(rast, polyg = NULL){
   lp <- seq(-4, 1, 1)
 
   p <- ggplot() + geom_raster(data = rastdf,
-                              aes(x = x, y = y, fill = rastdf[,3])) +
+                              aes(x = x, y = y, fill = rastdf[,3] / rast.res.km )) +
 
     scale_fill_gradientn(colours = virpal, trans = 'log10',
-                         #limits=c(min(10^lp), max(10^lp)),     # Control fill limits limits <<<<<<<<<<
-                         na.value = "gray", breaks = 10^lp, labels = 10^lp) +
+                         limits=c(min(10^lp)*10, # 0.001 tonnes, or 1 kg/km2
+                                  max(10^lp)),
+                         na.value = "gray",
+                         breaks = 10^lp, labels = 10^lp) +
 
     guides(fill = guide_colourbar(barwidth = 1.2,
                                   barheight = 9,

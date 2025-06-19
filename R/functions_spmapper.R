@@ -27,9 +27,8 @@ spmapper <- function(spname, fppolys, popscen, tooldir){
     stop("Invalid population scenario: must be 'low', 'baseline' or 'high'")
   }
 
-  file_popsize <- system.file("extdata",
-                              "fame_population_ests.csv",
-                              package = "ecowings")
+  file_popsize <- file.path(tooldir,
+                              "fame_population_ests.csv")
 
   popsizes <- read.csv(file_popsize)
 
@@ -38,9 +37,8 @@ spmapper <- function(spname, fppolys, popscen, tooldir){
   ## ################################
   ## 3. Load data - energetics parameters - estimates
 
-  file_energypars_est <- system.file("extdata",
-                                     "Seabird_energetics_pars_spmapper.csv",
-                                     package = "ecowings")
+  file_energypars_est <- file.path(tooldir,
+                                   "Seabird_energetics_pars_spmapper.csv")
 
   energypars_base_est <- read.csv(file_energypars_est)
 
@@ -57,10 +55,10 @@ spmapper <- function(spname, fppolys, popscen, tooldir){
   ## ################################
   ## 4. Load dat - energetic parameters - simulations (capturing uncertainty)
 
-  file_energypars_sim <- system.file("extdata",
-                                     paste(spcode, "sampled", "params", "csv",
-                                           sep="."),
-                                     package = "ecowings")
+  file_energypars_sim <- file.path(
+    tooldir,
+    paste(spcode, "sampled", "params", "csv", sep = ".")
+  )
   energypars_base_sim <- read.csv(file_energypars_sim)
 
   energypars_base_sim$init_mass_sd <- energypars_base_est$init_mass_sd ## fix missing values
@@ -72,11 +70,9 @@ spmapper <- function(spname, fppolys, popscen, tooldir){
   ## ################################
   ## 5. Load species-level UD
 
-  file_udmap <- system.file(
-    "extdata",
-    paste0("FAME_UD_standardised_", spcode, ".tif"),
-    #paste("FAME_UD_standardised_", spcode, ".tif"),
-    package = "ecowings"
+  file_udmap <- file.path(
+    tooldir,
+    paste0("FAME_UD_standardised_", spcode, ".tif")
   )
 
   udmap <- terra::rast(file_udmap)
@@ -96,7 +92,7 @@ spmapper <- function(spname, fppolys, popscen, tooldir){
   ## #################################
   ## 8. Prey calculation - estimates and simulations
 
-  onebird_prey_est <- fn.tot.prey(
+  onebird_prey_kg_est <- fn.tot.prey(
     TB_foraging = energypars_base_est$TB_foraging,
     TB_flying = energypars_base_est$TB_flying,
     TB_resting_sea = energypars_base_est$TB_resting_sea,
@@ -115,7 +111,7 @@ spmapper <- function(spname, fppolys, popscen, tooldir){
     energy_prey_conv = energypars_base_est$energy_prey_conv,
     assim_effic = energypars_base_est$assim_effic)
 
-  onebird_prey_sim <- fn.tot.prey(
+  onebird_prey_kg_sim <- fn.tot.prey(
     TB_foraging = energypars_base_sim$TB_foraging,
     TB_flying = energypars_base_sim$TB_flying,
     TB_resting_sea = energypars_base_sim$TB_resting_sea,
@@ -137,12 +133,19 @@ spmapper <- function(spname, fppolys, popscen, tooldir){
   ## #################################
   ## 10. Total prey loss
 
-  allbirds_prey_est <- nbirds_in_fp * onebird_prey_est
+  allbirds_prey_est <- nbirds_in_fp * onebird_prey_kg_est
 
-  allbirds_prey_sim <- nbirds_in_fp * onebird_prey_sim
+  allbirds_prey_sim <- nbirds_in_fp * onebird_prey_kg_sim
 
   ## #################################
-  ## 11. Output
+  # 11 . Prey map
+
+  # baseline pop. estimate
+  prey_cons_map <- udmap
+  values(prey_cons_map) <- values(prey_cons_map) * (popsize * onebird_prey_kg_est/1000) # tonnes
+
+  ## #################################
+  ## 12. Output
 
   list(
     spname = spname,
@@ -153,10 +156,11 @@ spmapper <- function(spname, fppolys, popscen, tooldir){
     popsize = popsize,
     fp_ud_overlap = fp_ud_overlap,
     nbirds_in_fp = nbirds_in_fp,
-    onebird_prey_est = onebird_prey_est,
-    onebird_prey_sim = onebird_prey_sim,
+    onebird_prey_kg_est = onebird_prey_kg_est,
+    onebird_prey_kg_sim = onebird_prey_kg_sim,
     allbirds_prey_est = allbirds_prey_est,
-    allbirds_prey_sim = allbirds_prey_sim
+    allbirds_prey_sim = allbirds_prey_sim,
+    prey_cons_map = prey_cons_map # baseline pop. estimate prey consumption map
   )
 }
 

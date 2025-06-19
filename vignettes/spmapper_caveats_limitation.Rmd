@@ -1,10 +1,9 @@
-
 ---
 title: "*spmapper*: uses, caveats & limitations"
 output: rmarkdown::html_vignette
 date: "`r Sys.Date()`"
 vignette: >
-  %\VignetteIndexEntry{Overview of ecowings}
+  %\VignetteIndexEntry{*spmapper*: uses, caveats & limitations}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -100,14 +99,14 @@ At the broader spatial scale used in *spmapper*, we apply utilisation distributi
 <br>
 
 ### *Windfarms may alter the quantity and distribution of prey available to seabirds.* 
-Any realised impacts of OWFs on seabird foraging dynamics and energetics may also depend on the responses of their prey to OWFs and OWF-mediated changes to geophyisical and biological processes. *spmapper* does not indicate prey redistribution or altered productivity dynamics in post-OWF areas. Any impact of displacement from OWFs may be mediated, positively or negatively, by any post-OWF changes to the distribution and productivity of prey fish... 
+Any realised impacts of OWFs on seabird foraging dynamics and energetics may also depend on the responses of their prey to OWFs and OWF-mediated changes to geophyisical and biological processes. *spmapper* does not indicate prey redistribution or altered productivity dynamics in post-OWF areas. Any impact of displacement from OWFs may be mediated, positively or negatively, by any post-OWF changes to the distribution and productivity of prey fish...
 [relevant citation?]<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 <br>
 
 # How to cite *spmapper*
 
-Leedham, O.; Searle, K.; Daunt, F.; Butler, A. "Spmapper: An R package spatial planning tool to indicate the foraging value of marine areas to breeding seabirds."
+Leedham, O.; Searle, K.; Caporusso, C.; Daunt, F.; Butler, A. "spmapper: An R package spatial planning tool to indicate the foraging value of marine areas to breeding seabirds."
 
 
 
@@ -117,7 +116,7 @@ Leedham, O., Searle, K. R., Harris, M. P., Newell, M., Wanless, S., Mobbs, D. C.
 
 R Core Team, R. (2013) *R: A language and environment for statistical computing*. Vienna, Austria.
 
-Wakefield, E. D., Owen, E., Baer, J., Carroll, M. J., Daunt, F., Dodd, S. G., Green, J. A., Guilford, T., Mavor, R. A., Miller, P. I., Newell, M. A., Newton, S. F., Robertson, G. S., Shoji, A., Soanes, L. M., Votier, S. C., Wanless, S. and Bolton, M. (2017) “Breeding density, fine-scale tracking, and large-scale modeling reveal the regional distribution of four seabird species.,” *Ecological Applications*, 27(7), pp. 2074–2091. doi: 10.1002/eap.1591. 
+Wakefield, E. D., Owen, E., Baer, J., Carroll, M. J., Daunt, F., Dodd, S. G., Green, J. A., Guilford, T., Mavor, R. A., Miller, P. I., Newell, M. A., Newton, S. F., Robertson, G. S., Shoji, A., Soanes, L. M., Votier, S. C., Wanless, S. and Bolton, M. (2017) “Breeding density, fine-scale tracking, and large-scale modeling reveal the regional distribution of four seabird species.,” *Ecological Applications*, 27(7), pp. 2074–2091. doi: 10.1002/eap.1591.
 
 <br>
 
