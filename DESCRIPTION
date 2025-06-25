@@ -1,18 +1,30 @@
 Package: spmapper
 Title: spmapper
 Version: 0.9.0
-Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Authors@R: c(
+    person("Oliver", "Leedham", , "olilee@ceh.ac.uk", role = c("aut", "cre")),
+    person("Kate", "Searle", role = "ctb"),
+    person("Claudia", "Caporusso", role = "ctb"),
+    person("Francis", "Daunt", role = "ctb"),
+    person("Adam", "Butler", role = "ctb")
+  )
+Maintainer: Claudia Caporusso <clacap@ceh.ac.uk>
+Description: A spatial planning tool to indicate the foraging value of marine areas to breeding seabirds.
+License: OGL
 Imports:
     sf,
     terra
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+Depends: 
+    R (>= 3.5)
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat
+Config/testthat/edition: 3
+VignetteBuilder: knitr
+LazyData: true
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
-Suggests: 
-    knitr,
-    rmarkdown
-VignetteBuilder: knitr
+URL: https://github.com/NERC-CEH/spmapper-pkg
+BugReports: https://github.com/NERC-CEH/spmapper-pkg/issues

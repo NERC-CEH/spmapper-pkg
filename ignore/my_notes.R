@@ -86,7 +86,7 @@ devtools::build()
 # not sure if devtools::build() is interchangeable with the below as it also creates a vignette folder
 # but maybe not a template introduction.Rmd?
 # and vignette for creating page on github
-usethis::use_vignette("introduction")
+#usethis::use_vignette("introduction")
 
 # if ready, install the package in your R system library
 devtools::install()
@@ -174,12 +174,12 @@ devtools::check()
 # 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
 Sys.setenv(GITHUB_PAT = "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")
 # test package installation from github
-devtools::install_github("NERC-CEH/spmapper-Rpkg")
+devtools::install_github("NERC-CEH/spmapper-pkg")
 
 
 # or even better
 
-devtools::install_github("NERC-CEH/spmapper-Rpkg", auth_token = "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")
+devtools::install_github("NERC-CEH/spmapper-pkg", auth_token = "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")
 
 # pending:
 # DESCRIPTION NEEDS TO BE UPDATED, See SEABORD
@@ -188,5 +188,18 @@ devtools::install_github("NERC-CEH/spmapper-Rpkg", auth_token = "ghp_JhC7gsHDlSQ
 # build package site
 
 library(pkgdown)
+
+# remove former contents in docs:
+pkgdown::clean_site(force = TRUE)
 pkgdown::build_site()
+build_favicons(pkg = ".", overwrite = FALSE)
 # this will create a website for the package in docs folder
+
+# use pkgdown to add logos (it will find them in pkgdown/favicon)
+
+
+# for every file, (e.g. a csv in ext data, create an R file
+# to put in a folder called data-raw)
+
+# generate a metadata skeleton for dataset
+#sinew::makeOxygen(Seabird_energetics_pars_spmapper)

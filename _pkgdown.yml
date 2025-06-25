@@ -1,7 +1,37 @@
+url: ~
+template:
+  bootstrap: 5
+  light-switch: true
 pandoc: '3.4'
-pkgdown: 2.1.3
-pkgdown_sha: ~
+
+navbar:
+  structure:
+    left: [intro, reference, articles]
+    right:
+      - search
+      - github
+      - lightswitch
+
+reference:
+  - title: "Main functions behind the spmapper model"
+    contents:
+      - spmapper
+      - spmapplot
+      - fpudoverlap
+      - fn.tot.prey
+
+  - title: "Datasets available"
+    contents:
+      - Seabird_energetics_pars_spmapper
+      - BLKI_sampled_spmapper
+      - COGU_sampled_spmapper
+      - RAZO_sampled_spmapper
+      - fame_population_spmapper
+      - FAME_UD_standardised_BLKI
+      - FAME_UD_standardised_COGU
+      - FAME_UD_standardised_RAZO
+
 articles:
-  spmapper-worked-example: spmapper-worked-example.html
-  spmapper_caveats_limitation: spmapper_caveats_limitation.html
-last_built: 2025-06-19T16:57Z
+  - title: "Worked examples and limitations"
+    navbar: Worked examples and limitations
+    contents: [spmapper-worked-example, spmapper_caveats_limitation]
