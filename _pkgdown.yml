@@ -34,4 +34,4 @@ reference:
 articles:
   - title: "Documentation"
     navbar: Documentation
-    contents: [spmapper_methods, spmapper_caveats_limitation, spmapper-worked-example]
+    contents: [spmapper_background, spmapper_methods, spmapper_caveats_limitation, spmapper-worked-example]

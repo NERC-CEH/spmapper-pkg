@@ -147,7 +147,6 @@ devtools::clean_dll()
 # open gitbash and navigate to pkg folder
 # add files to git repo: git add .
 # git commit -m "date, initials: my description of changes"
-# git remote add origin https://github.com/NERC-CEH/spmapper-pkg.git
 # git push -u origin master
 #####################################################
 
@@ -197,7 +196,7 @@ library(pkgdown)
 # remove former contents in docs:
 pkgdown::clean_site(force = TRUE)
 pkgdown::build_site()
-build_favicons(pkg = ".", overwrite = FALSE)
+#build_favicons(pkg = ".", overwrite = FALSE)
 # this will create a website for the package in docs folder
 
 # use pkgdown to add logos (it will find them in pkgdown/favicon)

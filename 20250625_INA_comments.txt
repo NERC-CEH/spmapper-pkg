@@ -1,8 +1,0 @@
-any table that has more than 10 columns and goes beyond page
-
-check figures quality best to prioritise:
-INA chapter status - returned by CLAs: yes
-
-start with chapter 3 (it has a powerpoint and excel with raw data)
-cross-check with word document
-USE Oene revisions after final checks June 16
