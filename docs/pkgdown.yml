@@ -4,4 +4,5 @@ pkgdown_sha: ~
 articles:
   spmapper-worked-example: spmapper-worked-example.html
   spmapper_caveats_limitation: spmapper_caveats_limitation.html
-last_built: 2025-06-25T10:56Z
+  spmapper_methods: spmapper_methods.html
+last_built: 2025-07-01T08:37Z

@@ -1,14 +1,18 @@
 #' Seabirds Energetics Parameters
 #'
-#' This dataset provides information about :
-#' @format A data frame with the following 4 columns:
+#' This dataset contains information on key behavioural and physiological traits of the three focal species of seabirds: Common guillemot Uria aalge;
+#' Razorbill Alca torda; and Black-legged kittiwake Rissa tridactyla.
+#' These data describe the daily time allocation to and energetic costs of core activities and other energetically important processes and species traits.
+#' These data are used by the spmapper() function to estimate the mass of prey taken by an individual breeding adult of each species.
+#'
+#' @format A data frame with 25 rows and 4 variables:
 #' \describe{
-#'   \item{parameter}{Character: ...}
-#'   \item{Guillemot}{Numeric: ...}
-#'   \item{Razorbill}{Numeric: ...}
-#'   \item{Kittiwake}{Numeric: ...}
+#'   \item{parameter}{Character Parameter name}
+#'   \item{Guillemot}{Numeric Parameter values for Guillemot}
+#'   \item{Razorbill}{Numeric Parameter values for Razorbill}
+#'   \item{Kittiwake}{Numeric Parameter values for Kittiwake}
 #' }
-#' @source NEED EXPL
+#' @source Published dataset: Leedham, O.; Searle, K.R.; Harris, M.P.; Newell, M.; Wanless, S.; Mobbs, D.C.; Butler, A.; Daunt, F. (2025). Time-activity budgets and energetics of common guillemot, razorbill, Atlantic puffin, and black-legged kittiwake. NERC EDS Environmental Information Data Centre. https://doi.org/10.5285/07b1105a-4a14-47e3-b491-9af59be90aff
 "Seabird_energetics_pars_spmapper"
 
 #' Razorbill sampled parameters
@@ -99,11 +103,11 @@
 #'
 #' @format A data frame with 9 rows and 3 variables:
 #' \describe{
-#'   \item{\code{spp}}{character COLUMN_DESCRIPTION}
-#'   \item{\code{estimate}}{character COLUMN_DESCRIPTION}
-#'   \item{\code{value}}{integer COLUMN_DESCRIPTION}
+#'   \item{\code{spp}}{character Species}
+#'   \item{\code{estimate}}{character Estimate level}
+#'   \item{\code{value}}{integer Population estimate}
 #'}
-#' @source NEED EXPL
+#' @source NEED EXPL # <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 "fame_population_spmapper"
 
 #' FAME-UD-standardised-RAZO-spmapper

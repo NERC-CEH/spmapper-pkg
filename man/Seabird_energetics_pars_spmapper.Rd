@@ -5,21 +5,24 @@
 \alias{Seabird_energetics_pars_spmapper}
 \title{Seabirds Energetics Parameters}
 \format{
-A data frame with the following 4 columns:
+A data frame with 25 rows and 4 variables:
 \describe{
-\item{parameter}{Character: ...}
-\item{Guillemot}{Numeric: ...}
-\item{Razorbill}{Numeric: ...}
-\item{Kittiwake}{Numeric: ...}
+\item{parameter}{Character Parameter name}
+\item{Guillemot}{Numeric Parameter values for Guillemot}
+\item{Razorbill}{Numeric Parameter values for Razorbill}
+\item{Kittiwake}{Numeric Parameter values for Kittiwake}
 }
 }
 \source{
-NEED EXPL
+Published dataset: Leedham, O.; Searle, K.R.; Harris, M.P.; Newell, M.; Wanless, S.; Mobbs, D.C.; Butler, A.; Daunt, F. (2025). Time-activity budgets and energetics of common guillemot, razorbill, Atlantic puffin, and black-legged kittiwake. NERC EDS Environmental Information Data Centre. https://doi.org/10.5285/07b1105a-4a14-47e3-b491-9af59be90aff
 }
 \usage{
 Seabird_energetics_pars_spmapper
 }
 \description{
-This dataset provides information about :
+This dataset contains information on key behavioural and physiological traits of the three focal species of seabirds: Common guillemot Uria aalge;
+Razorbill Alca torda; and Black-legged kittiwake Rissa tridactyla.
+These data describe the daily time allocation to and energetic costs of core activities and other energetically important processes and species traits.
+These data are used by the spmapper() function to estimate the mass of prey taken by an individual breeding adult of each species.
 }
 \keyword{datasets}

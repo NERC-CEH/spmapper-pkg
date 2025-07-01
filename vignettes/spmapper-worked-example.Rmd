@@ -23,23 +23,18 @@ library(terra) ## note: needed in 'fpudoverlap'
 library(sf)
 library(knitr)
 library(rnaturalearth)
+#library(rnaturalearthhires)
 library(viridis)
 library(ggplot2)
 library(patchwork)
 
-#tooldir <- file.path("/data", "notebooks", "rstudio-spmapper2","spmapper")
-#tooldir <- file.path("R", package = "ecowings")
-#tooldir <- system.file("scripts", package = "ecowings")
 tooldir <- system.file("extdata", package = "spmapper")
-
 
 system.file("R", "functions_preymodel.R", package = "spmapper")
 system.file("R", "functions_spmapper.R", package = "spmapper")
 system.file("R", "functions_fpudoverlap.R", package = "spmapper")
 system.file("R", "functions_spmapplot.R", package = "spmapper")
-#source(file.path(tooldir, "R", "functions_preymodel.R"))
-#source(file.path(tooldir, "R", "functions_spmapper.R"))
-#source(file.path(tooldir, "R", "functions_fpudoverlap.R"))
+
 ```
 
 # Worked example - NnG and Berwick Bank
@@ -49,6 +44,8 @@ system.file("R", "functions_spmapplot.R", package = "spmapper")
 NOTE: TEMPORARY
 
 ```{r echo=FALSE}
+# Example polygons
+# UK offshore windfarms (Sourced via EMODNet)
 fppolys <- sf::st_read(system.file("demo/UK_OWF_polygons_by_status", package = "spmapper"))
 fppolys <- fppolys %>% dplyr::filter(country == "United Kingdom")
 fppolys <- fppolys %>% dplyr::filter(status %in% c("Approved", "Construction", "Planned", "Production" )) 
@@ -71,7 +68,6 @@ terra::crs(udmap) <- '+proj=laea +lat_0=-7.947 +lon_0=-14.30 +x_0=0 +y_0=0 +ellp
 spmapplot(udmap,fppolys) # this colour scale wont work for raster as this is UD values, much less than prey map values, just used to test 
 
 ```
-
 
 ## Run tool for each species
 
@@ -111,7 +107,6 @@ lines(rep(out_cogu$allbirds_prey_est,2),c(0,10000),lwd=2)
 
 hist(out_razo$allbirds_prey_sim, breaks=50, col=gray(0.6), main="Razorbill")
 lines(rep(out_razo$allbirds_prey_est,2),c(0,10000),lwd=2)
-
 ```
 
 ## Tables
@@ -178,7 +173,6 @@ The tool runs three checks for consistency between polygons and the UD map
 ### Footprints smaller than one grid cell
 
 ```{r error=TRUE}
-#fppolys <- sf::st_read(file.path(tooldir, "ExampleData", "North_Sea_OWF_2030_polygons"))
 fppolys <- sf::st_read(system.file("demo/North_Sea_OWF_2030_polygons", package = "spmapper"))
 fppolys <- fppolys[which.min(sf::st_area(fppolys)),]
 
@@ -189,7 +183,6 @@ spmapper(spname = "Kittiwake", fppolys = fppolys, popscen = "baseline", tooldir 
 Note: the extent of the UD maps varies between species
 
 ```{r error=TRUE}
-#fppolys <- sf::st_read(file.path(tooldir, "ExampleData", "North_Sea_OWF_2030_polygons"))
 fppolys <- sf::st_read(system.file("demo/North_Sea_OWF_2030_polygons", package = "spmapper"))
 
 fppolys <- fppolys[1,]
@@ -202,7 +195,6 @@ spmapper(spname = "Guillemot", fppolys = fppolys, popscen = "baseline", tooldir 
 Note: this may be footprints on land, but it could also be footprints in areas that are within extent but have missing values as weren't included in the original modelling in Wakefield et al. (2017)
 
 ```{r error=TRUE}
-#fppolys <- sf::st_read(file.path(tooldir, "ExampleData", "North_Sea_OWF_2030_polygons"))
 fppolys <- sf::st_read(system.file("demo/North_Sea_OWF_2030_polygons", package = "spmapper"))
 
 fppolys <- fppolys[155,]

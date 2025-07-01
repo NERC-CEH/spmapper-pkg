@@ -7,13 +7,13 @@
 \format{
 A data frame with 9 rows and 3 variables:
 \describe{
-\item{\code{spp}}{character COLUMN_DESCRIPTION}
-\item{\code{estimate}}{character COLUMN_DESCRIPTION}
-\item{\code{value}}{integer COLUMN_DESCRIPTION}
+\item{\code{spp}}{character Species}
+\item{\code{estimate}}{character Estimate level}
+\item{\code{value}}{integer Population estimate}
 }
 }
 \source{
-NEED EXPL
+NEED EXPL # <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 }
 \usage{
 fame_population_spmapper

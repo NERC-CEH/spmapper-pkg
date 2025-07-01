@@ -3,6 +3,7 @@
 # all data is on datalabs
 # https://datalab.datalabs.ceh.ac.uk/resource/ecowings/spmapper/
 # spmapper
+# last extracted 25/06/2025, 12.20am
 # last extracted 16/06/2025, 11.30am
 
 # moved the scripts from R to inst>scripts
@@ -103,7 +104,6 @@ library(spmapper)
 # check that the function works by running ?spmapper for example
 ?spmapper
 ?fn.tot.prey
-spmapper()
 
 # errors:
 
@@ -132,18 +132,24 @@ devtools::clean_dll()
 # for visualising plots and charts use this:
 #```{r, fig.width=8, fig.height=8}
 
-
+##########################################################
+# FIRST TIME ONLY ############################################
 # to create repo
 # open gitbash and navigate to pkg folder
 # type git init # SKIP THIS IF YOU HAVE ALREADY CREATED IT
 # add files to git repo (after it confirms creation): git add .
 # git commit -m "date, initials: my description of changes"
-
-
-# IGNORE THIS LINE BELOW IF REPO ALREADY EXISTS ######
-# git remote add origin https://github.com/NERC-CEH/ecowings-Rpkg.git
+# git remote add origin https://github.com/NERC-CEH/spmapper-Rpkg.git
 #########################################
 
+###############################################
+# updates
+# open gitbash and navigate to pkg folder
+# add files to git repo: git add .
+# git commit -m "date, initials: my description of changes"
+# git remote add origin https://github.com/NERC-CEH/spmapper-pkg.git
+# git push -u origin master
+#####################################################
 
 ##### if doing major edit use another branch
 # git push -u origin branchnamehere
@@ -183,7 +189,6 @@ devtools::install_github("NERC-CEH/spmapper-pkg", auth_token = "ghp_JhC7gsHDlSQA
 
 # pending:
 # DESCRIPTION NEEDS TO BE UPDATED, See SEABORD
-# also how does the vignette package is called?
 
 # build package site
 
@@ -203,3 +208,6 @@ build_favicons(pkg = ".", overwrite = FALSE)
 
 # generate a metadata skeleton for dataset
 #sinew::makeOxygen(Seabird_energetics_pars_spmapper)
+
+# to finally view your pkgdown site go to your repository in Settings>pages and set
+# Branch to Master>docs and then save

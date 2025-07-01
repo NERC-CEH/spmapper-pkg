@@ -6,6 +6,6 @@
 # * https://r-pkgs.org/testing-design.html#sec-tests-files-overview
 # * https://testthat.r-lib.org/articles/special-files.html
 library(testthat)
-library(ecowings)
+library(spmapper)
 
-test_check("ecowings")
+test_check("spmapper")

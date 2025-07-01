@@ -1,0 +1,15 @@
+---
+title: "spmapper_methods"
+output: html_document
+date: "2025-06-30"
+---
+
+<style>
+p {
+  text-align: justify;
+  text-align-last: left;
+}
+</style>
+
+# Methods summary
+

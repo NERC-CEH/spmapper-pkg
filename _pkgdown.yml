@@ -32,6 +32,6 @@ reference:
       - FAME_UD_standardised_RAZO
 
 articles:
-  - title: "Worked examples and limitations"
-    navbar: Worked examples and limitations
-    contents: [spmapper-worked-example, spmapper_caveats_limitation]
+  - title: "Documentation"
+    navbar: Documentation
+    contents: [spmapper_methods, spmapper_caveats_limitation, spmapper-worked-example]
