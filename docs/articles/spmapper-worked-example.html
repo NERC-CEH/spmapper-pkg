@@ -116,7 +116,7 @@
 </h3>
 <p>NOTE: TEMPORARY</p>
 <pre><code><span><span class="co">#&gt; Reading layer `windfarmspolyPolygon' from data source </span></span>
-<span><span class="co">#&gt;   `C:\Users\clacap\AppData\Local\Temp\RtmpmIU3Cj\temp_libpath2028cd3641\spmapper\demo\UK_OWF_polygons_by_status' </span></span>
+<span><span class="co">#&gt;   `C:\Users\clacap\AppData\Local\Temp\Rtmp0YC6RZ\temp_libpath55008be4416\spmapper\demo\UK_OWF_polygons_by_status' </span></span>
 <span><span class="co">#&gt;   using driver `ESRI Shapefile'</span></span>
 <span><span class="co">#&gt; Simple feature collection with 405 features and 9 fields</span></span>
 <span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
@@ -133,10 +133,13 @@
 </h3>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">out_kitt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/spmapper.html">spmapper</a></span><span class="op">(</span>spname <span class="op">=</span> <span class="st">"Kittiwake"</span>, fppolys <span class="op">=</span> <span class="va">fppolys</span>, popscen <span class="op">=</span> <span class="st">"baseline"</span>, tooldir <span class="op">=</span> <span class="va">tooldir</span><span class="op">)</span></span>
+<span><span class="co">#&gt; |---------|---------|---------|---------|=========================================                                          </span></span>
 <span></span>
 <span><span class="va">out_cogu</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/spmapper.html">spmapper</a></span><span class="op">(</span>spname <span class="op">=</span> <span class="st">"Guillemot"</span>, fppolys <span class="op">=</span> <span class="va">fppolys</span>, popscen <span class="op">=</span> <span class="st">"baseline"</span>, tooldir <span class="op">=</span> <span class="va">tooldir</span><span class="op">)</span></span>
+<span><span class="co">#&gt; |---------|---------|---------|---------|=========================================                                          </span></span>
 <span></span>
-<span><span class="va">out_razo</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/spmapper.html">spmapper</a></span><span class="op">(</span>spname <span class="op">=</span> <span class="st">"Razorbill"</span>, fppolys <span class="op">=</span> <span class="va">fppolys</span>, popscen <span class="op">=</span> <span class="st">"baseline"</span>, tooldir <span class="op">=</span> <span class="va">tooldir</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">out_razo</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/spmapper.html">spmapper</a></span><span class="op">(</span>spname <span class="op">=</span> <span class="st">"Razorbill"</span>, fppolys <span class="op">=</span> <span class="va">fppolys</span>, popscen <span class="op">=</span> <span class="st">"baseline"</span>, tooldir <span class="op">=</span> <span class="va">tooldir</span><span class="op">)</span></span>
+<span><span class="co">#&gt; |---------|---------|---------|---------|=========================================                                          </span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="show-ud-map">Show UD map<a class="anchor" aria-label="anchor" href="#show-ud-map"></a>
@@ -290,7 +293,7 @@ UD map</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fppolys</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">st_read</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"demo/North_Sea_OWF_2030_polygons"</span>, package <span class="op">=</span> <span class="st">"spmapper"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Reading layer `North_Sea_OWF_2030_polygons' from data source </span></span>
-<span><span class="co">#&gt;   `C:\Users\clacap\AppData\Local\Temp\RtmpmIU3Cj\temp_libpath2028cd3641\spmapper\demo\North_Sea_OWF_2030_polygons' </span></span>
+<span><span class="co">#&gt;   `C:\Users\clacap\AppData\Local\Temp\Rtmp0YC6RZ\temp_libpath55008be4416\spmapper\demo\North_Sea_OWF_2030_polygons' </span></span>
 <span><span class="co">#&gt;   using driver `ESRI Shapefile'</span></span>
 <span><span class="co">#&gt; Simple feature collection with 177 features and 4 fields</span></span>
 <span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
@@ -309,7 +312,7 @@ UD map</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fppolys</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">st_read</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"demo/North_Sea_OWF_2030_polygons"</span>, package <span class="op">=</span> <span class="st">"spmapper"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Reading layer `North_Sea_OWF_2030_polygons' from data source </span></span>
-<span><span class="co">#&gt;   `C:\Users\clacap\AppData\Local\Temp\RtmpmIU3Cj\temp_libpath2028cd3641\spmapper\demo\North_Sea_OWF_2030_polygons' </span></span>
+<span><span class="co">#&gt;   `C:\Users\clacap\AppData\Local\Temp\Rtmp0YC6RZ\temp_libpath55008be4416\spmapper\demo\North_Sea_OWF_2030_polygons' </span></span>
 <span><span class="co">#&gt;   using driver `ESRI Shapefile'</span></span>
 <span><span class="co">#&gt; Simple feature collection with 177 features and 4 fields</span></span>
 <span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
@@ -331,7 +334,7 @@ included in the original modelling in Wakefield et al. (2017)</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fppolys</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">st_read</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"demo/North_Sea_OWF_2030_polygons"</span>, package <span class="op">=</span> <span class="st">"spmapper"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Reading layer `North_Sea_OWF_2030_polygons' from data source </span></span>
-<span><span class="co">#&gt;   `C:\Users\clacap\AppData\Local\Temp\RtmpmIU3Cj\temp_libpath2028cd3641\spmapper\demo\North_Sea_OWF_2030_polygons' </span></span>
+<span><span class="co">#&gt;   `C:\Users\clacap\AppData\Local\Temp\Rtmp0YC6RZ\temp_libpath55008be4416\spmapper\demo\North_Sea_OWF_2030_polygons' </span></span>
 <span><span class="co">#&gt;   using driver `ESRI Shapefile'</span></span>
 <span><span class="co">#&gt; Simple feature collection with 177 features and 4 fields</span></span>
 <span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
@@ -342,6 +345,7 @@ included in the original modelling in Wakefield et al. (2017)</p>
 <span><span class="va">fppolys</span> <span class="op">&lt;-</span> <span class="va">fppolys</span><span class="op">[</span><span class="fl">155</span>,<span class="op">]</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/spmapper.html">spmapper</a></span><span class="op">(</span>spname <span class="op">=</span> <span class="st">"Guillemot"</span>, fppolys <span class="op">=</span> <span class="va">fppolys</span>, popscen <span class="op">=</span> <span class="st">"baseline"</span>, tooldir <span class="op">=</span> <span class="va">tooldir</span><span class="op">)</span></span>
+<span><span class="co">#&gt; |---------|---------|---------|---------|=========================================                                          </span></span>
 <span><span class="co">#&gt; Error in fpudoverlap(fppolys = fppolys, udmap = udmap): Part or all of footprint lies on land or outside area with UD values!</span></span></code></pre></div>
 </div>
 </div>
