@@ -1,6 +1,10 @@
 ---
-title: "spmapper_methods"
+title: "Methods"
 output: html_document
+vignette: >
+  %\VignetteIndexEntry{Methods}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 date: "2025-06-30"
 ---
 

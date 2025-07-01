@@ -2,6 +2,11 @@ url: ~
 template:
   bootstrap: 5
   light-switch: true
+  theme: gruvbox-light
+  theme-dark: gruvbox-dark
+  bslib:
+    bootswatch: lux
+    pkgdown-nav-height: 100px
 pandoc: '3.4'
 
 navbar:
@@ -34,4 +39,4 @@ reference:
 articles:
   - title: "Documentation"
     navbar: Documentation
-    contents: [spmapper_background, spmapper_methods, spmapper_caveats_limitation, spmapper-worked-example]
+    contents: [spmapper_methods, spmapper_caveats_limitation, spmapper-worked-example]

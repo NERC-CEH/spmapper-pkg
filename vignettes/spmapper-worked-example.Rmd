@@ -1,8 +1,8 @@
 ---
-title: "Worked example for 'spmapper'"
+title: "Worked example"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Worked example for 'spmapper'}
+  %\VignetteIndexEntry{Worked example}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 date: "2025-05-20"
@@ -81,7 +81,8 @@ out_razo <- spmapper(spname = "Razorbill", fppolys = fppolys, popscen = "baselin
 
 ## Show UD map
 
-```{r}
+```{r multi-species-map, fig.alt = "Composite map showing prey consumption for Kittiwake, Guillemot, and Razorbill", fig.width=8, fig.height=6}
+par(mfrow=c(2,2))
 par(mfrow=c(2,2))
 par(mar=c(2,2,2,2))  # bottom, left, top, right
 (spmapplot(out_kitt$prey_cons_map, fppolys) + ggtitle("Kittiwake")) +

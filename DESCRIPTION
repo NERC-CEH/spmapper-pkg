@@ -10,16 +10,21 @@ Authors@R: c(
   )
 Maintainer: Claudia Caporusso <clacap@ceh.ac.uk>
 Description: A spatial planning tool to indicate the foraging value of marine areas to breeding seabirds.
-License: OGL
+License: OGL-UK-3.0
 Imports:
+    dplyr,
+    ggplot2,
+    patchwork,
+    rnaturalearth,
     sf,
-    terra
+    terra,
+    viridis
 Depends: 
     R (>= 3.5)
 Suggests: 
     knitr,
     rmarkdown,
-    testthat
+    testthat (>= 3.0.0)
 Config/testthat/edition: 3
 VignetteBuilder: knitr
 LazyData: true

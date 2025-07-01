@@ -3,7 +3,6 @@ pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
   spmapper-worked-example: spmapper-worked-example.html
-  spmapper_background: spmapper_background.html
   spmapper_caveats_limitation: spmapper_caveats_limitation.html
   spmapper_methods: spmapper_methods.html
-last_built: 2025-07-01T08:49Z
+last_built: 2025-07-01T14:51Z

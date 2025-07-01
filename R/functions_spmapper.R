@@ -6,6 +6,7 @@
 #' @param popscen Population scenario: a character string. Must be "baseline", "low" or "high"
 #' @param tooldir Path to directory containing tool: a character string.
 #' @return A list, with elements: "spname" (species name), "popscen" (population scenario"), "energypars_base_est" (energetics parameters - estimates), "energypars_base_sim" (energetics parameters - simulations), "udmap" (utilisation distribution, a raster), "popsize" (population size - BREEDING PAIRS **TBC**, "fp_ud_overlap" (proportion of UD within a footprint), "nbirds_in_fp" (number of birds in footprints), "onebird_prey_kg_est" (prey intake from one bird - estimate), "onebird_prey_kg_sim" (prey intake from one bird - simulations), "allbirds_prey_est" (prey intake from all birds in footprints - estimate), "allbirds_prey_sim" (prey intake from all birds in footprints - simulations)
+#' @importFrom utils read.csv
 #' @export
 
 spmapper <- function(spname, fppolys, popscen, tooldir){
@@ -142,7 +143,7 @@ spmapper <- function(spname, fppolys, popscen, tooldir){
 
   # baseline pop. estimate
   prey_cons_map <- udmap
-  values(prey_cons_map) <- values(prey_cons_map) * (popsize * onebird_prey_kg_est/1000) # tonnes
+  values(prey_cons_map) <- terra::values(prey_cons_map) * (popsize * onebird_prey_kg_est/1000) # tonnes
 
   ## #################################
   ## 12. Output
@@ -165,3 +166,5 @@ spmapper <- function(spname, fppolys, popscen, tooldir){
 }
 
 ## ########################################
+
+# write a function to test the function above runs as expected

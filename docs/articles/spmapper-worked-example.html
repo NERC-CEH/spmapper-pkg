@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Worked example for 'spmapper' • spmapper</title>
+<title>Worked example • spmapper</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
 <link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
 <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
@@ -15,7 +15,7 @@
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Worked example for 'spmapper'">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Worked example">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -40,10 +40,9 @@
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><hr class="dropdown-divider"></li>
     <li><h6 class="dropdown-header" data-toc-skip>Documentation</h6></li>
-    <li><a class="dropdown-item" href="../articles/spmapper_background.html">spmapper_background</a></li>
-    <li><a class="dropdown-item" href="../articles/spmapper_methods.html">spmapper_methods</a></li>
-    <li><a class="dropdown-item" href="../articles/spmapper_caveats_limitation.html">*spmapper*: uses, caveats &amp; limitations</a></li>
-    <li><a class="dropdown-item" href="../articles/spmapper-worked-example.html">Worked example for 'spmapper'</a></li>
+    <li><a class="dropdown-item" href="../articles/spmapper_methods.html">Methods</a></li>
+    <li><a class="dropdown-item" href="../articles/spmapper_caveats_limitation.html">Uses, Caveats &amp; Limitations</a></li>
+    <li><a class="dropdown-item" href="../articles/spmapper-worked-example.html">Worked example</a></li>
   </ul>
 </li>
       </ul>
@@ -72,7 +71,7 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.png" class="logo" alt=""><h1>Worked example for 'spmapper'</h1>
+      <img src="../logo.png" class="logo" alt=""><h1>Worked example</h1>
             
             <h4 data-toc-skip class="date">2025-05-20</h4>
       
@@ -98,7 +97,7 @@
 <span><span class="co">#&gt; Warning: package 'rnaturalearth' was built under R version 4.4.2</span></span>
 <span><span class="co">#&gt; Loading required package: viridisLite</span></span>
 <span><span class="co">#&gt; Warning: package 'ggplot2' was built under R version 4.4.3</span></span>
-<span><span class="co">#&gt; Warning: package 'patchwork' was built under R version 4.4.1</span></span>
+<span><span class="co">#&gt; Warning: package 'patchwork' was built under R version 4.4.3</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Attaching package: 'patchwork'</span></span>
 <span><span class="co">#&gt; The following object is masked from 'package:terra':</span></span>
@@ -117,7 +116,7 @@
 </h3>
 <p>NOTE: TEMPORARY</p>
 <pre><code><span><span class="co">#&gt; Reading layer `windfarmspolyPolygon' from data source </span></span>
-<span><span class="co">#&gt;   `C:\Users\clacap\AppData\Local\Temp\RtmpGohhB5\temp_libpath5ab81fc8e4\spmapper\demo\UK_OWF_polygons_by_status' </span></span>
+<span><span class="co">#&gt;   `C:\Users\clacap\AppData\Local\Temp\RtmpmIU3Cj\temp_libpath2028cd3641\spmapper\demo\UK_OWF_polygons_by_status' </span></span>
 <span><span class="co">#&gt;   using driver `ESRI Shapefile'</span></span>
 <span><span class="co">#&gt; Simple feature collection with 405 features and 9 fields</span></span>
 <span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
@@ -134,19 +133,17 @@
 </h3>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">out_kitt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/spmapper.html">spmapper</a></span><span class="op">(</span>spname <span class="op">=</span> <span class="st">"Kittiwake"</span>, fppolys <span class="op">=</span> <span class="va">fppolys</span>, popscen <span class="op">=</span> <span class="st">"baseline"</span>, tooldir <span class="op">=</span> <span class="va">tooldir</span><span class="op">)</span></span>
-<span><span class="co">#&gt; |---------|---------|---------|---------|=========================================                                          </span></span>
 <span></span>
 <span><span class="va">out_cogu</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/spmapper.html">spmapper</a></span><span class="op">(</span>spname <span class="op">=</span> <span class="st">"Guillemot"</span>, fppolys <span class="op">=</span> <span class="va">fppolys</span>, popscen <span class="op">=</span> <span class="st">"baseline"</span>, tooldir <span class="op">=</span> <span class="va">tooldir</span><span class="op">)</span></span>
-<span><span class="co">#&gt; |---------|---------|---------|---------|=========================================                                          </span></span>
 <span></span>
-<span><span class="va">out_razo</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/spmapper.html">spmapper</a></span><span class="op">(</span>spname <span class="op">=</span> <span class="st">"Razorbill"</span>, fppolys <span class="op">=</span> <span class="va">fppolys</span>, popscen <span class="op">=</span> <span class="st">"baseline"</span>, tooldir <span class="op">=</span> <span class="va">tooldir</span><span class="op">)</span></span>
-<span><span class="co">#&gt; |---------|---------|---------|---------|=========================================                                          </span></span></code></pre></div>
+<span><span class="va">out_razo</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/spmapper.html">spmapper</a></span><span class="op">(</span>spname <span class="op">=</span> <span class="st">"Razorbill"</span>, fppolys <span class="op">=</span> <span class="va">fppolys</span>, popscen <span class="op">=</span> <span class="st">"baseline"</span>, tooldir <span class="op">=</span> <span class="va">tooldir</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="show-ud-map">Show UD map<a class="anchor" aria-label="anchor" href="#show-ud-map"></a>
 </h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mar<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>  <span class="co"># bottom, left, top, right</span></span>
 <span><span class="op">(</span><span class="fu"><a href="../reference/spmapplot.html">spmapplot</a></span><span class="op">(</span><span class="va">out_kitt</span><span class="op">$</span><span class="va">prey_cons_map</span>, <span class="va">fppolys</span><span class="op">)</span> <span class="op">+</span> <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"Kittiwake"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span><span class="op">(</span><span class="fu"><a href="../reference/spmapplot.html">spmapplot</a></span><span class="op">(</span><span class="va">out_cogu</span><span class="op">$</span><span class="va">prey_cons_map</span>, <span class="va">fppolys</span><span class="op">)</span> <span class="op">+</span> <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"Guillemot"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -158,7 +155,7 @@
 <span><span class="co">#&gt; replace the existing one.</span></span>
 <span><span class="co">#&gt; Coordinate system already present. Adding new coordinate system, which will</span></span>
 <span><span class="co">#&gt; replace the existing one.</span></span></code></pre></div>
-<p><img src="spmapper-worked-example_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
+<p><img src="spmapper-worked-example_files/figure-html/multi-species-map-1.png" alt="Composite map showing prey consumption for Kittiwake, Guillemot, and Razorbill" width="768"></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># SPACING ISSUE</span></span></code></pre></div>
@@ -178,7 +175,7 @@
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">out_razo</span><span class="op">$</span><span class="va">allbirds_prey_sim</span>, breaks<span class="op">=</span><span class="fl">50</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/gray.html" class="external-link">gray</a></span><span class="op">(</span><span class="fl">0.6</span><span class="op">)</span>, main<span class="op">=</span><span class="st">"Razorbill"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="va">out_razo</span><span class="op">$</span><span class="va">allbirds_prey_est</span>,<span class="fl">2</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">10000</span><span class="op">)</span>,lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<p><img src="spmapper-worked-example_files/figure-html/unnamed-chunk-5-1.png" width="50%"></p>
+<p><img src="spmapper-worked-example_files/figure-html/unnamed-chunk-4-1.png" width="50%"></p>
 </div>
 <div class="section level3">
 <h3 id="tables">Tables<a class="anchor" aria-label="anchor" href="#tables"></a>
@@ -293,7 +290,7 @@ UD map</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fppolys</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">st_read</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"demo/North_Sea_OWF_2030_polygons"</span>, package <span class="op">=</span> <span class="st">"spmapper"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Reading layer `North_Sea_OWF_2030_polygons' from data source </span></span>
-<span><span class="co">#&gt;   `C:\Users\clacap\AppData\Local\Temp\RtmpGohhB5\temp_libpath5ab81fc8e4\spmapper\demo\North_Sea_OWF_2030_polygons' </span></span>
+<span><span class="co">#&gt;   `C:\Users\clacap\AppData\Local\Temp\RtmpmIU3Cj\temp_libpath2028cd3641\spmapper\demo\North_Sea_OWF_2030_polygons' </span></span>
 <span><span class="co">#&gt;   using driver `ESRI Shapefile'</span></span>
 <span><span class="co">#&gt; Simple feature collection with 177 features and 4 fields</span></span>
 <span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
@@ -312,7 +309,7 @@ UD map</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fppolys</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">st_read</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"demo/North_Sea_OWF_2030_polygons"</span>, package <span class="op">=</span> <span class="st">"spmapper"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Reading layer `North_Sea_OWF_2030_polygons' from data source </span></span>
-<span><span class="co">#&gt;   `C:\Users\clacap\AppData\Local\Temp\RtmpGohhB5\temp_libpath5ab81fc8e4\spmapper\demo\North_Sea_OWF_2030_polygons' </span></span>
+<span><span class="co">#&gt;   `C:\Users\clacap\AppData\Local\Temp\RtmpmIU3Cj\temp_libpath2028cd3641\spmapper\demo\North_Sea_OWF_2030_polygons' </span></span>
 <span><span class="co">#&gt;   using driver `ESRI Shapefile'</span></span>
 <span><span class="co">#&gt; Simple feature collection with 177 features and 4 fields</span></span>
 <span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
@@ -334,7 +331,7 @@ included in the original modelling in Wakefield et al. (2017)</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fppolys</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">st_read</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"demo/North_Sea_OWF_2030_polygons"</span>, package <span class="op">=</span> <span class="st">"spmapper"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Reading layer `North_Sea_OWF_2030_polygons' from data source </span></span>
-<span><span class="co">#&gt;   `C:\Users\clacap\AppData\Local\Temp\RtmpGohhB5\temp_libpath5ab81fc8e4\spmapper\demo\North_Sea_OWF_2030_polygons' </span></span>
+<span><span class="co">#&gt;   `C:\Users\clacap\AppData\Local\Temp\RtmpmIU3Cj\temp_libpath2028cd3641\spmapper\demo\North_Sea_OWF_2030_polygons' </span></span>
 <span><span class="co">#&gt;   using driver `ESRI Shapefile'</span></span>
 <span><span class="co">#&gt; Simple feature collection with 177 features and 4 fields</span></span>
 <span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
@@ -345,7 +342,6 @@ included in the original modelling in Wakefield et al. (2017)</p>
 <span><span class="va">fppolys</span> <span class="op">&lt;-</span> <span class="va">fppolys</span><span class="op">[</span><span class="fl">155</span>,<span class="op">]</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/spmapper.html">spmapper</a></span><span class="op">(</span>spname <span class="op">=</span> <span class="st">"Guillemot"</span>, fppolys <span class="op">=</span> <span class="va">fppolys</span>, popscen <span class="op">=</span> <span class="st">"baseline"</span>, tooldir <span class="op">=</span> <span class="va">tooldir</span><span class="op">)</span></span>
-<span><span class="co">#&gt; |---------|---------|---------|---------|=========================================                                          </span></span>
 <span><span class="co">#&gt; Error in fpudoverlap(fppolys = fppolys, udmap = udmap): Part or all of footprint lies on land or outside area with UD values!</span></span></code></pre></div>
 </div>
 </div>

@@ -123,7 +123,7 @@ file_energypars_sim <- system.file(
 )
 
 # if pkg is corrupted unlink it
-unlink("C:/Users/clacap/AppData/Local/R/win-library/4.4/ecowings", recursive = TRUE, force = TRUE)
+unlink("C:/Users/clacap/AppData/Local/R/win-library/4.4/spmapper", recursive = TRUE, force = TRUE)
 # or manually remove it by browsing to it
 # clean
 devtools::clean_dll()
@@ -165,8 +165,19 @@ devtools::clean_dll()
 
 
 #####################################
-# final checks of package
+# final checks of package - go to unlink and remove dll around line 125 if you have
+# corruption errors
 devtools::check()
+
+#t roughly simulates what happens when a package is installed and loaded with library
+devtools::load_all()
+
+# test package
+# set up testthat
+usethis::use_testthat(3)
+
+# test overage of the whole package
+devtools::test_coverage()
 
 # for testing create a token (if don't have it already) on github
 # https://github.com/settings/tokens

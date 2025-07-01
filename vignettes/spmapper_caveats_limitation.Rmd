@@ -1,9 +1,9 @@
 ---
-title: "*spmapper*: uses, caveats & limitations"
+title: "Uses, Caveats & Limitations"
 output: rmarkdown::html_vignette
 date: "`r Sys.Date()`"
 vignette: >
-  %\VignetteIndexEntry{*spmapper*: uses, caveats & limitations}
+  %\VignetteIndexEntry{Uses, Caveats & Limitations}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -27,33 +27,34 @@ p {
 # Caveats & Limitations
 Recommendation of spatial scale? <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-### *The consequences of developing in areas evaluated using* spmapper *are not indicated.*
+## *The consequences of developing in areas evaluated using* spmapper *are not indicated.*
 Outputs do not indicate displacement rates or demographic impacts, *i.e.* how much of the indicated prey consumption will be lost to seabirds should an input area be developed, nor the subsequent impacts to breeding performance via energetic effects. We emphasise the use of *spmapper* as a *comparative* tool for candidate areas for development or protective measures. 
 
 <br>
-### *Treatment of prey intake mass estimates*
+
+## *Treatment of prey intake mass estimates.*
 Values of prey mass intake by seabird species network chick-rearing adults provided by *spmapper* an expected range (95% intervals), representing uncertainty in prey mass consumption estimates.
 
 <br>
 
-### *Uncertainty estimates concern prey masses only, not proportions of consumption, which are fixed.* 
+## *Uncertainty estimates concern prey masses only, not proportions of consumption, which are fixed.* 
 Spatial estimations of prey consumption (*i.e.* the underlying utilisation distributions) are fixed proportional estimates of space use. Uncertainty was estimated for the *mass* of prey consumed by species 
 [paper], <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 but no variation in the spatial component was assumed.
 
 <br>
 
-### *Prey consumption estimates are derived from a provided dataset*
+## *Prey consumption estimates are derived from a provided dataset*
 Values for the parameters underpin estimates of prey consumption masses are provided as a baseline and correspond to the Future of the Atlantic Marine Environment (FAME) seabird tracking study period (2010-2014) to align with space use estimates (Wakefield et al. 2017). Intake model parameters and their sources are published as a dataset (Leedham et al. 2025). Note, mass change (parameter: *mass_change*) for Razorbill was assumed as equivalent to Guillemot (Leedham et al. 2025).
 
-### *Modifying input parameters may impact prey mass estimates.*
+## *Modifying input parameters may impact prey mass estimates.*
 Users may modify the input parameters for the prey intake model, but users must indicate these changes... 
 [in any eventual publications or releases]. <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 <br>
 
 
-### *Seabird space use varies through time* 
+## *Seabird space use varies through time* 
 There is evidence that seabirds of a given colony can use marine space quite differently across years 
 [cite paper, others?]. <<<<<<<<<<<<<<<<
 
@@ -69,12 +70,11 @@ At the broader spatial scale used in *spmapper*, we apply utilisation distributi
 
 <br>
 
-### *Windfarms may alter the quantity and distribution of prey available to seabirds.* 
+## *Windfarms may alter the quantity and distribution of prey available to seabirds.* 
 Any realised impacts of OWFs on seabird foraging dynamics and energetics may also depend on the responses of their prey to OWFs and OWF-mediated changes to geophyisical and biological processes. *spmapper* does not indicate prey redistribution or altered productivity dynamics in post-OWF areas. Any impact of displacement from OWFs may be mediated, positively or negatively, by any post-OWF changes to the distribution and productivity of prey fish...
 [relevant citation?]<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-<br>
-
+<hr>
 
 ## Reference list
 
