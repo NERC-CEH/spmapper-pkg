@@ -7,7 +7,7 @@
 \format{
 A list with two elements:
 \describe{
-\item{matrix}{A numeric matrix of UD values with 462,392 rows and 1 column (with bird species code).
+\item{matrix}{A numeric matrix of UD values with 462,392 rows and 1 column (with bird species code).}
 \item{metadata}{A list of 7 elements describing spatial extent and resolution:
 \describe{
 \item{n_rows}{Number of raster rows}
@@ -28,7 +28,7 @@ Wakefield, E.D., Owen, E., Baer, J., Carroll, M.J., Daunt, F., Dodd, S.G., Green
 FAME_UD_standardised_BLKI
 }
 \description{
-Uk-Ireland utilisation distribution (UD) for Black-legged Kittiwake (Future of the Atlantic Marine Environment FAME study period; 2010-2014). Via RSPB; for methods, see Wakefi#'
+Uk-Ireland utilisation distribution (UD) for Black-legged Kittiwake (Future of the Atlantic Marine Environment FAME study period; 2010-2014). Via RSPB; for methods, see Wakefi
 The object contains a matrix of UD values and associated spatial metadata, to build a raster
 }
 \keyword{datasets}

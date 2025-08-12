@@ -120,7 +120,7 @@
 #'
 #' @format A list with two elements:
 #' \describe{
-#'   \item{matrix}{A numeric matrix of UD values with 462,392 rows and 1 column (with bird species code).
+#'   \item{matrix}{A numeric matrix of UD values with 462,392 rows and 1 column (with bird species code).}
 #'   \item{metadata}{A list of 7 elements describing spatial extent and resolution:
 #'     \describe{
 #'       \item{n_rows}{Number of raster rows}
@@ -130,9 +130,9 @@
 #'       \item{y_min}{Minimum Y coordinate}
 #'       \item{y_max}{Maximum Y coordinate}
 #'       \item{crs}{Coordinate reference system as WKT or PROJ string}
-#'     }
-#'   }
-#' }
+#'      }
+#'    }
+#'  }
 #' @source Wakefield, E.D., Owen, E., Baer, J., Carroll, M.J., Daunt, F., Dodd, S.G., Green, J.A., Guilford, T., Mavor, R.A., Miller, P.I. and Newell, M.A., 2017. Breeding density, fine‐scale tracking, and large‐scale modeling reveal the regional distribution of four seabird species. Ecological Applications, 27(7), pp.2074-2091.
 "FAME_UD_standardised_RAZO"
 
@@ -145,7 +145,7 @@
 #'
 #' @format A list with two elements:
 #' \describe{
-#'   \item{matrix}{A numeric matrix of UD values with 462,392 rows and 1 column (with bird species code).
+#'   \item{matrix}{A numeric matrix of UD values with 462,392 rows and 1 column (with bird species code).}
 #'   \item{metadata}{A list of 7 elements describing spatial extent and resolution:
 #'     \describe{
 #'       \item{n_rows}{Number of raster rows}
@@ -155,21 +155,21 @@
 #'       \item{y_min}{Minimum Y coordinate}
 #'       \item{y_max}{Maximum Y coordinate}
 #'       \item{crs}{Coordinate reference system as WKT or PROJ string}
-#'     }
-#'   }
-#' }
+#'      }
+#'    }
+#'  }
 #' @source Wakefield, E.D., Owen, E., Baer, J., Carroll, M.J., Daunt, F., Dodd, S.G., Green, J.A., Guilford, T., Mavor, R.A., Miller, P.I. and Newell, M.A., 2017. Breeding density, fine‐scale tracking, and large‐scale modeling reveal the regional distribution of four seabird species. Ecological Applications, 27(7), pp.2074-2091.
 "FAME_UD_standardised_COGU"
 
 
 #' FAME-UD-standardised-BLKI-spmapper
 #'
-#' Uk-Ireland utilisation distribution (UD) for Black-legged Kittiwake (Future of the Atlantic Marine Environment FAME study period; 2010-2014). Via RSPB; for methods, see Wakefi#'
+#' Uk-Ireland utilisation distribution (UD) for Black-legged Kittiwake (Future of the Atlantic Marine Environment FAME study period; 2010-2014). Via RSPB; for methods, see Wakefi
 #' The object contains a matrix of UD values and associated spatial metadata, to build a raster
 #'
 #' @format A list with two elements:
 #' \describe{
-#'   \item{matrix}{A numeric matrix of UD values with 462,392 rows and 1 column (with bird species code).
+#'   \item{matrix}{A numeric matrix of UD values with 462,392 rows and 1 column (with bird species code).}
 #'   \item{metadata}{A list of 7 elements describing spatial extent and resolution:
 #'     \describe{
 #'       \item{n_rows}{Number of raster rows}
@@ -179,8 +179,8 @@
 #'       \item{y_min}{Minimum Y coordinate}
 #'       \item{y_max}{Maximum Y coordinate}
 #'       \item{crs}{Coordinate reference system as WKT or PROJ string}
-#'     }
-#'   }
-#' }
+#'      }
+#'    }
+#'  }
 #' @source Wakefield, E.D., Owen, E., Baer, J., Carroll, M.J., Daunt, F., Dodd, S.G., Green, J.A., Guilford, T., Mavor, R.A., Miller, P.I. and Newell, M.A., 2017. Breeding density, fine‐scale tracking, and large‐scale modeling reveal the regional distribution of four seabird species. Ecological Applications, 27(7), pp.2074-2091.
 "FAME_UD_standardised_BLKI"

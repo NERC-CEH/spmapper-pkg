@@ -7,7 +7,7 @@
 \format{
 A list with two elements:
 \describe{
-\item{matrix}{A numeric matrix of UD values with 462,392 rows and 1 column (with bird species code).
+\item{matrix}{A numeric matrix of UD values with 462,392 rows and 1 column (with bird species code).}
 \item{metadata}{A list of 7 elements describing spatial extent and resolution:
 \describe{
 \item{n_rows}{Number of raster rows}
