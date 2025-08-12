@@ -9,16 +9,16 @@ A data frame with 9 rows and 3 variables:
 \describe{
 \item{\code{spp}}{character Species}
 \item{\code{estimate}}{character Estimate level}
-\item{\code{value}}{integer Population estimate}
+\item{\code{value}}{integer Breeding population size estimate}
 }
 }
 \source{
-NEED EXPL # <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+See methods for details.
 }
 \usage{
 fame_population_spmapper
 }
 \description{
-A dataset containing information on:
+A dataset containing UK seabird population size estimates for breeding population size of focal seabird species. A full national census (Seabird 2000) is available for the period 1998-2002, whereas colony counts for a subset of colonies are available for the period 2010-2014 via the Seabird Monitoring Programme (SMP). We used both datasets to derive an estimate of national-level abundance for the period 2010-2014. See methods for further details.
 }
 \keyword{datasets}

@@ -45,7 +45,7 @@ fpudoverlap <- function(fppolys, udmap){
   ## #################################
   ## 6. Check none of footprint is on land:
 
-  if(any((! is_cell_atsea) & (pcell.in.footprint > 0))){ stop("Part or all of footprint lies on land or outside area with UD values!") }
+  if(any((! is_cell_atsea) & (pcell.in.footprint > 0))){ warning("Part or all of footprint lies on land or outside area with UD values!") }
 
   ## #################################
   ## 7. Subset so that only using values for grid cells at sea:

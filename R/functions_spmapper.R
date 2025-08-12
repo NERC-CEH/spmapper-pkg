@@ -1,11 +1,12 @@
 ## ########################################
-#' @title TO BE ADDED - TITLE OF MAIN SPMAPPER FUNCTION
-#' @description TO BE ADDED - OVERALL DESCRIPTION OF WHAT SPMAPPER DOES
+#' @title spmapper core function. Generate prey consumption maps and perform extractions within user-supplied polygons.
+#' @description Produces prey consumption maps and extracts of prey mass values within user-specified spatial polygons. Returns list of various inputs, intermediate quantities, prey consumption maps and extraction totals.
 #' @param spname Species name: a character string. Must be "Guillemot", "Kittiwake" or "Razorbill"
 #' @param fppolys Footprint(s): a simple feature collection
 #' @param popscen Population scenario: a character string. Must be "baseline", "low" or "high"
 #' @param tooldir Path to directory containing tool: a character string.
-#' @return A list, with elements: "spname" (species name), "popscen" (population scenario"), "energypars_base_est" (energetics parameters - estimates), "energypars_base_sim" (energetics parameters - simulations), "udmap" (utilisation distribution, a raster), "popsize" (population size - BREEDING PAIRS **TBC**, "fp_ud_overlap" (proportion of UD within a footprint), "nbirds_in_fp" (number of birds in footprints), "onebird_prey_kg_est" (prey intake from one bird - estimate), "onebird_prey_kg_sim" (prey intake from one bird - simulations), "allbirds_prey_est" (prey intake from all birds in footprints - estimate), "allbirds_prey_sim" (prey intake from all birds in footprints - simulations)
+#' @return A list, with elements: "spname" (species name), "popscen" (population scenario"), "energypars_base_est" (energetics parameters - estimates), "energypars_base_sim" (energetics parameters - simulations), "udmap" (utilisation distribution, a raster), "popsize" (population size - number of individual breeding adults), "fp_ud_overlap" (proportion of UD within polygons/footprints), "onebird_prey_kg_est" (chick-rearing prey intake mass from one bird - estimate), "onebird_prey_kg_sim" (chick-rearing prey intake mass from one bird - simulations), "allbirds_prey_est" (prey intake mass from all birds - estimate),  "allbirds_prey_sim" (prey intake from all birds - simulations), "allbirds_prey_fp_est" (prey mass in footprints - estimate),  "allbirds_prey_
+#' _sim" (prey mass in footprints - simulations), "prey_cons_map" (prey consumption map - a raster)
 #' @importFrom utils read.csv
 #' @export
 
@@ -86,12 +87,7 @@ spmapper <- function(spname, fppolys, popscen, tooldir){
   fp_ud_overlap <- fpudoverlap(fppolys = fppolys, udmap = udmap)
 
   ## #################################
-  ## 7. Number of birds in footprint
-
-  nbirds_in_fp <- popsize * fp_ud_overlap
-
-  ## #################################
-  ## 8. Prey calculation - estimates and simulations
+  ## 7. Prey calculation - estimates and simulations
 
   onebird_prey_kg_est <- fn.tot.prey(
     TB_foraging = energypars_base_est$TB_foraging,
@@ -132,21 +128,28 @@ spmapper <- function(spname, fppolys, popscen, tooldir){
     assim_effic = energypars_base_sim$assim_effic)
 
   ## #################################
-  ## 10. Total prey loss
+  ## 8. Total prey mass
 
-  allbirds_prey_est <- nbirds_in_fp * onebird_prey_kg_est
+  allbirds_prey_est <- popsize * onebird_prey_kg_est # baseline
 
-  allbirds_prey_sim <- nbirds_in_fp * onebird_prey_kg_sim
+  allbirds_prey_sim <- popsize * onebird_prey_kg_sim # simulated
 
   ## #################################
-  # 11 . Prey map
+  ## 9. Prey mass in footprint fp
 
-  # baseline pop. estimate
+  allbirds_prey_fp_est <- allbirds_prey_est * fp_ud_overlap # baseline
+
+  allbirds_prey_fp_sim <- allbirds_prey_sim * fp_ud_overlap # simulated
+
+
+  ## #################################
+  # 10 . Prey consumption map
+
   prey_cons_map <- udmap
-  values(prey_cons_map) <- terra::values(prey_cons_map) * (popsize * onebird_prey_kg_est/1000) # tonnes
+  values(prey_cons_map) <- values(prey_cons_map) * (popsize * onebird_prey_kg_est/1000) # tonnes
 
   ## #################################
-  ## 12. Output
+  ## 11. Output
 
   list(
     spname = spname,
@@ -156,15 +159,14 @@ spmapper <- function(spname, fppolys, popscen, tooldir){
     udmap = udmap,
     popsize = popsize,
     fp_ud_overlap = fp_ud_overlap,
-    nbirds_in_fp = nbirds_in_fp,
     onebird_prey_kg_est = onebird_prey_kg_est,
     onebird_prey_kg_sim = onebird_prey_kg_sim,
     allbirds_prey_est = allbirds_prey_est,
     allbirds_prey_sim = allbirds_prey_sim,
-    prey_cons_map = prey_cons_map # baseline pop. estimate prey consumption map
+    allbirds_prey_fp_est = allbirds_prey_fp_est,
+    allbirds_prey_fp_sim = allbirds_prey_fp_sim,
+    prey_cons_map = prey_cons_map # baseline prey consumption map
   )
 }
 
 ## ########################################
-
-# write a function to test the function above runs as expected

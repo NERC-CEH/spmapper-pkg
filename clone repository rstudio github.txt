@@ -1,0 +1,10 @@
+Open RStudio.
+
+Go to the top menu:
+File → New Project → Version Control → Git.
+
+In the Repository URL field, paste the GitHub URL (e.g., https://github.com/username/repository-name.git).
+
+Choose a local directory where the repo will be saved.
+
+Click Create Project.

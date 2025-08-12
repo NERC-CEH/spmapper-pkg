@@ -9,10 +9,7 @@ date: "2025-05-20"
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Load packages and functions
@@ -23,7 +20,7 @@ library(terra) ## note: needed in 'fpudoverlap'
 library(sf)
 library(knitr)
 library(rnaturalearth)
-#library(rnaturalearthhires)
+library(rnaturalearthhires)
 library(viridis)
 library(ggplot2)
 library(patchwork)
@@ -53,23 +50,22 @@ fppolys <- fppolys %>% dplyr::filter(!grepl("OFTO", name)) # exclude cable polyg
 proj.laea <- '+proj=laea +lat_0=-7.947 +lon_0=-14.30 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84  +units=m +no_defs'
 fppolys <-  st_transform(fppolys, crs = proj.laea)
 
-fppolys <-  fppolys %>% dplyr::filter(name == "SeaGreen Alpha") # filter for one OWF for now <<<<<<<<<<<<<<<<<<<<<<<<<<<<<< REMOVE/REPLACE
-
 # Union of polygons to avoid double counting within overlapping polygons
+# We should instead add warning to test if user's polygons overlap <<<<<<<<<<<<<<<<<<<<<<<<
 fppolys <- st_union(fppolys) # combine overlapping elements 
 fppolys <- st_sf(geometry = st_cast(fppolys, "POLYGON"))  # return to sfc
 
 
-# Example BLKI UD for testing code
+# TEMPORARY - Example BLKI UD for testing code    TO BE REMOVED <<<<<<<<<<<<<<<<<<<<<<<<
 file_udmap <- system.file("extdata", paste0("FAME_UD_standardised_", "BLKI", ".tif"), package = "spmapper")
 udmap <- terra::rast(file_udmap)
 terra::crs(udmap) <- '+proj=laea +lat_0=-7.947 +lon_0=-14.30 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs +towgs84=0,0,0'
   
-spmapplot(udmap,fppolys) # this colour scale wont work for raster as this is UD values, much less than prey map values, just used to test 
+spmapplot(udmap, fppolys) + theme(legend.position = "none") # map colour scale wont work for UD values (used as dummy)
 
 ```
 
-## Run tool for each species
+## Run primary function spmapper() to produce prey consumption maps for each species and optionally extract within user specified polygons
 
 ```{r}
 out_kitt <- spmapper(spname = "Kittiwake", fppolys = fppolys, popscen = "baseline", tooldir = tooldir)
@@ -79,26 +75,27 @@ out_cogu <- spmapper(spname = "Guillemot", fppolys = fppolys, popscen = "baselin
 out_razo <- spmapper(spname = "Razorbill", fppolys = fppolys, popscen = "baseline", tooldir = tooldir)
 ```
 
-## Show UD map
+## Visualise prey consumption maps with optional input polygons overlaid, using spmapplot()
+```{r, fig.width = 8, fig.height = 16, dpi = 400}
 
-```{r multi-species-map, fig.alt = "Composite map showing prey consumption for Kittiwake, Guillemot, and Razorbill", fig.width=8, fig.height=6}
-par(mfrow=c(2,2))
-par(mfrow=c(2,2))
-par(mar=c(2,2,2,2))  # bottom, left, top, right
+## Plot a single species map 
+# spmapplot(out_razo$prey_cons_map, fppolys) + ggtitle("Razorbill")
+
+# Plot all species map # REMOVE and simply show how to plot one as above?? <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 (spmapplot(out_kitt$prey_cons_map, fppolys) + ggtitle("Kittiwake")) +
 (spmapplot(out_cogu$prey_cons_map, fppolys) + ggtitle("Guillemot")) +
 (spmapplot(out_razo$prey_cons_map, fppolys) + ggtitle("Razorbill")) + 
-  patchwork::plot_layout(ncol = 2)
+  patchwork::plot_layout(ncol = 1)
 
-# SPACING ISSUE
+
+
 ```
 
-## Visualize outputs
+## Visualise prey mass estimates
 
 
-```{r, out.width="50%"}
+```{r, fig.width=7, fig.height=5}
 par(mfrow=c(2,2))
-par(mar=c(2,2,2,2))  # bottom, left, top, right
 
 hist(out_kitt$allbirds_prey_sim, breaks=50, col=gray(0.6), main="Kittiwake")
 lines(rep(out_kitt$allbirds_prey_est,2),c(0,10000),lwd=2)
@@ -113,26 +110,25 @@ lines(rep(out_razo$allbirds_prey_est,2),c(0,10000),lwd=2)
 ## Tables
 
 ```{r}
-dev.off()
 tab_kitt <- data.frame(
   Species = "Kittiwake",
   Estimate = out_kitt$allbirds_prey_est, 
   Sim_CI_Lower = as.numeric(quantile(out_kitt$allbirds_prey_sim, 0.025)), 
-  Sim_Mean = mean(out_kitt$allbirds_prey_sim), 
+# Sim_Mean = mean(out_kitt$allbirds_prey_sim), 
   Sim_CI_Upper = as.numeric(quantile(out_kitt$allbirds_prey_sim, 0.975)))
 
 tab_cogu <- data.frame(
   Species = "Guillemot",
   Estimate = out_cogu$allbirds_prey_est, 
   Sim_CI_Lower = as.numeric(quantile(out_cogu$allbirds_prey_sim, 0.025)), 
-  Sim_Mean = mean(out_cogu$allbirds_prey_sim), 
+# Sim_Mean = mean(out_cogu$allbirds_prey_sim), 
   Sim_CI_Upper = as.numeric(quantile(out_cogu$allbirds_prey_sim, 0.975)))
 
 tab_razo <- data.frame(
   Species = "Razorbill",
   Estimate = out_razo$allbirds_prey_est, 
   Sim_CI_Lower = as.numeric(quantile(out_razo$allbirds_prey_sim, 0.025)), 
-  Sim_Mean = mean(out_razo$allbirds_prey_sim), 
+ # Sim_Mean = mean(out_razo$allbirds_prey_sim), 
   Sim_CI_Upper = as.numeric(quantile(out_razo$allbirds_prey_sim, 0.975)))
 
 kable(rbind(tab_kitt, tab_cogu, tab_razo))
@@ -158,7 +154,7 @@ spmapper(spname = "Kittiwake", fppolys = fppolys, popscen = "medium", tooldir = 
 
 ## Incorrect path to tool
 
-The tool does not currently explicitly check if the path provided is correct/valid, but seems to yield a fairly sensible error messages if an incorrect path is specified
+The tool does not currently explicitly check if the path provided is correct/valid, but may yield sensible error messages if an incorrect path is specified
 
 ```{r error=TRUE}
 spmapper(spname = "Kittiwake", fppolys = fppolys, popscen = "baseline", tooldir = "test")

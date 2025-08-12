@@ -73,7 +73,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Uses, Caveats &amp; Limitations</h1>
             
-            <h4 data-toc-skip class="date">2025-07-01</h4>
+            <h4 data-toc-skip class="date">2025-08-12</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/NERC-CEH/spmapper-pkg/blob/HEAD/vignettes/spmapper_caveats_limitation.Rmd" class="external-link"><code>vignettes/spmapper_caveats_limitation.Rmd</code></a></small>
       <div class="d-none name"><code>spmapper_caveats_limitation.Rmd</code></div>
@@ -88,113 +88,121 @@ p {
 }
 </style>
 <div class="section level2">
-<h2 id="caveats-limitations">Caveats &amp; Limitations<a class="anchor" aria-label="anchor" href="#caveats-limitations"></a>
+<h2 id="recommendations-caveats-limitations">Recommendations, Caveats &amp; Limitations<a class="anchor" aria-label="anchor" href="#recommendations-caveats-limitations"></a>
 </h2>
-<p>Recommendation of spatial scale?
-&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</p>
-<div class="section level3">
-<h3 id="the-consequences-of-developing-in-areas-evaluated-using-spmapper-are-not-indicated-">
+<div class="section level4">
+<h4 id="the-consequences-of-developing-in-areas-evaluated-using-spmapper-are-not-indicated-">
 <em>The consequences of developing in areas evaluated using</em>
 spmapper <em>are not indicated.</em><a class="anchor" aria-label="anchor" href="#the-consequences-of-developing-in-areas-evaluated-using-spmapper-are-not-indicated-"></a>
-</h3>
+</h4>
 <p>Outputs do not indicate displacement rates or demographic impacts,
 <em>i.e.</em> how much of the indicated prey consumption will be lost to
 seabirds should an input area be developed, nor the subsequent impacts
 to breeding performance via energetic effects. We emphasise the use of
 <em>spmapper</em> as a <em>comparative</em> tool for candidate areas for
 development or protective measures.</p>
+<p><br> ### <em>Uncertainty in prey intake mass estimates</em>
+<em>spmapper</em> provides an expected range (95% intervals) of prey
+mass intake by seabird species network chick-rearing adults,
+representing uncertainty in prey mass consumption estimates. Uncertainty
+estimates concern prey masses only, not proportions of consumption,
+which are fixed. Spatial estimations of prey consumption (<em>i.e.</em>
+the underlying utilisation distributions) are fixed proportional
+estimates of space use.</p>
+<p>Therefore, no variation or uncertainty in the spatial component was
+assumed (e.g. arising from inter-annual variation in space use or
+uncertainty in relationships used within the predictive spatial models
+(Wakefield et al., 2017).</p>
+<p>[See paper for full uncertainty propagation methods]
+&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</p>
 <p><br></p>
 </div>
-<div class="section level3">
-<h3 id="treatment-of-prey-intake-mass-estimates-">
-<em>Treatment of prey intake mass estimates.</em><a class="anchor" aria-label="anchor" href="#treatment-of-prey-intake-mass-estimates-"></a>
-</h3>
-<p>Values of prey mass intake by seabird species network chick-rearing
-adults provided by <em>spmapper</em> an expected range (95% intervals),
-representing uncertainty in prey mass consumption estimates.</p>
-<p><br></p>
-</div>
-<div class="section level3">
-<h3 id="uncertainty-estimates-concern-prey-masses-only-not-proportions-of-consumption-which-are-fixed-">
-<em>Uncertainty estimates concern prey masses only, not proportions
-of consumption, which are fixed.</em><a class="anchor" aria-label="anchor" href="#uncertainty-estimates-concern-prey-masses-only-not-proportions-of-consumption-which-are-fixed-"></a>
-</h3>
-<p>Spatial estimations of prey consumption (<em>i.e.</em> the underlying
-utilisation distributions) are fixed proportional estimates of space
-use. Uncertainty was estimated for the <em>mass</em> of prey consumed by
-species [paper],
-&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
-but no variation in the spatial component was assumed.</p>
-<p><br></p>
-</div>
-<div class="section level3">
-<h3 id="prey-consumption-estimates-are-derived-from-a-provided-dataset">
-<em>Prey consumption estimates are derived from a provided
-dataset</em><a class="anchor" aria-label="anchor" href="#prey-consumption-estimates-are-derived-from-a-provided-dataset"></a>
-</h3>
-<p>Values for the parameters underpin estimates of prey consumption
+<div class="section level4">
+<h4 id="prey-consumption-estimates-are-derived-from-a-provided-baseline-dataset">
+<em>Prey consumption estimates are derived from a provided baseline
+dataset</em><a class="anchor" aria-label="anchor" href="#prey-consumption-estimates-are-derived-from-a-provided-baseline-dataset"></a>
+</h4>
+<p>Values for the parameters that underpin estimates of prey consumption
 masses are provided as a baseline and correspond to the Future of the
 Atlantic Marine Environment (FAME) seabird tracking study period
-(2010-2014) to align with space use estimates (Wakefield et al. 2017).
-Intake model parameters and their sources are published as a dataset
-(Leedham et al. 2025). Note, mass change (parameter:
-<em>mass_change</em>) for Razorbill was assumed as equivalent to
-Guillemot (Leedham et al. 2025).</p>
+(2010-2014) to align with space use estimates available at the UK &amp;
+Ireland scale (Wakefield et al. 2017). Intake model parameters and their
+sources are published as a dataset (Leedham et al. 2025). Note, mass
+change (parameter: <em>mass_change</em>) for Razorbill was assumed as
+equivalent to Guillemot (Leedham et al. 2025) due to a lack of empirical
+data for this species.</p>
 </div>
-<div class="section level3">
-<h3 id="modifying-input-parameters-may-impact-prey-mass-estimates-">
+<div class="section level4">
+<h4 id="modifying-input-parameters-may-impact-prey-mass-estimates-">
 <em>Modifying input parameters may impact prey mass
 estimates.</em><a class="anchor" aria-label="anchor" href="#modifying-input-parameters-may-impact-prey-mass-estimates-"></a>
-</h3>
+</h4>
 <p>Users may modify the input parameters for the prey intake model, but
-users must indicate these changes… [in any eventual publications or
-releases].
-&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</p>
+users must indicate these changes in any use of spmapper outputs, with
+full justification for variation from defaults.</p>
 <p><br></p>
 </div>
-<div class="section level3">
-<h3 id="seabird-space-use-varies-through-time">
-<em>Seabird space use varies through time</em><a class="anchor" aria-label="anchor" href="#seabird-space-use-varies-through-time"></a>
-</h3>
-<p>There is evidence that seabirds of a given colony can use marine
-space quite differently across years [cite paper, others?].
-&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</p>
+<div class="section level4">
+<h4 id="use-of-spmapper-at-the-appropriate-spatial-scale">
+<em>Use of spmapper at the appropriate spatial scale</em><a class="anchor" aria-label="anchor" href="#use-of-spmapper-at-the-appropriate-spatial-scale"></a>
+</h4>
 <p><em>spmapper</em> concerns space use at a broad, shelf-seas scale,
-for seabird species networks for the UK and Ireland.</p>
-<p>[See paper for single-colony maps, and details as to why this
-approach is not applicable for prey consumption at the colony level].
+for seabird species networks for the UK and Ireland. <em>spmapper</em>
+generates prey consumption maps on a regular 2x2 km grid, in Lambert
+azimuthal equal-area projection. Users should not provide polygons or
+footprint shapefiles that are smaller than a single grid cell for
+<em>spmapper</em> to extract. The <em>spmapper</em>() function will
+return a warning if a polygon of insufficient size (<em>i.e.</em>
+smaller than a single grid cell) is provided.</p>
+<p>Note, population scale mass consumption was estimated for UK &amp;
+Ireland combined seabird species networks to correspond to the GPS
+tracking underpinning the utilisation distributions (Wakefield et al.,
+2017). Extractions within supplied polygons therefore provide the
+<em>proportion</em> of prey mass taken by UK &amp; Ireland seabirds, but
+due to the spatial isolation and central place foraging of breeding
+seabirds, extractions within polygons will retrieve prey <em>masses</em>
+taken by breeding seabirds of colonies within foraging range distances.
+We reiterate that <em>spmapper</em> is recommended for use as a
+<em>comparative</em> tool (see above).</p>
+</div>
+<div class="section level4">
+<h4 id="seabird-space-use-may-vary-through-time">
+<em>Seabird space use may vary through time</em><a class="anchor" aria-label="anchor" href="#seabird-space-use-may-vary-through-time"></a>
+</h4>
+<p>There is evidence that seabirds of a given colony can use marine
+space quite differently across years [cite our paper, others?].
+&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; = See
+[PAPER] for single-colony maps, and details as to why this approach is
+not applicable for prey consumption at the colony level.
 &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</p>
 <p>Understanding drivers of this variation is challenging, but these
-patterns may indicate that the potential consequences of spatial
-planning (<em>i.e.</em> at the level of individual developments or
-protection areas) may vary year on year.</p>
+patterns may indicate that the potential consequences of development or
+protection in a given area (<em>i.e.</em> at the level of individual
+developments or protection areas) may vary year on year.</p>
 <p>At the broader spatial scale used in <em>spmapper</em>, we apply
 utilisation distributions to provide a representative, predicted
-distribution of marine space use for each species. The space use
+distribution of marine space use for each species. These space use
 estimates are derived from models that predict space use based on GPS
 tracking data. The predicted use of marine space by each species was
 modelled according to environmental and spatial characteristics,
-including distance from colonies, and the suitability of habitat (see
+including distance from colonies and the suitability of habitat (see
 Wakefield et al., 2017 for details of space use modelling). This tool
-does not include temporal variation in prey consumption, which can be
-substantial at the level of individual colonies [paper].
+does not include inter-annual variation in prey mass consumption, which
+can be substantial at the level of individual colonies [PAPER] [paper].
 &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</p>
 <p><br></p>
 </div>
-<div class="section level3">
-<h3 id="windfarms-may-alter-the-quantity-and-distribution-of-prey-available-to-seabirds-">
+<div class="section level4">
+<h4 id="windfarms-may-alter-the-quantity-and-distribution-of-prey-available-to-seabirds-">
 <em>Windfarms may alter the quantity and distribution of prey
 available to seabirds.</em><a class="anchor" aria-label="anchor" href="#windfarms-may-alter-the-quantity-and-distribution-of-prey-available-to-seabirds-"></a>
-</h3>
+</h4>
 <p>Any realised impacts of OWFs on seabird foraging dynamics and
 energetics may also depend on the responses of their prey to OWFs and
 OWF-mediated changes to geophyisical and biological processes.
-<em>spmapper</em> does not indicate prey redistribution or altered
-productivity dynamics in post-OWF areas. Any impact of displacement from
-OWFs may be mediated, positively or negatively, by any post-OWF changes
-to the distribution and productivity of prey fish… [relevant
-citation?]&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</p>
-<hr>
+<em>spmapper</em> does not assume any prey redistribution or altered
+productivity dynamics in post-OWF areas or within protected areas.</p>
+<p><br></p>
 </div>
 <div class="section level3">
 <h3 id="reference-list">Reference list<a class="anchor" aria-label="anchor" href="#reference-list"></a>
@@ -203,7 +211,7 @@ citation?]&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&l
 Mobbs, D. C., Butler, A. and Daunt, F. (2025) “Time-activity budgets and
 energetics of common guillemot, razorbill, Atlantic puffin, and
 black-legged kittiwake”, <em>NERC EDS Environmental Information Data
-Centre</em>. doi: 10.5285/07b1105a-4a14-47e3-b491-9af59be90aff.</p>
+Centre</em>. <a href="https://doi.org/10.5285/07b1105a-4a14-47e3-b491-9af59be90aff" class="external-link uri">https://doi.org/10.5285/07b1105a-4a14-47e3-b491-9af59be90aff</a></p>
 <p>Wakefield, E. D., Owen, E., Baer, J., Carroll, M. J., Daunt, F.,
 Dodd, S. G., Green, J. A., Guilford, T., Mavor, R. A., Miller, P. I.,
 Newell, M. A., Newton, S. F., Robertson, G. S., Shoji, A., Soanes, L.

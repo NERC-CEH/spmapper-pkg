@@ -7,32 +7,32 @@
 \format{
 A data frame with 60000 rows and 17 variables:
 \describe{
-\item{\code{TB_nest}}{integer COLUMN_DESCRIPTION}
-\item{\code{TB_flying}}{double COLUMN_DESCRIPTION}
-\item{\code{TB_resting_sea}}{double COLUMN_DESCRIPTION}
-\item{\code{TB_foraging}}{double COLUMN_DESCRIPTION}
-\item{\code{BS_length}}{integer COLUMN_DESCRIPTION}
-\item{\code{ER_foraging}}{double COLUMN_DESCRIPTION}
-\item{\code{ER_flying}}{double COLUMN_DESCRIPTION}
-\item{\code{ER_resting_sea}}{double COLUMN_DESCRIPTION}
-\item{\code{ER_nest}}{double COLUMN_DESCRIPTION}
-\item{\code{ER_warming_food}}{double COLUMN_DESCRIPTION}
-\item{\code{chicks_n}}{double COLUMN_DESCRIPTION}
-\item{\code{chick_ER}}{double COLUMN_DESCRIPTION}
-\item{\code{assim_effic}}{double COLUMN_DESCRIPTION}
-\item{\code{init_mass}}{double COLUMN_DESCRIPTION}
-\item{\code{mass_change}}{double COLUMN_DESCRIPTION}
-\item{\code{tissue_en_dens}}{double COLUMN_DESCRIPTION}
-\item{\code{energy_prey_conv}}{double COLUMN_DESCRIPTION}
+\item{\code{TB_nest}}{double Time-activity budget: nest}
+\item{\code{TB_flying}}{double Time-activity budget: flight}
+\item{\code{TB_resting_sea}}{double Time-activity budget: rest-at-sea}
+\item{\code{TB_foraging}}{double Time-activity budget: foraging}
+\item{\code{BS_length}}{integer Number of days chick-rearing}
+\item{\code{ER_foraging}}{double Energetic cost: foraging}
+\item{\code{ER_flying}}{double Energetic cost: flight}
+\item{\code{ER_resting_sea}}{double Energetic cost: rest at sea}
+\item{\code{ER_nest}}{double Energetic cost: nest}
+\item{\code{ER_warming_food}}{double Energetic cost: warming food}
+\item{\code{chicks_n}}{double Number of chicks}
+\item{\code{chick_ER}}{double Daily chick energetic requirement}
+\item{\code{assim_effic}}{double Digestive assimilation efficiency}
+\item{\code{init_mass}}{double Initial adult body mass}
+\item{\code{mass_change}}{double Breeding season change in adult body mass}
+\item{\code{tissue_en_dens}}{double Adult seabird tissue energy density}
+\item{\code{energy_prey_conv}}{double Prey energy density}
 }
 }
 \source{
-NEED EXPL
+Randomly sampled deviates of parameters from 'Seabird_energetics_pars_spmapper'. See methods for details.
 }
 \usage{
 BLKI_sampled_spmapper
 }
 \description{
-A dataset containing information on:
+This dataset contains random deviate samples of Kittiwake energetics & behavioural parameters, based on 'Seabird_energetics_pars_spmapper'. Each row represent a set of parameter values used by the prey consumption model. See methods for details.
 }
 \keyword{datasets}

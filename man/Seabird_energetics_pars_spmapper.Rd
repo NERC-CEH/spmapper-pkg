@@ -8,9 +8,9 @@
 A data frame with 25 rows and 4 variables:
 \describe{
 \item{parameter}{Character Parameter name}
-\item{Guillemot}{Numeric Parameter values for Guillemot}
-\item{Razorbill}{Numeric Parameter values for Razorbill}
-\item{Kittiwake}{Numeric Parameter values for Kittiwake}
+\item{Guillemot}{Numeric Parameter value for Guillemot}
+\item{Razorbill}{Numeric Parameter value for Razorbill}
+\item{Kittiwake}{Numeric Parameter value for Kittiwake}
 }
 }
 \source{
@@ -23,6 +23,6 @@ Seabird_energetics_pars_spmapper
 This dataset contains information on key behavioural and physiological traits of the three focal species of seabirds: Common guillemot Uria aalge;
 Razorbill Alca torda; and Black-legged kittiwake Rissa tridactyla.
 These data describe the daily time allocation to and energetic costs of core activities and other energetically important processes and species traits.
-These data are used by the spmapper() function to estimate the mass of prey taken by an individual breeding adult of each species.
+These data are used by the spmapper() function to estimate the mass of prey taken by an individual breeding adult of each species. See Leedham et al. (2025) for full details of data sourcing.
 }
 \keyword{datasets}

@@ -22,15 +22,13 @@ A list with two elements:
 }
 }
 \source{
-NEED EXPL
+Wakefield, E.D., Owen, E., Baer, J., Carroll, M.J., Daunt, F., Dodd, S.G., Green, J.A., Guilford, T., Mavor, R.A., Miller, P.I. and Newell, M.A., 2017. Breeding density, fine‐scale tracking, and large‐scale modeling reveal the regional distribution of four seabird species. Ecological Applications, 27(7), pp.2074-2091.
 }
 \usage{
 FAME_UD_standardised_RAZO
 }
 \description{
-A dataset containing information on:
-}
-\details{
+Uk-Ireland utilisation distribution (UD) for Razorbill (Future of the Atlantic Marine Environment FAME study period; 2010-2014). Via RSPB; for methods, see Wakefi#'
 The object contains a matrix of UD values and associated spatial metadata, to build a raster
 }
 \keyword{datasets}

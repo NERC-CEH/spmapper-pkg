@@ -55,8 +55,8 @@ devtools::document()
 
 # you can create extra folder "demo" to store files used by vignette within "inst"
 
-# documentation goes in vignettes, same for spmapper-worked-example
-
+# documentation/docs goes in vignettes, same for spmapper-worked-example.Rmd as .Rmd files
+# background.rmd  = homepage (README.md)?
 #######################################
 # installing the package
 #######################################
@@ -78,6 +78,19 @@ devtools::document()
 #' @param tooldir Path to directory containing tool: a character string.
 #' @return A list, with elements: "spname" (species name), "popscen" (population scenario"), "energypars_base_est" (energetics parameters - estimates), "energypars_base_sim" (energetics parameters - simulations), "udmap" (utilisation distribution, a raster), "popsize" (population size - BREEDING PAIRS **TBC**, "fp_ud_overlap" (proportion of UD within a footprint), "nbirds_in_fp" (number of birds in footprints), "onebird_prey_est" (prey intake from one bird - estimate), "onebird_prey_sim" (prey intake from one bird - simulations), "allbirds_prey_est" (prey intake from all birds in footprints - estimate), "allbirds_prey_sim" (prey intake from all birds in footprints - simulations)
 #' @export
+
+
+# build package site - if changing anything etc
+
+library(pkgdown)
+
+# remove former contents in docs:
+pkgdown::clean_site(force = TRUE)
+pkgdown::build_site()
+#build_favicons(pkg = ".", overwrite = FALSE)
+# this will create a website for the package in docs folder
+
+# use pkgdown to add logos (it will find them in pkgdown/favicon)
 
 # after changes
 devtools::build()
@@ -164,6 +177,14 @@ devtools::clean_dll()
 # git push -u origin master
 
 
+#### if you can't pull and don't have edits to commit
+
+#git reset --hard origin/main
+#if that doens't work try :
+#git fetch origin
+#git reset --hard origin/main
+
+
 #####################################
 # final checks of package - go to unlink and remove dll around line 125 if you have
 # corruption errors
@@ -174,9 +195,9 @@ devtools::load_all()
 
 # test package
 # set up testthat
-usethis::use_testthat(3)
+#usethis::use_testthat(3)
 
-# test overage of the whole package
+# test coverage of the whole package
 devtools::test_coverage()
 
 # for testing create a token (if don't have it already) on github
@@ -199,19 +220,6 @@ devtools::install_github("NERC-CEH/spmapper-pkg", auth_token = "ghp_JhC7gsHDlSQA
 
 # pending:
 # DESCRIPTION NEEDS TO BE UPDATED, See SEABORD
-
-# build package site
-
-library(pkgdown)
-
-# remove former contents in docs:
-pkgdown::clean_site(force = TRUE)
-pkgdown::build_site()
-#build_favicons(pkg = ".", overwrite = FALSE)
-# this will create a website for the package in docs folder
-
-# use pkgdown to add logos (it will find them in pkgdown/favicon)
-
 
 # for every file, (e.g. a csv in ext data, create an R file
 # to put in a folder called data-raw)

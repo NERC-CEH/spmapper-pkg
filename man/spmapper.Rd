@@ -2,7 +2,7 @@
 % Please edit documentation in R/functions_spmapper.R
 \name{spmapper}
 \alias{spmapper}
-\title{TO BE ADDED - TITLE OF MAIN SPMAPPER FUNCTION}
+\title{spmapper core function. Generate prey consumption maps and perform extractions within user-supplied polygons.}
 \usage{
 spmapper(spname, fppolys, popscen, tooldir)
 }
@@ -16,8 +16,9 @@ spmapper(spname, fppolys, popscen, tooldir)
 \item{tooldir}{Path to directory containing tool: a character string.}
 }
 \value{
-A list, with elements: "spname" (species name), "popscen" (population scenario"), "energypars_base_est" (energetics parameters - estimates), "energypars_base_sim" (energetics parameters - simulations), "udmap" (utilisation distribution, a raster), "popsize" (population size - BREEDING PAIRS \strong{TBC}, "fp_ud_overlap" (proportion of UD within a footprint), "nbirds_in_fp" (number of birds in footprints), "onebird_prey_kg_est" (prey intake from one bird - estimate), "onebird_prey_kg_sim" (prey intake from one bird - simulations), "allbirds_prey_est" (prey intake from all birds in footprints - estimate), "allbirds_prey_sim" (prey intake from all birds in footprints - simulations)
+A list, with elements: "spname" (species name), "popscen" (population scenario"), "energypars_base_est" (energetics parameters - estimates), "energypars_base_sim" (energetics parameters - simulations), "udmap" (utilisation distribution, a raster), "popsize" (population size - number of individual breeding adults), "fp_ud_overlap" (proportion of UD within polygons/footprints), "onebird_prey_kg_est" (chick-rearing prey intake mass from one bird - estimate), "onebird_prey_kg_sim" (chick-rearing prey intake mass from one bird - simulations), "allbirds_prey_est" (prey intake mass from all birds - estimate),  "allbirds_prey_sim" (prey intake from all birds - simulations), "allbirds_prey_fp_est" (prey mass in footprints - estimate),  "allbirds_prey_
+_sim" (prey mass in footprints - simulations), "prey_cons_map" (prey consumption map - a raster)
 }
 \description{
-TO BE ADDED - OVERALL DESCRIPTION OF WHAT SPMAPPER DOES
+Produces prey consumption maps and extracts of prey mass values within user-specified spatial polygons. Returns list of various inputs, intermediate quantities, prey consumption maps and extraction totals.
 }
