@@ -1,5 +1,0 @@
-We sourced an OWF dataset collated for the European Marine Observation and Data Network (via EMODnet; CETMAR 2024) 
-
-https://emodnet.ec.europa.eu/geoviewer/
-
-Access date: 13/01/2025
