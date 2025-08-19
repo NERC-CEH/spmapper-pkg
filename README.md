@@ -1,3 +1,4 @@
+---
 title: "spmapper_background"
 output: html_document
 date: "2025-06-30"
@@ -25,12 +26,9 @@ It is not possible to observe foraging success at sufficiently fine scales or wi
 <br>
 
 # Purpose & applications
-*spmapper* is a spatial planning tool that generates maps of seabird prey consumption by chick-rearing seabirds for three species. The tool generates these maps by calculating the mass of fish prey taken by all breeding seabirds comprising the UK & Ireland species network for each of three seabird species, according to species-specific behaviour, physiology, diet, demography and population size; and then estimates the spatial origin of seabird prey removal according to models of marine space use (utilisation distributions, UDs). See the 'Methods' page for further details. 
+*spmapper* is a spatial planning tool that generates maps of estimated seabird prey consumption by chick-rearing seabirds for three species. The tool generates these maps by calculating the mass of fish prey taken by all breeding seabirds comprising the UK & Ireland species network for each of three seabird species, according to species-specific behaviour, physiology, diet, demography and population size; and then estimates the spatial origin of seabird prey removal according to models of marine space use (utilisation distributions, UDs). See the 'Methods' page for further details. 
 
-[Define population of interest].<<<<<<<<<<<<<<<<<<<<<
- 
 The central function of *spmapper* is to retrieve estimates for the absolute and proportional quantities of prey taken by three focal species networks from within areas of interest to the user. In other words, the aim of the tool is to indicate the energetic or foraging value of marine areas to seabirds in terms of their prey consumption at the shelf-seas scale. The primary application for these outputs includes comparison of the total prey consumption in candidate areas for offshore renewable developments, or within areas for protective conservation measures. These outputs can be used to assist with marine spatial planning for these purposes.
-
 
 
 <br>
@@ -42,7 +40,7 @@ The central function of *spmapper* is to retrieve estimates for the absolute and
 ------------------------------------------------  
 ## Reference list
 
-Leedham, O., Searle, K. R., Harris, M. P., Newell, M., Wanless, S., Mobbs, D. C., Butler, A. and Daunt, F. (2025) "Time-activity budgets and energetics of common guillemot, razorbill, Atlantic puffin, and black-legged kittiwake”, *NERC EDS Environmental Information Data Centre*. doi: 10.5285/07b1105a-4a14-47e3-b491-9af59be90aff.
+Leedham, O., Searle, K. R., Harris, M. P., Newell, M., Wanless, S., Mobbs, D. C., Butler, A. and Daunt, F. (2025) "Time-activity budgets and energetics of common guillemot, razorbill, Atlantic puffin, and black-legged kittiwake”, *NERC EDS Environmental Information Data Centre*. doi: <a href="https://www.doi.org/10.5285/07b1105a-4a14-47e3-b491-9af59be90aff" >target="_blank">10.5285/07b1105a-4a14-47e3-b491-9af59be90aff</a>.
 
 R Core Team, R. (2013) *R: A language and environment for statistical computing*. Vienna, Austria.
 

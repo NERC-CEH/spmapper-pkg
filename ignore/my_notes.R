@@ -140,6 +140,7 @@ unlink("C:/Users/clacap/AppData/Local/R/win-library/4.4/spmapper", recursive = T
 # or manually remove it by browsing to it
 # clean
 devtools::clean_dll()
+devtools::install()
 # and try reinstalling
 
 # for visualising plots and charts use this:
@@ -199,6 +200,9 @@ devtools::load_all()
 
 # test coverage of the whole package
 devtools::test_coverage()
+
+# Verify that all documented functions exist
+tools::checkDocFiles("spmapper")
 
 # for testing create a token (if don't have it already) on github
 # https://github.com/settings/tokens
