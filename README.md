@@ -6,7 +6,9 @@ date: "2025-06-30"
 <style>
 p {
   text-align: justify;
-  text-align-last: left;
+  text-align-last: left;   
+  -moz-text-align-last: left; /* Firefox support */
+  -ms-text-align-last: left;  /* Internet Explorer support */
 }
 </style>
 
@@ -40,7 +42,9 @@ The central function of *spmapper* is to retrieve estimates for the absolute and
 ------------------------------------------------  
 ## Reference list
 
-Leedham, O., Searle, K. R., Harris, M. P., Newell, M., Wanless, S., Mobbs, D. C., Butler, A. and Daunt, F. (2025) "Time-activity budgets and energetics of common guillemot, razorbill, Atlantic puffin, and black-legged kittiwake”, *NERC EDS Environmental Information Data Centre*. doi: <a href="https://www.doi.org/10.5285/07b1105a-4a14-47e3-b491-9af59be90aff" >target="_blank">10.5285/07b1105a-4a14-47e3-b491-9af59be90aff</a>.
+Leedham, O., Searle, K. R., Harris, M. P., Newell, M., Wanless, S., Mobbs, D. C., Butler, A. and Daunt, F. (2025) "Time-activity budgets and energetics of common guillemot, razorbill, Atlantic puffin, and black-legged kittiwake”, *NERC EDS Environmental Information Data Centre*. doi: <a href="https://www.doi.org/10.5285/07b1105a-4a14-47e3-b491-9af59be90aff" target="_blank">
+10.5285/07b1105a-4a14-47e3-b491-9af59be90aff
+</a>.
 
 R Core Team, R. (2013) *R: A language and environment for statistical computing*. Vienna, Austria.
 

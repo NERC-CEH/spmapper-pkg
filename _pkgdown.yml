@@ -9,9 +9,6 @@ template:
   bslib:
     bootswatch: lux
     pkgdown-nav-height: 100px
-  params:
-    google_analytics: G-NCCK8VLGWY  # google analytics measurement ID
-
 
 navbar:
   structure:
