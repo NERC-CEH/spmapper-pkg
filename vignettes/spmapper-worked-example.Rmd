@@ -5,6 +5,8 @@ vignette: >
   %\VignetteIndexEntry{Worked example}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+pkgdown:
+  as_is: true
 date: "2025-05-20"
 ---
 

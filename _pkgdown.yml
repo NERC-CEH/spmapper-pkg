@@ -9,6 +9,10 @@ template:
   bslib:
     bootswatch: lux
     pkgdown-nav-height: 100px
+  favicon: pkgdown/favicon/favicon.ico
+  before_body: pkgdown/assets/head.html
+  css:
+    - pkgdown/assets/custom.css
 
 navbar:
   structure:
@@ -36,6 +40,8 @@ reference:
       - FAME_UD_standardised_BLKI
       - FAME_UD_standardised_COGU
       - FAME_UD_standardised_RAZO
+
+source_links: false
 
 articles:
   - title: "Documentation"

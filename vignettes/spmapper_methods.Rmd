@@ -1,10 +1,12 @@
 ---
 title: "Methods"
-output: html_document
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Methods}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+pkgdown:
+  as_is: true
 date: "2025-06-30"
 ---
 
@@ -19,10 +21,10 @@ p {
 
 *spmapper* estimates, with uncertainty, the total prey consumed over the course of the chick-rearing period by a typical breeding adult bird of each focal species. These estimates are then scaled to give the fish prey mass intake by the breeding population. Utilisation distributions are used to estimate the spatial origin of prey mass in the waters surrounding the UK & Ireland. By providing spatial polygons, users can interrogate the resulting prey consumption maps to indicate the foraging value of marine spatial areas to breeding seabirds. The underlying calculations follow the following stages:
 
-**1) Estimate prey mass intake by a single breeding adult**
-**2) Scale individual prey mass intake to the species network breeding population**
-**3) Map the spatial distribution of prey consumption**
-**4) Extraction of absolute & proportional prey mass within areas of interest**
+1) Estimate prey mass intake by a single breeding adult
+2) Scale individual prey mass intake to the species network breeding population
+3) Map the spatial distribution of prey consumption
+4) Extraction of absolute & proportional prey mass within areas of interest
 
 Values underlying key behavioural and energetic parameters are available as a dataset (Leedham et al., 2025); sourcing and calculation methods are described in full in the supporting documentation. 
 

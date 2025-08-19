@@ -1,11 +1,13 @@
 ---
-title: "Uses, Caveats & Limitations"
+title: "Recommendations, Caveats & Limitations"
 output: rmarkdown::html_vignette
-date: "`r Sys.Date()`"
 vignette: >
-  %\VignetteIndexEntry{Uses, Caveats & Limitations}
+  %\VignetteIndexEntry{Recommendations, Caveats & Limitations}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+pkgdown:
+  as_is: true
+date: "`r Sys.Date()`"
 ---
 
 

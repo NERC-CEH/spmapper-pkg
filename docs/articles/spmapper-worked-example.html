@@ -57,8 +57,6 @@
 </nav><div class="container template-article">
 
 
-
-
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Worked example</h1>
@@ -74,7 +72,7 @@
 <div class="section level2">
 <h2 id="load-packages-and-functions">Load packages and functions<a class="anchor" aria-label="anchor" href="#load-packages-and-functions"></a>
 </h2>
-<pre><code><span><span class="co">## terra 1.8.54</span></span></code></pre>
+<pre><code><span><span class="co">## terra 1.8.60</span></span></code></pre>
 <pre><code><span><span class="co">## Linking to GEOS 3.13.1, GDAL 3.11.0, PROJ 9.6.0; sf_use_s2() is TRUE</span></span></code></pre>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## Attaching package: 'knitr'</span></span></code></pre>
@@ -100,7 +98,7 @@
 </h3>
 <p>NOTE: TEMPORARY</p>
 <pre><code><span><span class="co">## Reading layer `windfarmspolyPolygon' from data source </span></span>
-<span><span class="co">##   `C:\Users\clacap\AppData\Local\Temp\RtmpIh0DkJ\temp_libpath1d7c5bf923cd\spmapper\demo\UK_OWF_polygons_by_status' </span></span>
+<span><span class="co">##   `C:\Users\clacap\AppData\Local\R\win-library\4.5\spmapper\demo\UK_OWF_polygons_by_status' </span></span>
 <span><span class="co">##   using driver `ESRI Shapefile'</span></span>
 <span><span class="co">## Simple feature collection with 405 features and 9 fields</span></span>
 <span><span class="co">## Geometry type: MULTIPOLYGON</span></span>
@@ -110,7 +108,7 @@
 <pre><code><span><span class="co">## Spherical geometry (s2) switched off</span></span></code></pre>
 <pre><code><span><span class="co">## Coordinate system already present. Adding new coordinate system, which will</span></span>
 <span><span class="co">## replace the existing one.</span></span></code></pre>
-<p><img src="spmapper-worked-example_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
+<p><img src="spmapper-worked-example_files/figure-html/unnamed-chunk-2-1.png"><!-- --></p>
 </div>
 <div class="section level3">
 <h3 id="run-primary-function-spmapper-to-produce-prey-consumption-maps-for-each-species-and-optionally-extract-within-user-specified-polygons">Run primary function spmapper() to produce prey consumption maps for
@@ -148,7 +146,7 @@ overlaid, using spmapplot()<a class="anchor" aria-label="anchor" href="#visualis
 <span><span class="co">## replace the existing one.</span></span>
 <span><span class="co">## Coordinate system already present. Adding new coordinate system, which will</span></span>
 <span><span class="co">## replace the existing one.</span></span></code></pre>
-<p><img src="spmapper-worked-example_files/figure-html/unnamed-chunk-4-1.png" width="3200"></p>
+<p><img src="spmapper-worked-example_files/figure-html/unnamed-chunk-4-1.png"><!-- --></p>
 </div>
 <div class="section level3">
 <h3 id="visualise-prey-mass-estimates">Visualise prey mass estimates<a class="anchor" aria-label="anchor" href="#visualise-prey-mass-estimates"></a>
@@ -164,7 +162,7 @@ overlaid, using spmapplot()<a class="anchor" aria-label="anchor" href="#visualis
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">out_razo</span><span class="op">$</span><span class="va">allbirds_prey_sim</span>, breaks<span class="op">=</span><span class="fl">50</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/gray.html" class="external-link">gray</a></span><span class="op">(</span><span class="fl">0.6</span><span class="op">)</span>, main<span class="op">=</span><span class="st">"Razorbill"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="va">out_razo</span><span class="op">$</span><span class="va">allbirds_prey_est</span>,<span class="fl">2</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">10000</span><span class="op">)</span>,lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<p><img src="spmapper-worked-example_files/figure-html/unnamed-chunk-5-1.png" width="672"></p>
+<p><img src="spmapper-worked-example_files/figure-html/unnamed-chunk-5-1.png"><!-- --></p>
 </div>
 <div class="section level3">
 <h3 id="tables">Tables<a class="anchor" aria-label="anchor" href="#tables"></a>
@@ -272,7 +270,7 @@ UD map</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fppolys</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">st_read</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"demo/North_Sea_OWF_2030_polygons"</span>, package <span class="op">=</span> <span class="st">"spmapper"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Reading layer `North_Sea_OWF_2030_polygons' from data source </span></span>
-<span><span class="co">##   `C:\Users\clacap\AppData\Local\Temp\RtmpIh0DkJ\temp_libpath1d7c5bf923cd\spmapper\demo\North_Sea_OWF_2030_polygons' </span></span>
+<span><span class="co">##   `C:\Users\clacap\AppData\Local\R\win-library\4.5\spmapper\demo\North_Sea_OWF_2030_polygons' </span></span>
 <span><span class="co">##   using driver `ESRI Shapefile'</span></span>
 <span><span class="co">## Simple feature collection with 177 features and 4 fields</span></span>
 <span><span class="co">## Geometry type: MULTIPOLYGON</span></span>
@@ -292,7 +290,7 @@ UD map</p>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fppolys</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">st_read</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"demo/North_Sea_OWF_2030_polygons"</span>, package <span class="op">=</span> <span class="st">"spmapper"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Reading layer `North_Sea_OWF_2030_polygons' from data source </span></span>
-<span><span class="co">##   `C:\Users\clacap\AppData\Local\Temp\RtmpIh0DkJ\temp_libpath1d7c5bf923cd\spmapper\demo\North_Sea_OWF_2030_polygons' </span></span>
+<span><span class="co">##   `C:\Users\clacap\AppData\Local\R\win-library\4.5\spmapper\demo\North_Sea_OWF_2030_polygons' </span></span>
 <span><span class="co">##   using driver `ESRI Shapefile'</span></span>
 <span><span class="co">## Simple feature collection with 177 features and 4 fields</span></span>
 <span><span class="co">## Geometry type: MULTIPOLYGON</span></span>
@@ -314,7 +312,7 @@ included in the original modelling in Wakefield et al. (2017)</p>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fppolys</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">st_read</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"demo/North_Sea_OWF_2030_polygons"</span>, package <span class="op">=</span> <span class="st">"spmapper"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Reading layer `North_Sea_OWF_2030_polygons' from data source </span></span>
-<span><span class="co">##   `C:\Users\clacap\AppData\Local\Temp\RtmpIh0DkJ\temp_libpath1d7c5bf923cd\spmapper\demo\North_Sea_OWF_2030_polygons' </span></span>
+<span><span class="co">##   `C:\Users\clacap\AppData\Local\R\win-library\4.5\spmapper\demo\North_Sea_OWF_2030_polygons' </span></span>
 <span><span class="co">##   using driver `ESRI Shapefile'</span></span>
 <span><span class="co">## Simple feature collection with 177 features and 4 fields</span></span>
 <span><span class="co">## Geometry type: MULTIPOLYGON</span></span>
@@ -325,6 +323,7 @@ included in the original modelling in Wakefield et al. (2017)</p>
 <code class="sourceCode R"><span><span class="va">fppolys</span> <span class="op">&lt;-</span> <span class="va">fppolys</span><span class="op">[</span><span class="fl">155</span>,<span class="op">]</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/spmapper.html">spmapper</a></span><span class="op">(</span>spname <span class="op">=</span> <span class="st">"Guillemot"</span>, fppolys <span class="op">=</span> <span class="va">fppolys</span>, popscen <span class="op">=</span> <span class="st">"baseline"</span>, tooldir <span class="op">=</span> <span class="va">tooldir</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## |---------|---------|---------|---------|=========================================                                          </span></span></code></pre>
 <pre><code><span><span class="co">## Warning in fpudoverlap(fppolys = fppolys, udmap = udmap): Part or all of</span></span>
 <span><span class="co">## footprint lies on land or outside area with UD values!</span></span></code></pre>
 <pre><code><span><span class="co">## Error in fpudoverlap(fppolys = fppolys, udmap = udmap): Zero overlap between footprint and any grid cell</span></span></code></pre>
@@ -338,7 +337,7 @@ included in the original modelling in Wakefield et al. (2017)</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Oliver Leedham.</p>
+  <p>Developed by Oliver Leedham, Kate Searle, Claudia Caporusso, Francis Daunt, Adam Butler.</p>
 </div>
 
 <div class="pkgdown-footer-right">

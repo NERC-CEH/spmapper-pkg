@@ -1,17 +1,3 @@
----
-title: "spmapper_background"
-output: html_document
-date: "2025-06-30"
----
-<style>
-p {
-  text-align: justify;
-  text-align-last: left;   
-  -moz-text-align-last: left; /* Firefox support */
-  -ms-text-align-last: left;  /* Internet Explorer support */
-}
-</style>
-
 # ***spmapper*: An R package spatial planning tool to indicate the foraging value of marine areas to breeding seabirds**
 
 <br>

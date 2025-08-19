@@ -2,13 +2,12 @@ Package: spmapper
 Title: spmapper
 Version: 0.9.0
 Authors@R: c(
-    person("Oliver", "Leedham", , "olilee@ceh.ac.uk", role = c("aut", "cre")),
-    person("Kate", "Searle", role = "ctb"),
-    person("Claudia", "Caporusso", role = "ctb"),
-    person("Francis", "Daunt", role = "ctb"),
-    person("Adam", "Butler", role = "ctb")
+    person("Oliver", "Leedham", email = "olilee@ceh.ac.uk", role = "aut"),
+    person("Kate", "Searle", role = "aut"),
+    person("Claudia", "Caporusso", role = c("aut","cre")),
+    person("Francis", "Daunt", role = "aut"),
+    person("Adam", "Butler", role = "aut")
   )
-Maintainer: Claudia Caporusso <clacap@ceh.ac.uk>
 Description: A spatial planning tool to indicate the foraging value of marine areas to breeding seabirds.
 License: OGL-UK-3.0
 URL: https://nerc-ceh.github.io/spmapper-pkg, https://github.com/NERC-CEH/spmapper-pkg
