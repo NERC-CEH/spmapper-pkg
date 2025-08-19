@@ -1,0 +1,15 @@
+.Rhistory
+.RData
+.Rproj.user/
+.Rproj.user
+.Ruserdata
+*.tar.gz
+*.Rcheck/
+inst/doc
+ignore/
+data-raw/
+dev/
+ecowings.Rproj
+clone repository rstudio github.txt
+how to download repo existing github clone.txt
+pkgdown/favicon

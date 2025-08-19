@@ -1,0 +1,24 @@
+^ecowings\.Rproj$
+^\.Rproj\.user$
+# Ignore RStudio project files
+^.*\.Rproj$
+^\.Rhistory$
+^\.RData$
+^\.Ruserdata$
+
+# Ignore Git and GitHub workflow files
+^\.gitignore$
+^\.github/
+
+# Ignore development and raw data folders
+^dev/
+^data-raw/
+^ignore/
+
+# Ignore pkgdown config and favicon (config may stay if needed, favicon usually not)
+^_pkgdown\.yml$
+^pkgdown/favicon/
+
+# Ignore clone notes or text files
+^clone repository rstudio github\.txt$
+^how to download repo existing github clone\.txt$
