@@ -13,7 +13,7 @@ template:
   css:
     - pkgdown/assets/custom.css
   includes:
-    before_body: pkgdown/assets/head.html
+    after_body: pkgdown/assets/extra.html
 
 navbar:
   structure:
