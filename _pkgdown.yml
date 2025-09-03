@@ -10,9 +10,10 @@ template:
     bootswatch: lux
     pkgdown-nav-height: 100px
   favicon: pkgdown/favicon/favicon.ico
-  before_body: pkgdown/assets/head.html
   css:
     - pkgdown/assets/custom.css
+  includes:
+    before_body: pkgdown/assets/head.html
 
 navbar:
   structure:

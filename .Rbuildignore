@@ -19,6 +19,8 @@
 ^_pkgdown\.yml$
 ^pkgdown/favicon/
 
-# Ignore clone notes or text files
-^clone repository rstudio github\.txt$
-^how to download repo existing github clone\.txt$
+# Ignore built pkgdown site
+^docs/
+
+# Ignore R Markdown files outside vignettes (if you have any)
+^.*\.Rmd$

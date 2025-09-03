@@ -3,13 +3,14 @@
 #' @description Produces prey consumption maps and extracts of prey mass values within user-specified spatial polygons. Returns list of various inputs, intermediate quantities, prey consumption maps and extraction totals.
 #' @param spname Species name: a character string. Must be "Guillemot", "Kittiwake" or "Razorbill"
 #' @param fppolys Footprint(s): a simple feature collection
-#' @param popscen Population scenario: a character string. Must be "baseline", "low" or "high"
 #' @param tooldir Path to directory containing tool: a character string.
-#' @return A list, with elements: "spname" (species name), "popscen" (population scenario"), "energypars_base_est" (energetics parameters - estimates), "energypars_base_sim" (energetics parameters - simulations), "udmap" (utilisation distribution, a raster), "popsize" (population size - number of individual breeding adults), "fp_ud_overlap" (proportion of UD within polygons/footprints), "onebird_prey_kg_est" (chick-rearing prey intake mass from one bird - estimate), "onebird_prey_kg_sim" (chick-rearing prey intake mass from one bird - simulations), "allbirds_prey_est" (prey intake mass from all birds - estimate),  "allbirds_prey_sim" (prey intake from all birds - simulations), "allbirds_prey_fp_est" (prey mass in footprints - estimate),  "allbirds_prey_sim" (prey mass in footprints - simulations), "prey_cons_map" (prey consumption map - a raster)
+#' @return A list, with elements: "spname" (species name), "energypars_base_est" (energetics parameters - estimates), "energypars_base_sim" (energetics parameters - simulations), "udmap" (utilisation distribution, a raster), "popsize" (population size - number of individual breeding adults), "fp_ud_overlap" (proportion of UD within polygons/footprints), "onebird_prey_kg_est" (chick-rearing prey intake mass from one bird - estimate), "onebird_prey_kg_sim" (chick-rearing prey intake mass from one bird - simulations), "allbirds_prey_est" (prey intake mass from all birds - estimate),  "allbirds_prey_sim" (prey intake from all birds - simulations), "allbirds_prey_fp_est" (prey mass in footprints - estimate),  "allbirds_prey_sim" (prey mass in footprints - simulations), "prey_cons_map" (prey consumption map - a raster)
 #' @importFrom utils read.csv
 #' @export
 
-spmapper <- function(spname, fppolys, popscen, tooldir){
+
+
+spmapper <- function(spname, fppolys, tooldir){
 
   ## ################################
   ## 1. Get four letter species code
@@ -23,17 +24,12 @@ spmapper <- function(spname, fppolys, popscen, tooldir){
   ## #################################
   ## 2. Load population size data
 
-  if(! any(popscen == c("low", "baseline", "high"))){
-
-    stop("Invalid population scenario: must be 'low', 'baseline' or 'high'")
-  }
-
   file_popsize <- file.path(tooldir,
-                              "fame_population_ests.csv")
+                            "fame_population_ests.csv")
 
   popsizes <- read.csv(file_popsize)
 
-  popsize <- popsizes$value[popsizes$spp == spcode & popsizes$estimate == popscen]
+  popsize <- popsizes$value[popsizes$spp == spcode]
 
   ## ################################
   ## 3. Load data - energetics parameters - estimates
@@ -60,6 +56,7 @@ spmapper <- function(spname, fppolys, popscen, tooldir){
     tooldir,
     paste(spcode, "sampled", "params", "csv", sep = ".")
   )
+
   energypars_base_sim <- read.csv(file_energypars_sim)
 
   energypars_base_sim$init_mass_sd <- energypars_base_est$init_mass_sd ## fix missing values
@@ -81,9 +78,10 @@ spmapper <- function(spname, fppolys, popscen, tooldir){
   terra::crs(udmap) <- '+proj=laea +lat_0=-7.947 +lon_0=-14.30 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs +towgs84=0,0,0'
 
   ## #################################
-  ## 6. Proportion of UD overlapping with polygons
+  ## 6. Proportion of UD within polygons
 
   fp_ud_overlap <- fpudoverlap(fppolys = fppolys, udmap = udmap)
+
 
   ## #################################
   ## 7. Prey calculation - estimates and simulations
@@ -152,7 +150,6 @@ spmapper <- function(spname, fppolys, popscen, tooldir){
 
   list(
     spname = spname,
-    popscen = popscen,
     energypars_base_est = energypars_base_est,
     energypars_base_sim = energypars_base_sim,
     udmap = udmap,

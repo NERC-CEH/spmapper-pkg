@@ -5,10 +5,9 @@
 \alias{fame_population_spmapper}
 \title{Fame population}
 \format{
-A data frame with 9 rows and 3 variables:
+A data frame with 3 rows and 2 variables:
 \describe{
 \item{\code{spp}}{character Species}
-\item{\code{estimate}}{character Estimate level}
 \item{\code{value}}{integer Breeding population size estimate}
 }
 }

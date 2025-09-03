@@ -3,7 +3,6 @@
 #' @description Plot prey consumption maps, with user polygons overlaid (optional)
 #' @param rast A spatRaster raster object to be plotted (i.e. prey consumption map)
 #' @param polyg An optional sf object (i.e. user polygons) to overlay on the raster plot (default: `NULL`).
-
 #' @return Prey consumption map with Western European country polygons (via rnaturalearth), with (optional) user input polygons overlaid: ggplot
 #' @export
 ## ########################################
@@ -52,11 +51,11 @@ spmapplot <- function(rast, polyg = NULL){
                                   barheight = 9,
                                   title = expression(atop(bold("Prey mass"), bold("tonnes km"^"-2"))))) +
 
+    geom_sf(data = west.eur.laea, fill = "grey97", colour = "black") +
+
     coord_sf(xlim = c(min(rastdf$x), max(rastdf$x)),
              ylim = c(min(rastdf$y), max(rastdf$y)),
              expand = FALSE) +
-
-    geom_sf(data = west.eur.laea, fill = "grey97", colour = "black") +
 
     labs(x = "Longitude", y = "Latitude") +
 

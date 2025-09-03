@@ -5,9 +5,7 @@ vignette: >
   %\VignetteIndexEntry{Methods}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-pkgdown:
-  as_is: true
-date: "2025-06-30"
+date: "`r Sys.Date()`"
 ---
 
 <style>
@@ -19,15 +17,16 @@ p {
 
 # Methods summary
 
-*spmapper* estimates, with uncertainty, the total prey consumed over the course of the chick-rearing period by a typical breeding adult bird of each focal species. These estimates are then scaled to give the fish prey mass intake by the breeding population. Utilisation distributions are used to estimate the spatial origin of prey mass in the waters surrounding the UK & Ireland. By providing spatial polygons, users can interrogate the resulting prey consumption maps to indicate the foraging value of marine spatial areas to breeding seabirds. The underlying calculations follow the following stages:
+*spmapper* estimates, with uncertainty, the total prey consumed over the course of the chick-rearing period by a typical breeding adult bird of each focal species. These estimates are then scaled to give the fish prey mass intake by the entire breeding population. Utilisation distributions are used to estimate the spatial origin of prey mass in the waters surrounding the UK & Ireland. By providing spatial polygons, users can interrogate the resulting prey consumption maps to indicate the foraging value of marine spatial areas to breeding seabirds. The underlying calculations follow the following stages:
 
-1) Estimate prey mass intake by a single breeding adult
-2) Scale individual prey mass intake to the species network breeding population
-3) Map the spatial distribution of prey consumption
-4) Extraction of absolute & proportional prey mass within areas of interest
+**1) Estimate prey mass intake by a single breeding adult** <br>
+**2) Scale individual prey mass intake to the species network breeding population** <br>
+**3) Map the spatial distribution of prey consumption** <br>
+**4) Extraction of absolute & proportional prey mass within areas of interest**
 
 Values underlying key behavioural and energetic parameters are available as a dataset (Leedham et al., 2025); sourcing and calculation methods are described in full in the supporting documentation. 
 
+<br>
 
 ## 1) Estimate prey mass intake by a single breeding adult
 To estimate the mass of fish prey taken by a single adult across the full chick-rearing period, we developed a model that considers the key behavioural, energetic and ecological traits of a typical adult of each species. Firstly, we estimate the daily energetic requirements (DER) of an adult, which consists of an individual's own energetic demands, and its half share of daily chick requirements, multiplied by the average number of chicks per nest. Adult DER is equal to the mean cost of all activity costs, weighted by the  proportion of time per day allocated to each of the core behaviours (foraging, flight, rest-at-sea & rest at the nest), in addition to a nominal daily cost of warming prey loads to body temperature. 
@@ -36,36 +35,37 @@ Total energetic requirement per adult for the full chick-rearing period is calcu
 
 The realised seasonal energy intake is then converted to *prey mass intake* by dividing by the product of prey energy density, and species' digestive energy efficiency. 
 
-The described calculation is applied to sets of species parameter values (Leedham et al., 2025) giving baseline prey mass estimates for each species. Additionally, prey mass intake calculation was applied to 60 thousand sets of parameter values per species (datasets provided) randomly sampled from continuous probability distributions for each parameter. These calculations provide uncertainty in prey mass estimates (2.5th and 97.5th percentiles). Time-activity budgets were simulated using Markov chain Montecarlo (MCMC) sampling. Other parameters were drawn from probability distributions about mean values. [SEE PAPER FOR FULL PARAMETER SAMPLING REGIME] <<<<<
+The described calculation is applied to sets of species parameter values (Leedham et al., 2025) giving baseline prey mass estimates for each species. Additionally, prey mass intake calculation was applied to 60 thousand sets of parameter values per species (datasets provided) randomly sampled from continuous probability distributions for each parameter (paper in prep). These calculations provide uncertainty in prey mass estimates (2.5th and 97.5th percentiles). Time-activity budgets were simulated using Markov chain Montecarlo (MCMC) sampling. Other parameters were drawn from probability distributions about mean values.
 
-
+<br>
 
 ## 2) Scale individual prey mass intake to the species network breeding population
 
 The total prey mass taken by the breeding adults of a given species network is the individual, seasonal prey mass intake, multiplied by estimates for the number of breeding adults.
 
-Because the UDs correspond to tracking for seabirds across the UK & Ireland (see below; Wakefield et al., 2017), individual intake quantities are scaled by estimates for the UK & Ireland species network breeding population sizes in the time period corresponding to the GPS tracking (2010-2014). We estimated breeding sizes by scaling species' breeding counts from the Seabird2000 full national census (Mitchell et al., 2004), by change ratios derived from a subset of colony recounts available for 2010-2014 via the Seabird Monitoring Programme (SMP) [CITE SMP!!!] <<<<<<<<
-See [PAPER] for full breeding population size estimate methodology. <<<<<<<
-Estimates for breeding population sizes include baseline, lower and upper estimates. 
+Because the UDs correspond to tracking for seabirds across the UK & Ireland (see below; Wakefield et al., 2017), individual intake quantities are scaled by estimates for the UK & Ireland species network breeding population sizes in the time period corresponding to the GPS tracking (2010-2014). We estimated breeding sizes by scaling species' breeding counts from the Seabird2000 full national census (Mitchell et al., 2004), by change ratios derived from a subset of colony recounts available for 2010-2014 via the Seabird Monitoring Programme (SMP; app.bto.org/seabirds/public). *spmapper* does not currently include uncertainty in population size.
 
+<br>
 
 ## 3) Map the spatial distribution of prey consumption
 The spatial origin of prey mass consumption is derived by multiplying prey quantities by utilisation distributions (UDs), which are maps of the proportional use of marine space for each species.
 
 UK & Ireland scale UDs for the focal species were produced by the RSPB (for GPS sampling and quantitative methods, see Wakefield et al., 2017).
 
+<br>
 
 ## 4) Extraction of absolute & proportional prey mass within areas of interest
-[TO BE ADDED] <<<<<<<<<<<
-Proportion...
-The total prey mass in user polygons is calculated as the proportion of all consumption within the polygons, multiplied by the total prey mass estimate. 
 
-[question here: is this why Adam set function to 'nbirds in footprint' instead of UD extraction, so it is transformative? (currently sums UD values)] <<<<<<<<<<<
+The *proportion* of a species' breeding population's prey consumption contained within user polygons is calculated by extracting the sum of the utilisation distribution values within them. 
+
+The corresponding total prey *mass* within user polygons is the proportion of all consumption within the polygons multiplied by the total prey mass.
+
+See the worked example for guidance on implementation of *spmapper*, and the retrieval and visualisation of results. 
+
+<br><br>
 
 
-
-
-# Reference list
+## Reference list
 Leedham, O., Searle, K. R., Harris, M. P., Newell, M., Wanless, S., Mobbs, D. C., Butler, A. and Daunt, F. (2025) "Time-activity budgets and energetics of common guillemot, razorbill, Atlantic puffin, and black-legged kittiwake”, *NERC EDS Environmental Information Data Centre*. doi: 10.5285/07b1105a-4a14-47e3-b491-9af59be90aff.
 
 Mitchell, P. I., Newton, S. F., Ratcliffe, N. & Dunn, T. E. Seabird populations of Britain and Ireland. T. & AD Poyser, London (2004).

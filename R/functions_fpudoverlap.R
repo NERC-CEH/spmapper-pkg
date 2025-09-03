@@ -49,7 +49,7 @@ fpudoverlap <- function(fppolys, udmap){
 
   ## #################################
   ## 7. Subset so that only using values for grid cells at sea:
-  ## Produces a vector whose length is equal to the number of at-sea (i.e. non-land) grid cells in the raster 'tmpl.land', containing the proportion of each grid cell that is contained within the footprint polygon
+  ## Produces a vector whose length is equal to the number of at-sea (i.e. non-land) grid cells in the raster, containing the proportion of each grid cell that is contained within the footprint polygon
 
   pcell.in.footprint <- pcell.in.footprint[is_cell_atsea]
 

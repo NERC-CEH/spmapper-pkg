@@ -19,7 +19,7 @@
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
-
+    pkgdown/assets/head.html
 
     <nav class="navbar navbar-expand-lg fixed-top " aria-label="Site navigation"><div class="container">
 
@@ -57,11 +57,13 @@
 </nav><div class="container template-article">
 
 
+
+
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Methods</h1>
             
-            <h4 data-toc-skip class="date">2025-06-30</h4>
+            <h4 data-toc-skip class="date">2025-09-03</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/NERC-CEH/spmapper-pkg/blob/HEAD/vignettes/spmapper_methods.Rmd" class="external-link"><code>vignettes/spmapper_methods.Rmd</code></a></small>
       <div class="d-none name"><code>spmapper_methods.Rmd</code></div>
@@ -81,23 +83,23 @@ p {
 <p><em>spmapper</em> estimates, with uncertainty, the total prey
 consumed over the course of the chick-rearing period by a typical
 breeding adult bird of each focal species. These estimates are then
-scaled to give the fish prey mass intake by the breeding population.
-Utilisation distributions are used to estimate the spatial origin of
-prey mass in the waters surrounding the UK &amp; Ireland. By providing
-spatial polygons, users can interrogate the resulting prey consumption
-maps to indicate the foraging value of marine spatial areas to breeding
-seabirds. The underlying calculations follow the following stages:</p>
-<ol style="list-style-type: decimal">
-<li>Estimate prey mass intake by a single breeding adult</li>
-<li>Scale individual prey mass intake to the species network breeding
-population</li>
-<li>Map the spatial distribution of prey consumption</li>
-<li>Extraction of absolute &amp; proportional prey mass within areas of
-interest</li>
-</ol>
+scaled to give the fish prey mass intake by the entire breeding
+population. Utilisation distributions are used to estimate the spatial
+origin of prey mass in the waters surrounding the UK &amp; Ireland. By
+providing spatial polygons, users can interrogate the resulting prey
+consumption maps to indicate the foraging value of marine spatial areas
+to breeding seabirds. The underlying calculations follow the following
+stages:</p>
+<p><strong>1) Estimate prey mass intake by a single breeding
+adult</strong> <br><strong>2) Scale individual prey mass intake to the
+species network breeding population</strong> <br><strong>3) Map the
+spatial distribution of prey consumption</strong> <br><strong>4)
+Extraction of absolute &amp; proportional prey mass within areas of
+interest</strong></p>
 <p>Values underlying key behavioural and energetic parameters are
 available as a dataset (Leedham et al., 2025); sourcing and calculation
 methods are described in full in the supporting documentation.</p>
+<p><br></p>
 <div class="section level3">
 <h3 id="estimate-prey-mass-intake-by-a-single-breeding-adult">1) Estimate prey mass intake by a single breeding adult<a class="anchor" aria-label="anchor" href="#estimate-prey-mass-intake-by-a-single-breeding-adult"></a>
 </h3>
@@ -131,11 +133,12 @@ values (Leedham et al., 2025) giving baseline prey mass estimates for
 each species. Additionally, prey mass intake calculation was applied to
 60 thousand sets of parameter values per species (datasets provided)
 randomly sampled from continuous probability distributions for each
-parameter. These calculations provide uncertainty in prey mass estimates
-(2.5th and 97.5th percentiles). Time-activity budgets were simulated
-using Markov chain Montecarlo (MCMC) sampling. Other parameters were
-drawn from probability distributions about mean values. [SEE PAPER FOR
-FULL PARAMETER SAMPLING REGIME] &lt;&lt;&lt;&lt;&lt;</p>
+parameter (paper in prep). These calculations provide uncertainty in
+prey mass estimates (2.5th and 97.5th percentiles). Time-activity
+budgets were simulated using Markov chain Montecarlo (MCMC) sampling.
+Other parameters were drawn from probability distributions about mean
+values.</p>
+<p><br></p>
 </div>
 <div class="section level3">
 <h3 id="scale-individual-prey-mass-intake-to-the-species-network-breeding-population">2) Scale individual prey mass intake to the species network breeding
@@ -152,10 +155,9 @@ the GPS tracking (2010-2014). We estimated breeding sizes by scaling
 species’ breeding counts from the Seabird2000 full national census
 (Mitchell et al., 2004), by change ratios derived from a subset of
 colony recounts available for 2010-2014 via the Seabird Monitoring
-Programme (SMP) [CITE SMP!!!] &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; See
-[PAPER] for full breeding population size estimate methodology.
-&lt;&lt;&lt;&lt;&lt;&lt;&lt; Estimates for breeding population sizes
-include baseline, lower and upper estimates.</p>
+Programme (SMP; app.bto.org/seabirds/public). <em>spmapper</em> does not
+currently include uncertainty in population size.</p>
+<p><br></p>
 </div>
 <div class="section level3">
 <h3 id="map-the-spatial-distribution-of-prey-consumption">3) Map the spatial distribution of prey consumption<a class="anchor" aria-label="anchor" href="#map-the-spatial-distribution-of-prey-consumption"></a>
@@ -166,23 +168,25 @@ the proportional use of marine space for each species.</p>
 <p>UK &amp; Ireland scale UDs for the focal species were produced by the
 RSPB (for GPS sampling and quantitative methods, see Wakefield et al.,
 2017).</p>
+<p><br></p>
 </div>
 <div class="section level3">
 <h3 id="extraction-of-absolute-proportional-prey-mass-within-areas-of-interest">4) Extraction of absolute &amp; proportional prey mass within areas
 of interest<a class="anchor" aria-label="anchor" href="#extraction-of-absolute-proportional-prey-mass-within-areas-of-interest"></a>
 </h3>
-<p>[TO BE ADDED] &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
-Proportion… The total prey mass in user polygons is calculated as the
-proportion of all consumption within the polygons, multiplied by the
-total prey mass estimate.</p>
-<p>[question here: is this why Adam set function to ‘nbirds in
-footprint’ instead of UD extraction, so it is transformative? (currently
-sums UD values)] &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</p>
+<p>The <em>proportion</em> of a species’ breeding population’s prey
+consumption contained within user polygons is calculated by extracting
+the sum of the utilisation distribution values within them.</p>
+<p>The corresponding total prey <em>mass</em> within user polygons is
+the proportion of all consumption within the polygons multiplied by the
+total prey mass.</p>
+<p>See the worked example for guidance on implementation of
+<em>spmapper</em>, and the retrieval and visualisation of results.</p>
+<p><br><br></p>
 </div>
-</div>
-<div class="section level2">
-<h2 id="reference-list">Reference list<a class="anchor" aria-label="anchor" href="#reference-list"></a>
-</h2>
+<div class="section level3">
+<h3 id="reference-list">Reference list<a class="anchor" aria-label="anchor" href="#reference-list"></a>
+</h3>
 <p>Leedham, O., Searle, K. R., Harris, M. P., Newell, M., Wanless, S.,
 Mobbs, D. C., Butler, A. and Daunt, F. (2025) “Time-activity budgets and
 energetics of common guillemot, razorbill, Atlantic puffin, and
@@ -198,6 +202,7 @@ M., Votier, S. C., Wanless, S. and Bolton, M. (2017) “Breeding density,
 fine-scale tracking, and large-scale modeling reveal the regional
 distribution of four seabird species.,” <em>Ecological
 Applications</em>, 27(7), pp. 2074–2091. doi: 10.1002/eap.1591.</p>
+</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

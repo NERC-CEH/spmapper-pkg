@@ -11,5 +11,6 @@ data-raw/
 dev/
 pkgdown/
 ecowings.Rproj
-clone repository rstudio github.txt
-how to download repo existing github clone.txt
+
+# Ignore HTML outputs of vignettes
+vignettes/*.html

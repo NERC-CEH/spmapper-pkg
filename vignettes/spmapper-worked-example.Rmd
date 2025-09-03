@@ -5,30 +5,40 @@ vignette: >
   %\VignetteIndexEntry{Worked example}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-pkgdown:
-  as_is: true
-date: "2025-05-20"
+date: "`r Sys.Date()`"
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+<br>
 
-# Load packages and functions
+### This worked example describes the use of *spmapper* and its core functions.
 
-```{r echo=FALSE}
+<br>
+
+# **Load packages and functions** 
+#### Load packages needed for tool functions. Check you have all necessary packages installed. 
+
+
+```{r, echo=FALSE}
+tooldir <- system.file("extdata", package = "spmapper") # invisible code directory line
+```
+
+```{r message=FALSE}
 library(spmapper)
-library(terra) ## note: needed in 'fpudoverlap'
+library(terra) 
 library(sf)
 library(knitr)
 library(rnaturalearth)
-library(rnaturalearthhires)
 library(viridis)
 library(ggplot2)
 library(patchwork)
 
-tooldir <- system.file("extdata", package = "spmapper")
+## define tool directory path
+# tooldir <- file.path("/spmapper") # Modify here to your package files directory
 
+# Load package functions
 system.file("R", "functions_preymodel.R", package = "spmapper")
 system.file("R", "functions_spmapper.R", package = "spmapper")
 system.file("R", "functions_fpudoverlap.R", package = "spmapper")
@@ -36,16 +46,31 @@ system.file("R", "functions_spmapplot.R", package = "spmapper")
 
 ```
 
-# Worked example - NnG and Berwick Bank
+<br><br>
 
-## User specified polygon(s) to use in example
+# **Worked example** 
 
-NOTE: TEMPORARY
+<br>
 
-```{r echo=FALSE}
+### **Specify user polygon(s)** 
+#### Users can specify multiple polygon/multipolygon objects and apply the rest of the example code to compare prey consumption across areas. *spmapper* functions are capable of handling multipolygon objects. 
+#### **Users are reminded to define the Coordinate Reference System (CRS) of their loaded shapefiles.** *spmapper* reprojects user polygons to align to the prey consumption maps. *spmapper* includes a function to plot prey consumption maps with the user polygons overlaid (see below).
+
+```{r, eval=FALSE}
+# Specify shapefile/s
+fppolys <- sf::st_read(file.path()) # Add your filepath/s here. 
+
+## Users must define the CRS of their loaded shapefile for spmapper to function!
+fppolys <- st_crs([...]) # define source file CRS
+```
+
+<br>
+
+#### **Example data presented**: UK offshore wind farm footprints of 'production', 'planned', 'construction' and 'approved' statuses, collated for the European Marine Observation and Data Network (via EMODnet; CETMAR, 2024). Offshore electricity transmission (OFTO) polygons excluded.
+```{r echo=FALSE, error = FALSE, warning=FALSE, message=FALSE, fig.width = 5, fig.height = 5 , dpi = 500}
 # Example polygons
 # UK offshore windfarms (Sourced via EMODNet)
-fppolys <- sf::st_read(system.file("demo/UK_OWF_polygons_by_status", package = "spmapper"))
+fppolys <- sf::st_read(system.file("demo/UK_OWF_polygons_by_status", package = "spmapper"),  quiet = TRUE)
 fppolys <- fppolys %>% dplyr::filter(country == "United Kingdom")
 fppolys <- fppolys %>% dplyr::filter(status %in% c("Approved", "Construction", "Planned", "Production" )) 
 fppolys <- fppolys %>% dplyr::filter(!grepl("OFTO", name)) # exclude cable polygons
@@ -53,12 +78,11 @@ proj.laea <- '+proj=laea +lat_0=-7.947 +lon_0=-14.30 +x_0=0 +y_0=0 +ellps=WGS84 
 fppolys <-  st_transform(fppolys, crs = proj.laea)
 
 # Union of polygons to avoid double counting within overlapping polygons
-# We should instead add warning to test if user's polygons overlap <<<<<<<<<<<<<<<<<<<<<<<<
 fppolys <- st_union(fppolys) # combine overlapping elements 
 fppolys <- st_sf(geometry = st_cast(fppolys, "POLYGON"))  # return to sfc
 
 
-# TEMPORARY - Example BLKI UD for testing code    TO BE REMOVED <<<<<<<<<<<<<<<<<<<<<<<<
+# UD example loaded as dummy data for polygon plot. UD not shown, prevented via fill scale in spmapplot. 
 file_udmap <- system.file("extdata", paste0("FAME_UD_standardised_", "BLKI", ".tif"), package = "spmapper")
 udmap <- terra::rast(file_udmap)
 terra::crs(udmap) <- '+proj=laea +lat_0=-7.947 +lon_0=-14.30 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs +towgs84=0,0,0'
@@ -67,137 +91,259 @@ spmapplot(udmap, fppolys) + theme(legend.position = "none") # map colour scale w
 
 ```
 
-## Run primary function spmapper() to produce prey consumption maps for each species and optionally extract within user specified polygons
+<br><br>
 
-```{r}
-out_kitt <- spmapper(spname = "Kittiwake", fppolys = fppolys, popscen = "baseline", tooldir = tooldir)
+## **Run primary function *spmapper()* ** - produces prey consumption maps for chosen species and optionally extracts quantities within user-specified polygons, if provided. 
 
-out_cogu <- spmapper(spname = "Guillemot", fppolys = fppolys, popscen = "baseline", tooldir = tooldir)
+<br>
 
-out_razo <- spmapper(spname = "Razorbill", fppolys = fppolys, popscen = "baseline", tooldir = tooldir)
+#### Specify species of interest with "spname = ", optional user-supplied polygons with "fppolys = ", and the directory to tool data with "tooldir = " (defined earlier under 'Load packages and functions'). The object returned (*e.g.* out_kitt) is a list object of the various inputs, quantities, and output prey consumption maps. 
+
+```{r error = FALSE, warning= FALSE, message= FALSE}
+out_kitt <- spmapper(spname = "Kittiwake", fppolys = fppolys, tooldir = tooldir)
+
+out_cogu <- spmapper(spname = "Guillemot", fppolys = fppolys, tooldir = tooldir)
+
+out_razo <- spmapper(spname = "Razorbill", fppolys = fppolys, tooldir = tooldir)
 ```
 
-## Visualise prey consumption maps with optional input polygons overlaid, using spmapplot()
-```{r, fig.width = 8, fig.height = 16, dpi = 400}
+<br><br>
 
-## Plot a single species map 
-# spmapplot(out_razo$prey_cons_map, fppolys) + ggtitle("Razorbill")
+## **Visualise prey consumption maps with optional input polygons overlaid, using *spmapplot()* **
 
-# Plot all species map # REMOVE and simply show how to plot one as above?? <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+<br>
+
+#### *spmapplot()* takes two arguments, the first is a prey consumption map (raster, generated by *spmapper()*, contained in list outputs in the form out_kitt$*prey_cons_map*), the second optional argument is a polygon object (*e.g.* the user's polygons, *fppolys*)
+```{r, , warning=FALSE,  message=FALSE, fig.width = 9, fig.height = 16, dpi = 500}
+
+
+# Plot all species prey consumption maps 
 (spmapplot(out_kitt$prey_cons_map, fppolys) + ggtitle("Kittiwake")) +
 (spmapplot(out_cogu$prey_cons_map, fppolys) + ggtitle("Guillemot")) +
 (spmapplot(out_razo$prey_cons_map, fppolys) + ggtitle("Razorbill")) + 
   patchwork::plot_layout(ncol = 1)
+```
 
-
+```{r, eval=FALSE}
+# Or plot a single species map, e.g. Razorbill
+spmapplot(out_razo$prey_cons_map, fppolys) + ggtitle("Razorbill")
 
 ```
 
-## Visualise prey mass estimates
 
+<br>
 
-```{r, fig.width=7, fig.height=5}
-par(mfrow=c(2,2))
+## **Visualise prey mass estimates**
+#### The following code plots the distribution of prey mass estimates produced by *spmapper()*, and annotates the baseline estimate with a dashed line. 
 
-hist(out_kitt$allbirds_prey_sim, breaks=50, col=gray(0.6), main="Kittiwake")
-lines(rep(out_kitt$allbirds_prey_est,2),c(0,10000),lwd=2)
+```{r, fig.margin=10, , fig.width = 10, fig.height = 3.2, dpi = 500}
 
-hist(out_cogu$allbirds_prey_sim, breaks=50, col=gray(0.6), main="Guillemot")
-lines(rep(out_cogu$allbirds_prey_est,2),c(0,10000),lwd=2)
+blki_p <- ggplot(data.frame(out_kitt$allbirds_prey_sim), aes(out_kitt$allbirds_prey_sim/1000)) +
+  geom_histogram(bins = 50, color = "gray10", fill = "skyblue") +
+  geom_vline(xintercept = out_kitt$allbirds_prey_est/1000, color = "gray10", linetype = "longdash", linewidth = 1.1) +
+  labs(x = "Prey consumption mass, t", y = "Frequency", title = "Kittiwake") +
+  theme_minimal()
 
-hist(out_razo$allbirds_prey_sim, breaks=50, col=gray(0.6), main="Razorbill")
-lines(rep(out_razo$allbirds_prey_est,2),c(0,10000),lwd=2)
+cogu_p <- ggplot(data.frame(out_cogu$allbirds_prey_sim), aes(out_cogu$allbirds_prey_sim/1000)) +
+  geom_histogram(bins = 50, color = "gray10", fill = "skyblue") +
+  geom_vline(xintercept = out_cogu$allbirds_prey_est/1000, color = "gray10", linetype = "longdash", linewidth = 1.1) +
+  labs(x = "Prey consumption mass, t", y = "Frequency", title = "Guillemot") +
+  theme_minimal()
+
+razo_p <- ggplot(data.frame(out_razo$allbirds_prey_sim), aes(out_razo$allbirds_prey_sim/1000)) +
+  geom_histogram(bins = 50, color = "gray10", fill = "skyblue") +
+  geom_vline(xintercept = out_razo$allbirds_prey_est/1000, color = "gray10", linetype = "longdash", linewidth = 1.1) +
+  labs(x = "Prey consumption mass, t", y = "Frequency", title = "Razorbill") +
+  theme_minimal()
+
+(blki_p + cogu_p + razo_p) 
+
 ```
 
-## Tables
+<br>
+
+## **View output tables**
+
+#### The folowing code produces a table of prey mass  consumption (kg) estimates for each species. *Estimate* refers to the baseline estimate, *CI_Lower* is the lower confidence interval (2.5%) and *CI_Upper* is the upper confidence interval (97.5%).
 
 ```{r}
 tab_kitt <- data.frame(
   Species = "Kittiwake",
   Estimate = out_kitt$allbirds_prey_est, 
-  Sim_CI_Lower = as.numeric(quantile(out_kitt$allbirds_prey_sim, 0.025)), 
-# Sim_Mean = mean(out_kitt$allbirds_prey_sim), 
-  Sim_CI_Upper = as.numeric(quantile(out_kitt$allbirds_prey_sim, 0.975)))
+  CI_Lower = as.numeric(quantile(out_kitt$allbirds_prey_sim, 0.025)), 
+  CI_Upper = as.numeric(quantile(out_kitt$allbirds_prey_sim, 0.975)))
 
 tab_cogu <- data.frame(
   Species = "Guillemot",
   Estimate = out_cogu$allbirds_prey_est, 
-  Sim_CI_Lower = as.numeric(quantile(out_cogu$allbirds_prey_sim, 0.025)), 
-# Sim_Mean = mean(out_cogu$allbirds_prey_sim), 
-  Sim_CI_Upper = as.numeric(quantile(out_cogu$allbirds_prey_sim, 0.975)))
+  CI_Lower = as.numeric(quantile(out_cogu$allbirds_prey_sim, 0.025)), 
+  CI_Upper = as.numeric(quantile(out_cogu$allbirds_prey_sim, 0.975)))
 
 tab_razo <- data.frame(
   Species = "Razorbill",
   Estimate = out_razo$allbirds_prey_est, 
-  Sim_CI_Lower = as.numeric(quantile(out_razo$allbirds_prey_sim, 0.025)), 
- # Sim_Mean = mean(out_razo$allbirds_prey_sim), 
-  Sim_CI_Upper = as.numeric(quantile(out_razo$allbirds_prey_sim, 0.975)))
+  CI_Lower = as.numeric(quantile(out_razo$allbirds_prey_sim, 0.025)), 
+  CI_Upper = as.numeric(quantile(out_razo$allbirds_prey_sim, 0.975)))
 
-kable(rbind(tab_kitt, tab_cogu, tab_razo))
+kable(rbind(tab_kitt, tab_cogu, tab_razo), digits = 2, caption = "Prey consumption mass, kg")
 ```
 
-# Testing mis-specification of inputs
+<br>
 
-## Incorrect species name
+## **View polygon extraction results**
 
-The tool explicitly checks whether the provided species names are valid (including capitalisation)
+#### The following code produces a table of the results of the spatial extraction of prey consumption within polygons. *fp_percent* is the percentage of total prey consumption, *fp_Estimate* is the baseline prey mass (kg),	*fp_CI_Lower* is the lower confidence interval for prey mass (kg, 2.5%), and *fp_CI_Upper* is the upper confidence interval for prey mass (kg, 97.5%) contained within the polygons.
+
+```{r}
+
+fp_tab_kitt <- data.frame(
+  Species = "Kittiwake",
+  fp_percent = round(out_kitt$fp_ud_overlap * 100, 4), # % prey consumption in footprint/s, 4 d.p.
+  fp_Estimate = out_kitt$allbirds_prey_fp_est, 
+  fp_CI_Lower = as.numeric(quantile(out_kitt$allbirds_prey_fp_sim, 0.025)), # 2.5%
+  fp_CI_Upper = as.numeric(quantile(out_kitt$allbirds_prey_fp_sim, 0.975))) # 97.5%
+
+fp_tab_cogu <- data.frame(
+  Species = "Guillemot",
+  fp_percent = round(out_cogu$fp_ud_overlap * 100, 4), # % prey consumption in footprint/s, 4 d.p.
+  fp_Estimate = out_cogu$allbirds_prey_fp_est, 
+  fp_CI_Lower = as.numeric(quantile(out_cogu$allbirds_prey_fp_sim, 0.025)), # 2.5%
+  fp_CI_Upper = as.numeric(quantile(out_cogu$allbirds_prey_fp_sim, 0.975))) # 97.5%
+
+fp_tab_razo <- data.frame(
+  Species = "Razorbill",
+  fp_percent = round(out_razo$fp_ud_overlap * 100, 4), # % prey consumption in footprint/s, 4 d.p.
+  fp_Estimate = out_razo$allbirds_prey_fp_est, 
+  fp_CI_Lower = as.numeric(quantile(out_razo$allbirds_prey_fp_sim, 0.025)), # 2.5%
+  fp_CI_Upper = as.numeric(quantile(out_razo$allbirds_prey_fp_sim, 0.975))) # 97.5%
+
+kable(rbind(fp_tab_kitt, fp_tab_cogu, fp_tab_razo), digits=1, caption = "Polygon extraction results")
+
+```
+
+<br><br><br>
+
+___
+# **Mis-specification of inputs**
+
+#### *spmapper* performs checks for potential input specification errors. The following examples illustrate the error messages produced under cases of mis-specification.
+
+<br>
+
+### Incorrect species name
+#### *spmapper* explicitly checks whether the provided species names are valid (including capitalisation).
 
 ```{r error=TRUE}
-spmapper(spname = "kittiwake", fppolys = fppolys, popscen = "baseline", tooldir = tooldir)
+spmapper(spname = "kittiwake", fppolys = fppolys, tooldir = tooldir)
 ```
 
-## Incorrect population scenario
+<br>
 
-The tool explicitly checks whether the provided scenario names are valid (including capitalisation)
+### Incorrect path to tool
+#### *spmapper* does not currently explicitly check if the path provided is correct/valid, but may yield sensible error messages if an incorrect path is specified.
 
 ```{r error=TRUE}
-spmapper(spname = "Kittiwake", fppolys = fppolys, popscen = "medium", tooldir = tooldir)
+spmapper(spname = "Kittiwake", fppolys = fppolys, tooldir = "test")
 ```
 
-## Incorrect path to tool
+<br>
 
-The tool does not currently explicitly check if the path provided is correct/valid, but may yield sensible error messages if an incorrect path is specified
-
-```{r error=TRUE}
-spmapper(spname = "Kittiwake", fppolys = fppolys, popscen = "baseline", tooldir = "test")
-```
 ## Validity of footprints
+#### The tool does not check directly for the validity of the polygons provided, but does run three checks for consistency between polygons and the prey consumption maps. *spmapplot()* can be used to visualise polygons overlaid on the prey consumption maps.
 
-The tool does not check directly for the validity of the polygons provided
+<br>
 
-## Inconsistencies between footprint polygons and UDs
+### 1. Footprints on land (or in other areas of map without values) 
 
-The tool runs three checks for consistency between polygons and the UD map
+```{r echo=FALSE, error=TRUE, warning=FALSE, message=FALSE, fig.width = 6, out.width = '80%', dpi = 500}
 
-### Footprints smaller than one grid cell
+# land polygon 
+land_p <- st_sf(
+  id = "land_p",
+  geometry = st_sfc(
+    st_polygon(list(rbind(
+      c(715500 + 170000, 6651000),
+      c(715500 + 170000, 6681000),
+      c(745500 + 170000, 6681000),
+      c(745500 + 170000, 6651000),
+      c(715500 + 170000, 6651000)
+    ))),
+    crs = proj.laea
+  )
+)
 
-```{r error=TRUE}
-fppolys <- sf::st_read(system.file("demo/North_Sea_OWF_2030_polygons", package = "spmapper"))
-fppolys <- fppolys[which.min(sf::st_area(fppolys)),]
+spmapplot(out_kitt$prey_cons_map, land_p)
 
-spmapper(spname = "Kittiwake", fppolys = fppolys, popscen = "baseline", tooldir = tooldir)
-```
-### Footprints outside extent of UD
+spmapper(spname = "Kittiwake", fppolys = land_p, tooldir = tooldir)
 
-Note: the extent of the UD maps varies between species
-
-```{r error=TRUE}
-fppolys <- sf::st_read(system.file("demo/North_Sea_OWF_2030_polygons", package = "spmapper"))
-
-fppolys <- fppolys[1,]
-
-spmapper(spname = "Guillemot", fppolys = fppolys, popscen = "baseline", tooldir = tooldir)
-```
-
-### Footprints on land (or in other areas of map without values)
-
-Note: this may be footprints on land, but it could also be footprints in areas that are within extent but have missing values as weren't included in the original modelling in Wakefield et al. (2017)
-
-```{r error=TRUE}
-fppolys <- sf::st_read(system.file("demo/North_Sea_OWF_2030_polygons", package = "spmapper"))
-
-fppolys <- fppolys[155,]
-
-spmapper(spname = "Guillemot", fppolys = fppolys, popscen = "baseline", tooldir = tooldir)
 ```
 
+<br>
+
+### 2. Footprints smaller than one grid cell 
+
+```{r echo=FALSE, error=TRUE, warning=FALSE, message=FALSE, fig.width = 6, out.width = '80%', dpi = 500}
+
+# 1.5 x 1.5 km polygon, i.e. too small for spmapper functionality
+small_p <- st_sf(
+  id = "small_p",
+  geometry = st_sfc(
+    st_polygon(list(rbind(
+      c(1060250, 7011000),
+      c(1060250, 7012500),
+      c(1061500, 7012500),
+      c(1061500, 7011000),
+      c(1060250, 7011000)
+    ))),
+    crs = proj.laea
+  )
+)
+
+tr_ext <- ext(725000, 1407000, 6653000, 7311000)
+
+spmapplot(out_kitt$prey_cons_map, small_p) + 
+  coord_sf(
+    xlim = c(xmin(tr_ext), xmax(tr_ext)),
+    ylim = c(ymin(tr_ext), ymax(tr_ext)),
+    expand = FALSE
+  )
+
+spmapper(spname = "Kittiwake", fppolys = small_p, tooldir = tooldir)
+
+```
+<br>
+
+### 3. Footprints outside extent of prey consumption maps
+
+#### Note: this may be footprints on land, but it could also be footprints in areas that are within extent but in areas that weren't included in the original modelling in Wakefield et al. (2017). 
+
+```{r echo=FALSE, error=TRUE, warning=FALSE, message=FALSE, fig.width = 6, out.width = '80%', dpi = 500}
+
+outside_p <- st_sf(
+  id = "outside_p",
+  geometry = st_sfc(
+    st_polygon(list(rbind(
+      c(937000, 7391000),
+      c(937000, 7451000),
+      c(997000, 7451000),
+      c(997000, 7391000),
+      c(937000, 7391000)
+    ))),
+    crs = proj.laea
+  )
+)
+
+ext_kitt <- ext(out_kitt$prey_cons_map) 
+
+spmapplot(out_kitt$prey_cons_map, outside_p) + 
+  geom_sf(data = outside_p,
+          colour = "orchid2", fill = NA,
+          alpha = 1, linewidth = 0.4) +
+  coord_sf(xlim = c(138000, ext_kitt$xmax - 1000),
+           ylim = c(5980000, 7485000),
+           expand = FALSE)
+
+spmapper(spname = "Kittiwake", fppolys = outside_p, tooldir = tooldir)
+
+```
+<br><br>
