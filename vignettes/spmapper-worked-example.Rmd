@@ -17,15 +17,30 @@ knitr::opts_chunk$set(echo = TRUE)
 
 <br>
 
-# **Load packages and functions** 
-#### Load packages needed for tool functions. Check you have all necessary packages installed. 
+# Install *spmapper* 
+You can install *spmapper* directly from within *R* (recommended) with the below code, or via download from the github repository, linked via the "Download spmapper" box on the homepage of this website. 
+```{r eval=FALSE}
+# Install spmapper from within R 
+library(devtools)
+devtools::install_github("NERC-CEH/spmapper-pkg") 
 
+## If you have downloaded the package files directly from the github repository,  you will first need to install the package by modifying the below example code
+# install.packages("C:/Users/myusername/Downloads/spmapper-pkg_[0.1.0].tar.gz", repos = NULL, type = "source") # with the correct file path and version name etc
 
-```{r, echo=FALSE}
-tooldir <- system.file("extdata", package = "spmapper") # invisible code directory line
+# load the package
+library(spmapper) 
 ```
 
+```{r, echo=FALSE}
+tooldir <- file.path(rprojroot::find_root(rprojroot::has_file("DESCRIPTION")), "inst/extdata")
+```
+
+# **Load packages and functions** 
+Load packages needed for tool functions. Check you have all necessary packages installed. 
+
 ```{r message=FALSE}
+
+# load required packages
 library(spmapper)
 library(terra) 
 library(sf)
@@ -35,15 +50,21 @@ library(viridis)
 library(ggplot2)
 library(patchwork)
 
-## define tool directory path
-# tooldir <- file.path("/spmapper") # Modify here to your package files directory
+```
 
+```{r eval=FALSE}
+## Define tool directory path - this is important to source the package functions, and for those functions to locate the input data!
+(tooldir <- system.file(package = "spmapper")) # automatically find and define your file path - but do check the path is correct
+
+# tooldir <- file.path(".../spmapper") # alternatively, modify here to your package files directory if you have installed the package elsewhere
+```
+
+``` {r message=FALSE}
 # Load package functions
-system.file("R", "functions_preymodel.R", package = "spmapper")
-system.file("R", "functions_spmapper.R", package = "spmapper")
-system.file("R", "functions_fpudoverlap.R", package = "spmapper")
-system.file("R", "functions_spmapplot.R", package = "spmapper")
-
+invisible(system.file("R", "functions_preymodel.R", package = "spmapper"))
+invisible(system.file("R", "functions_spmapper.R", package = "spmapper"))
+invisible(system.file("R", "functions_fpudoverlap.R", package = "spmapper"))
+invisible(system.file("R", "functions_spmapplot.R", package = "spmapper"))
 ```
 
 <br><br>
@@ -70,7 +91,7 @@ fppolys <- st_crs([...]) # define source file CRS
 ```{r echo=FALSE, error = FALSE, warning=FALSE, message=FALSE, fig.width = 5, fig.height = 5 , dpi = 500}
 # Example polygons
 # UK offshore windfarms (Sourced via EMODNet)
-fppolys <- sf::st_read(system.file("demo/UK_OWF_polygons_by_status", package = "spmapper"),  quiet = TRUE)
+fppolys <- sf::st_read(file.path(tooldir,"demo/windfarmspolyPolygon.shp"), quiet = TRUE)
 fppolys <- fppolys %>% dplyr::filter(country == "United Kingdom")
 fppolys <- fppolys %>% dplyr::filter(status %in% c("Approved", "Construction", "Planned", "Production" )) 
 fppolys <- fppolys %>% dplyr::filter(!grepl("OFTO", name)) # exclude cable polygons

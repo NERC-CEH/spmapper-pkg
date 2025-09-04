@@ -5,7 +5,50 @@ These data describe the daily time allocation to and energetic costs of core act
 These data are used by the spmapper() function to estimate the mass of prey taken by an individual breeding adult of each species. See Leedham et al. (2025) for full details of data sourcing."><meta property="og:description" content="This dataset contains information on key behavioural and physiological traits of the three focal species of seabirds: Common guillemot Uria aalge;
 Razorbill Alca torda; and Black-legged kittiwake Rissa tridactyla.
 These data describe the daily time allocation to and energetic costs of core activities and other energetically important processes and species traits.
-These data are used by the spmapper() function to estimate the mass of prey taken by an individual breeding adult of each species. See Leedham et al. (2025) for full details of data sourcing."><meta property="og:image" content="https://nerc-ceh.github.io/spmapper-pkg/logo.png"></head><body>
+These data are used by the spmapper() function to estimate the mass of prey taken by an individual breeding adult of each species. See Leedham et al. (2025) for full details of data sourcing."><meta property="og:image" content="https://nerc-ceh.github.io/spmapper-pkg/logo.png"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css"><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"></script><script>
+window.addEventListener("load", function() {
+  window.cookieconsent.initialise({
+    palette: {
+      popup: { background: "#000" },
+      button: { background: "#f1d600", color: "#000" }
+    },
+    theme: "classic",
+    type: "opt-in",
+    content: {
+      message: "This site uses cookies for analytics. Do you accept?",
+      allow: "Accept",
+      deny: "Refuse",
+      link: "https://www.ceh.ac.uk/about-us/policies/privacy-notice",
+      href: "https://www.ceh.ac.uk/about-us/policies/privacy-notice"
+    },
+    onInitialise: function(status) {
+      if (this.hasConsented()) {
+        loadGoogleAnalytics();
+      }
+    },
+    onStatusChange: function(status, chosenBefore) {
+      if (this.hasConsented()) {
+        loadGoogleAnalytics();
+      }
+    }
+  });
+});
+
+// Function to load Google Analytics only after consent
+function loadGoogleAnalytics() {
+  if (window.gaLoaded) return; // prevent double-loading
+  window.gaLoaded = true;
+
+  // Replace 'G-XXXXXXXXXX' with your Google Analytics Measurement ID
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'G-XXXXXXXXXX', 'auto');
+  ga('send', 'pageview');
+}
+</script></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -92,7 +135,7 @@ These data are used by the spmapper() function to estimate the mass of prey take
 
 
 
-  pkgdown/assets/extra.html
+
 
   </body></html>
 

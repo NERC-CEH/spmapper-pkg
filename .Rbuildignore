@@ -1,3 +1,6 @@
+# Ignore other files
+^Thumbs\.db$
+^favicon\.png$
 ^ecowings\.Rproj$
 ^\.Rproj\.user$
 # Ignore RStudio project files
@@ -17,10 +20,12 @@
 
 # Ignore pkgdown config and favicon (config may stay if needed, favicon usually not)
 ^_pkgdown\.yml$
-^pkgdown/favicon/
+^pkgdown/
 
 # Ignore built pkgdown site
 ^docs/
+^inst/extdata/demo/
+^vignettes/
 
 # Ignore R Markdown files outside vignettes (if you have any)
 ^.*\.Rmd$
