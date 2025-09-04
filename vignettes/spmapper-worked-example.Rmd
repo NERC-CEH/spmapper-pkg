@@ -54,7 +54,7 @@ library(patchwork)
 
 ```{r eval=FALSE}
 ## Define tool directory path - this is important to source the package functions, and for those functions to locate the input data!
-(tooldir <- system.file(package = "spmapper")) # automatically find and define your file path - but do check the path is correct
+tooldir <- system.file("extdata", package = "spmapper") # automatically find and define your file path - but do check the path is correct
 
 # tooldir <- file.path(".../spmapper") # alternatively, modify here to your package files directory if you have installed the package elsewhere
 ```
