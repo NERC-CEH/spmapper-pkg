@@ -1,6 +1,8 @@
 # ***spmapper*: An R package spatial planning tool to indicate the foraging value of marine areas to breeding seabirds**
 
 <br>
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17063790.svg)](https://doi.org/10.5281/zenodo.17063790)
+<br>
 
 # Background 
 Offshore wind energy is central to the UK's renewable energy strategy and is projected to expand substantially in terms of generation capacity, and in the number and area coverage of offshore windfarms (OWFs). OWFs have the potential for adverse impacts on marine wildlife, including seabirds, which travel through and forage in offshore areas. Among other possible impact mechanisms, OWFs may impact seabirds via displacement from foraging habitat, that is, seabirds may avoid windfarms in areas that they might otherwise forage. Because of this, displacement from windfarms may correspond to a loss of access to prey for foraging seabirds, with energetic and demographic consequences. 
