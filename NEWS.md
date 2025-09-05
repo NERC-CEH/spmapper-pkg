@@ -30,7 +30,12 @@ Core functions and datasets are in place, but minor changes may still occur befo
 
 ---
 
-# Unreleased
+# spmapper 0.9.1
+Release Date: 2025-09-05
 
-- Changes since 0.9.0 will appear here.
+tar.gz and zip files were updated to include only necessary files.
+
+## Notes
+* This is a **GitHub-only release**; the package is not available on CRAN.
+* Feedback and bug reports are welcome: [GitHub Issues](https://github.com/NERC-CEH/spmapper-pkg/issues).
 
