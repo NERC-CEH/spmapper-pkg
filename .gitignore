@@ -6,6 +6,7 @@
 *.tar.gz
 *.Rcheck/
 inst/doc
+inst/extdata/demo
 ignore/
 data-raw/
 dev/
