@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "spmapper: spmapper"
+version: "0.9.1"
+date-released: 2025-09-05
+type: software
+authors:
+  - family-names: Leedham
+    given-names: Oliver
+  - family-names: Searle
+    given-names: Kate
+  - family-names: Caporusso
+    given-names: Claudia
+  - family-names: Daunt
+    given-names: Francis
+  - family-names: Butler
+    given-names: Adam
+repository-code: "https://github.com/NERC-CEH/spmapper-pkg"
+url: "https://nerc-ceh.github.io/spmapper-pkg"
