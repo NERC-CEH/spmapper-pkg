@@ -58,6 +58,10 @@ template:
         ga('send', 'pageview');
       }
       </script>
+    after_body: |
+      <style>
+        .news-source { display: none; }
+      </style>
 
 assets:
   - extdata
@@ -67,6 +71,7 @@ navbar:
     left:
       - intro
       - reference
+      - news
     right:
       - search
       - github
