@@ -5,6 +5,11 @@
 #' @param polyg An optional sf object (i.e. user polygons) to overlay on the raster plot (default: `NULL`).
 #' @return Prey consumption map with Western European country polygons (via rnaturalearth), with (optional) user input polygons overlaid: ggplot
 #' @export
+#' @importFrom ggplot2 ggplot aes geom_raster geom_sf guides guide_colourbar
+#'   labs theme element_text element_blank element_rect coord_sf
+#'   scale_fill_gradientn margin
+#' @importFrom sf sf_use_s2 st_as_sfc st_bbox st_crop st_transform
+#' @importFrom viridis viridis
 ## ########################################
 
 spmapplot <- function(rast, polyg = NULL){
