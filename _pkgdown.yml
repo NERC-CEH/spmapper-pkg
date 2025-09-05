@@ -128,6 +128,6 @@ home:
             <a class="btn btn-outline-primary btn-lg"
               href="https://github.com/NERC-CEH/spmapper-pkg/releases/latest"
               role="button">
-              <i class="bi bi-box-arrow-down"></i> Get spmapper (.tar.gz)
+              <i class="bi bi-box-arrow-down"></i> Get spmapper
             </a>
           </div>

@@ -1,6 +1,6 @@
 Package: spmapper
 Title: spmapper
-Version: 0.9.0
+Version: 0.9.1
 Authors@R: c(
     person("Oliver", "Leedham", email = "olilee@ceh.ac.uk", role = "aut"),
     person("Kate", "Searle", role = "aut"),
