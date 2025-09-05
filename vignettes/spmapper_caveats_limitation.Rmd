@@ -21,7 +21,7 @@ p {
 
 <br>
 
-#### This page outlines recommendations, appropriate applications, and important caveats relating to the use of *spmapper* and its outputs. **Users are asked to read this document fully (approximate read time: 3-5 minutes).**
+This page outlines recommendations, appropriate applications, and important caveats relating to the use of *spmapper* and its outputs. **Users are asked to read this document fully (approximate read time: 3-5 minutes).**
 
 
 <br>

@@ -8,13 +8,14 @@ Core functions and datasets are in place, but minor changes may still occur befo
 * Core modelling functions:
   - `spmapper()`
   - `spmapplot()`
-  - `fpudoverlap()` and `fn.tot.prey()`
+  - `fpudoverlap()`
+  - `fn.tot.prey()`
 * Included datasets:
   - `Seabird_energetics_pars_spmapper`
+  - `fame_population_spmapper`
   - `BLKI_sampled_spmapper`
   - `COGU_sampled_spmapper`
   - `RAZO_sampled_spmapper`
-  - `fame_population_spmapper`
   - `FAME_UD_standardised_BLKI`, 
   - `FAME_UD_standardised_COGU`, 
   - `FAME_UD_standardised_RAZO`
