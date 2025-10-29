@@ -1,3 +1,14 @@
+# spmapper 0.9.2
+Release Date: 2025-10-29
+
+functions_spmapper.R file was updated to fix minor bugs in the `spmapper()` function.
+
+## Notes
+* This is a **GitHub-only release**; the package is not available on CRAN.
+* Feedback and bug reports are welcome: [GitHub Issues](https://github.com/NERC-CEH/spmapper-pkg/issues).
+
+---
+
 # spmapper 0.9.1
 Release Date: 2025-09-05
 

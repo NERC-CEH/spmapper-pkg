@@ -70,7 +70,7 @@ function loadGoogleAnalytics() {
 
     <a class="navbar-brand me-2" href="../index.html">spmapper</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -109,7 +109,7 @@ function loadGoogleAnalytics() {
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Worked example</h1>
             
-            <h4 data-toc-skip class="date">2025-09-05</h4>
+            <h4 data-toc-skip class="date">2025-10-29</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/NERC-CEH/spmapper-pkg/blob/HEAD/vignettes/spmapper-worked-example.Rmd" class="external-link"><code>vignettes/spmapper-worked-example.Rmd</code></a></small>
       <div class="d-none name"><code>spmapper-worked-example.Rmd</code></div>
@@ -158,8 +158,10 @@ packages installed.</p>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://sjmgarnier.github.io/viridis/" class="external-link">viridis</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com" class="external-link">patchwork</a></span><span class="op">)</span></span></code></pre></div>
+<p>Define tool directory path - this is important to source the package
+functions, and for those functions to locate the input data!</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## Define tool directory path - this is important to source the package functions, and for those functions to locate the input data!</span></span>
+<code class="sourceCode R"><span><span class="co">## Define tool directory path</span></span>
 <span><span class="va">tooldir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, package <span class="op">=</span> <span class="st">"spmapper"</span><span class="op">)</span> <span class="co"># automatically find and define your file path - but do check the path is correct</span></span>
 <span></span>
 <span><span class="co"># tooldir &lt;- file.path(".../spmapper") # alternatively, modify here to your package files directory if you have installed the package elsewhere</span></span></code></pre></div>
@@ -207,26 +209,42 @@ electricity transmission (OFTO) polygons excluded.
 </div>
 </div>
 <div class="section level3">
-<h3 id="run-primary-function-spmapper---produces-prey-consumption-maps-for-chosen-species-and-optionally-extracts-quantities-within-user-specified-polygons-if-provided-">
+<h3 id="run-primary-function-spmapper---produces-prey-consumption-maps-for-all-species-and-optionally-extracts-quantities-within-user-specified-polygons-if-provided-">
 <strong>Run primary function <em>spmapper()</em> </strong> -
-produces prey consumption maps for chosen species and optionally
-extracts quantities within user-specified polygons, if provided.<a class="anchor" aria-label="anchor" href="#run-primary-function-spmapper---produces-prey-consumption-maps-for-chosen-species-and-optionally-extracts-quantities-within-user-specified-polygons-if-provided-"></a>
+produces prey consumption maps for all species and optionally extracts
+quantities within user-specified polygons, if provided.<a class="anchor" aria-label="anchor" href="#run-primary-function-spmapper---produces-prey-consumption-maps-for-all-species-and-optionally-extracts-quantities-within-user-specified-polygons-if-provided-"></a>
 </h3>
 <p><br></p>
-<p>Specify species of interest with “spname =”, optional user-supplied
-polygons with “fppolys =”, and the directory to tool data with “tooldir
-=” (defined earlier under ‘Load packages and functions’). The object
-returned (<em>e.g.</em> out_kitt) is a list object of the various
-inputs, quantities, and output prey consumption maps.</p>
+<p>Optionally specify polygons with “fppolys =”. Users must specify the
+directory to tool data with “tooldir =” (defined earlier under ‘Load
+packages and functions’). The object returned (assigned as the object
+named ‘out’ in this example) is a list object. This list contains 3
+sub-lists (one per species) of the various inputs, quantities, and
+output prey consumption maps and extracted quantities. The species
+sub-lists are named by species, <em>e.g.</em> ‘out$Kittiwake’. The
+spmapper() output list also contains a dataframe summary of key results
+per species (named ‘Summary’, retrieved via ‘out$Summary’). The
+spmapper() function provides updates on its progress through the
+calculations.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">out_kitt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/spmapper.html">spmapper</a></span><span class="op">(</span>spname <span class="op">=</span> <span class="st">"Kittiwake"</span>, fppolys <span class="op">=</span> <span class="va">fppolys</span>, tooldir <span class="op">=</span> <span class="va">tooldir</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/spmapper.html">spmapper</a></span><span class="op">(</span>fppolys <span class="op">=</span> <span class="va">fppolys</span>, tooldir <span class="op">=</span> <span class="va">tooldir</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## |---------|---------|---------|---------|=========================================                                          </span></span></code></pre>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">out_cogu</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/spmapper.html">spmapper</a></span><span class="op">(</span>spname <span class="op">=</span> <span class="st">"Guillemot"</span>, fppolys <span class="op">=</span> <span class="va">fppolys</span>, tooldir <span class="op">=</span> <span class="va">tooldir</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## |---------|---------|---------|---------|=========================================                                          </span></span></code></pre>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">out_razo</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/spmapper.html">spmapper</a></span><span class="op">(</span>spname <span class="op">=</span> <span class="st">"Razorbill"</span>, fppolys <span class="op">=</span> <span class="va">fppolys</span>, tooldir <span class="op">=</span> <span class="va">tooldir</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## |---------|---------|---------|---------|=========================================                                          </span></span></code></pre>
+<pre><code><span><span class="co">## [1] "Completed 1 of 3 species: Kittiwake"</span></span>
+<span><span class="co">## |---------|---------|---------|---------|=========================================                                          </span></span></code></pre>
+<pre><code><span><span class="co">## [1] "Completed 2 of 3 species: Guillemot"</span></span>
+<span><span class="co">## |---------|---------|---------|---------|=========================================                                          </span></span></code></pre>
+<pre><code><span><span class="co">## [1] "Completed 3 of 3 species: Razorbill"</span></span></code></pre>
+<p><br></p>
+<p>Note, if you pass <em>spmapper()</em> a set of multiple polygons
+(<em>i.e.</em> a multipolygon object), spatial extractions will be
+performed and summed across all contained polygons. If you are
+interested in comparing two specific polygons - or two sets of polygons
+- you will need to run <em>spmapper()</em> separately for each, and then
+compare results. See example code below to run the tool for two
+individual or sets of input polygons, ‘fppolys1’ and ‘fppolys2’.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">out1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/spmapper.html">spmapper</a></span><span class="op">(</span>fppolys <span class="op">=</span> <span class="va">fppolys1</span>, tooldir <span class="op">=</span> <span class="va">tooldir</span><span class="op">)</span></span>
+<span><span class="va">out2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/spmapper.html">spmapper</a></span><span class="op">(</span>fppolys <span class="op">=</span> <span class="va">fppolys2</span>, tooldir <span class="op">=</span> <span class="va">tooldir</span><span class="op">)</span></span></code></pre></div>
 <p><br><br></p>
 </div>
 <div class="section level3">
@@ -242,14 +260,14 @@ optional argument is a polygon object (<em>e.g.</em> the user’s
 polygons, <em>fppolys</em>)</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Plot all species prey consumption maps </span></span>
-<span><span class="op">(</span><span class="fu"><a href="../reference/spmapplot.html">spmapplot</a></span><span class="op">(</span><span class="va">out_kitt</span><span class="op">$</span><span class="va">prey_cons_map</span>, <span class="va">fppolys</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Kittiwake"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span><span class="op">(</span><span class="fu"><a href="../reference/spmapplot.html">spmapplot</a></span><span class="op">(</span><span class="va">out_cogu</span><span class="op">$</span><span class="va">prey_cons_map</span>, <span class="va">fppolys</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Guillemot"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span><span class="op">(</span><span class="fu"><a href="../reference/spmapplot.html">spmapplot</a></span><span class="op">(</span><span class="va">out_razo</span><span class="op">$</span><span class="va">prey_cons_map</span>, <span class="va">fppolys</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Razorbill"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span><span class="op">(</span><span class="fu"><a href="../reference/spmapplot.html">spmapplot</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">Kittiwake</span><span class="op">$</span><span class="va">prey_cons_map</span>, <span class="va">fppolys</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Kittiwake"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="op">(</span><span class="fu"><a href="../reference/spmapplot.html">spmapplot</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">Guillemot</span><span class="op">$</span><span class="va">prey_cons_map</span>, <span class="va">fppolys</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Guillemot"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="op">(</span><span class="fu"><a href="../reference/spmapplot.html">spmapplot</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">Razorbill</span><span class="op">$</span><span class="va">prey_cons_map</span>, <span class="va">fppolys</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Razorbill"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu">patchwork</span><span class="fu">::</span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html" class="external-link">plot_layout</a></span><span class="op">(</span>ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<p><img src="spmapper-worked-example_files/figure-html/unnamed-chunk-9-1.png" width="4500"></p>
+<p><img src="spmapper-worked-example_files/figure-html/unnamed-chunk-10-1.png" width="4500"></p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Or plot a single species map, e.g. Razorbill</span></span>
-<span><span class="fu"><a href="../reference/spmapplot.html">spmapplot</a></span><span class="op">(</span><span class="va">out_razo</span><span class="op">$</span><span class="va">prey_cons_map</span>, <span class="va">fppolys</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Razorbill"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/spmapplot.html">spmapplot</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">Razorbill</span><span class="op">$</span><span class="va">prey_cons_map</span>, <span class="va">fppolys</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Razorbill"</span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level3">
@@ -260,63 +278,69 @@ polygons, <em>fppolys</em>)</p>
 produced by <em>spmapper()</em>, and annotates the baseline estimate
 with a dashed line.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">blki_p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">out_kitt</span><span class="op">$</span><span class="va">allbirds_prey_sim</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">out_kitt</span><span class="op">$</span><span class="va">allbirds_prey_sim</span><span class="op">/</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<code class="sourceCode R"><span><span class="va">blki_p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">Kittiwake</span><span class="op">$</span><span class="va">allbirds_prey_sim</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">Kittiwake</span><span class="op">$</span><span class="va">allbirds_prey_sim</span><span class="op">/</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html" class="external-link">geom_histogram</a></span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">50</span>, color <span class="op">=</span> <span class="st">"gray10"</span>, fill <span class="op">=</span> <span class="st">"skyblue"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">out_kitt</span><span class="op">$</span><span class="va">allbirds_prey_est</span><span class="op">/</span><span class="fl">1000</span>, color <span class="op">=</span> <span class="st">"gray10"</span>, linetype <span class="op">=</span> <span class="st">"longdash"</span>, linewidth <span class="op">=</span> <span class="fl">1.1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">out</span><span class="op">$</span><span class="va">Kittiwake</span><span class="op">$</span><span class="va">allbirds_prey_est</span><span class="op">/</span><span class="fl">1000</span>, color <span class="op">=</span> <span class="st">"gray10"</span>, linetype <span class="op">=</span> <span class="st">"longdash"</span>, linewidth <span class="op">=</span> <span class="fl">1.1</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Prey consumption mass, t"</span>, y <span class="op">=</span> <span class="st">"Frequency"</span>, title <span class="op">=</span> <span class="st">"Kittiwake"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">cogu_p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">out_cogu</span><span class="op">$</span><span class="va">allbirds_prey_sim</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">out_cogu</span><span class="op">$</span><span class="va">allbirds_prey_sim</span><span class="op">/</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="va">cogu_p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">Guillemot</span><span class="op">$</span><span class="va">allbirds_prey_sim</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">Guillemot</span><span class="op">$</span><span class="va">allbirds_prey_sim</span><span class="op">/</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html" class="external-link">geom_histogram</a></span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">50</span>, color <span class="op">=</span> <span class="st">"gray10"</span>, fill <span class="op">=</span> <span class="st">"skyblue"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">out_cogu</span><span class="op">$</span><span class="va">allbirds_prey_est</span><span class="op">/</span><span class="fl">1000</span>, color <span class="op">=</span> <span class="st">"gray10"</span>, linetype <span class="op">=</span> <span class="st">"longdash"</span>, linewidth <span class="op">=</span> <span class="fl">1.1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">out</span><span class="op">$</span><span class="va">Guillemot</span><span class="op">$</span><span class="va">allbirds_prey_est</span><span class="op">/</span><span class="fl">1000</span>, color <span class="op">=</span> <span class="st">"gray10"</span>, linetype <span class="op">=</span> <span class="st">"longdash"</span>, linewidth <span class="op">=</span> <span class="fl">1.1</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Prey consumption mass, t"</span>, y <span class="op">=</span> <span class="st">"Frequency"</span>, title <span class="op">=</span> <span class="st">"Guillemot"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">razo_p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">out_razo</span><span class="op">$</span><span class="va">allbirds_prey_sim</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">out_razo</span><span class="op">$</span><span class="va">allbirds_prey_sim</span><span class="op">/</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="va">razo_p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">Razorbill</span><span class="op">$</span><span class="va">allbirds_prey_sim</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">Razorbill</span><span class="op">$</span><span class="va">allbirds_prey_sim</span><span class="op">/</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html" class="external-link">geom_histogram</a></span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">50</span>, color <span class="op">=</span> <span class="st">"gray10"</span>, fill <span class="op">=</span> <span class="st">"skyblue"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">out_razo</span><span class="op">$</span><span class="va">allbirds_prey_est</span><span class="op">/</span><span class="fl">1000</span>, color <span class="op">=</span> <span class="st">"gray10"</span>, linetype <span class="op">=</span> <span class="st">"longdash"</span>, linewidth <span class="op">=</span> <span class="fl">1.1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">out</span><span class="op">$</span><span class="va">Razorbill</span><span class="op">$</span><span class="va">allbirds_prey_est</span><span class="op">/</span><span class="fl">1000</span>, color <span class="op">=</span> <span class="st">"gray10"</span>, linetype <span class="op">=</span> <span class="st">"longdash"</span>, linewidth <span class="op">=</span> <span class="fl">1.1</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Prey consumption mass, t"</span>, y <span class="op">=</span> <span class="st">"Frequency"</span>, title <span class="op">=</span> <span class="st">"Razorbill"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="op">(</span><span class="va">blki_p</span> <span class="op">+</span> <span class="va">cogu_p</span> <span class="op">+</span> <span class="va">razo_p</span><span class="op">)</span> </span></code></pre></div>
-<p><img src="spmapper-worked-example_files/figure-html/unnamed-chunk-11-1.png" width="5000"></p>
+<p><img src="spmapper-worked-example_files/figure-html/unnamed-chunk-12-1.png" width="5000"></p>
 <p><br></p>
 </div>
 <div class="section level3">
-<h3 id="view-output-tables">
-<strong>View output tables</strong><a class="anchor" aria-label="anchor" href="#view-output-tables"></a>
+<h3 id="view-key-results">
+<strong>View key results</strong><a class="anchor" aria-label="anchor" href="#view-key-results"></a>
 </h3>
-<p>The folowing code produces a table of prey mass consumption (kg)
-estimates for each species. <em>Estimate</em> refers to the baseline
-estimate, <em>CI_Lower</em> is the lower confidence interval (2.5%) and
-<em>CI_Upper</em> is the upper confidence interval (97.5%).</p>
+<p>The following code retrieves a table of prey mass consumption (kg)
+estimates for each species and the results of the spatial extraction of
+prey consumption within polygons. Users can also access the full
+input/output data per species within the output sub-list for each
+(e.g. via ‘out$Kittiwake’, and the entries therein).</p>
+<p><em>Estimate_kg</em> refers to the baseline <em>total</em> prey
+consumption (kg) estimate; <em>CI_Lower_kg</em> and <em>CI_Upper_kg</em>
+refer to the lower (2.5%) and upper (97.5%) confidence intervals,
+respectively.</p>
+<p><em>fp_percent</em> is the percentage of total prey consumption
+contained <em>within the polygons</em>. <em>fp_Estimate_kg</em> is the
+baseline prey mass (kg) contained within the polygons;
+<em>fp_CI_Lower_kg</em> and <em>fp_CI_Upper_kg</em> refer to the lower
+(2.5%) and upper (97.5%) confidence intervals, respectively.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">tab_kitt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span>  Species <span class="op">=</span> <span class="st">"Kittiwake"</span>,</span>
-<span>  Estimate <span class="op">=</span> <span class="va">out_kitt</span><span class="op">$</span><span class="va">allbirds_prey_est</span>, </span>
-<span>  CI_Lower <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">out_kitt</span><span class="op">$</span><span class="va">allbirds_prey_sim</span>, <span class="fl">0.025</span><span class="op">)</span><span class="op">)</span>, </span>
-<span>  CI_Upper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">out_kitt</span><span class="op">$</span><span class="va">allbirds_prey_sim</span>, <span class="fl">0.975</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">tab_cogu</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span>  Species <span class="op">=</span> <span class="st">"Guillemot"</span>,</span>
-<span>  Estimate <span class="op">=</span> <span class="va">out_cogu</span><span class="op">$</span><span class="va">allbirds_prey_est</span>, </span>
-<span>  CI_Lower <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">out_cogu</span><span class="op">$</span><span class="va">allbirds_prey_sim</span>, <span class="fl">0.025</span><span class="op">)</span><span class="op">)</span>, </span>
-<span>  CI_Upper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">out_cogu</span><span class="op">$</span><span class="va">allbirds_prey_sim</span>, <span class="fl">0.975</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">tab_razo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span>  Species <span class="op">=</span> <span class="st">"Razorbill"</span>,</span>
-<span>  Estimate <span class="op">=</span> <span class="va">out_razo</span><span class="op">$</span><span class="va">allbirds_prey_est</span>, </span>
-<span>  CI_Lower <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">out_razo</span><span class="op">$</span><span class="va">allbirds_prey_sim</span>, <span class="fl">0.025</span><span class="op">)</span><span class="op">)</span>, </span>
-<span>  CI_Upper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">out_razo</span><span class="op">$</span><span class="va">allbirds_prey_sim</span>, <span class="fl">0.975</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">tab_kitt</span>, <span class="va">tab_cogu</span>, <span class="va">tab_razo</span><span class="op">)</span>, digits <span class="op">=</span> <span class="fl">2</span>, caption <span class="op">=</span> <span class="st">"Prey consumption mass, kg"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">out</span><span class="op">$</span><span class="va">Summary</span></span></code></pre></div>
 <table class="table">
-<caption>Prey consumption mass, kg</caption>
+<caption>spmapper Key Results</caption>
+<colgroup>
+<col width="9%">
+<col width="11%">
+<col width="11%">
+<col width="11%">
+<col width="10%">
+<col width="14%">
+<col width="14%">
+<col width="14%">
+</colgroup>
 <thead><tr class="header">
 <th align="left">Species</th>
-<th align="right">Estimate</th>
-<th align="right">CI_Lower</th>
-<th align="right">CI_Upper</th>
+<th align="right">Estimate_kg</th>
+<th align="right">CI_Lower_kg</th>
+<th align="right">CI_Upper_kg</th>
+<th align="right">fp_percent</th>
+<th align="right">fp_Estimate_kg</th>
+<th align="right">fp_CI_Lower_kg</th>
+<th align="right">fp_CI_Upper_kg</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -324,87 +348,30 @@ estimate, <em>CI_Lower</em> is the lower confidence interval (2.5%) and
 <td align="right">4819894.3</td>
 <td align="right">4085681.9</td>
 <td align="right">5718792</td>
+<td align="right">6.99</td>
+<td align="right">336915.8</td>
+<td align="right">285593.59</td>
+<td align="right">399749.74</td>
 </tr>
 <tr class="even">
 <td align="left">Guillemot</td>
 <td align="right">5681001.3</td>
 <td align="right">4775665.0</td>
 <td align="right">9955648</td>
+<td align="right">4.28</td>
+<td align="right">243174.5</td>
+<td align="right">204421.73</td>
+<td align="right">426150.25</td>
 </tr>
 <tr class="odd">
 <td align="left">Razorbill</td>
 <td align="right">718604.3</td>
 <td align="right">553496.9</td>
 <td align="right">1122483</td>
-</tr>
-</tbody>
-</table>
-<p><br></p>
-</div>
-<div class="section level3">
-<h3 id="view-polygon-extraction-results">
-<strong>View polygon extraction results</strong><a class="anchor" aria-label="anchor" href="#view-polygon-extraction-results"></a>
-</h3>
-<p>The following code produces a table of the results of the spatial
-extraction of prey consumption within polygons. <em>fp_percent</em> is
-the percentage of total prey consumption, <em>fp_Estimate</em> is the
-baseline prey mass (kg), <em>fp_CI_Lower</em> is the lower confidence
-interval for prey mass (kg, 2.5%), and <em>fp_CI_Upper</em> is the upper
-confidence interval for prey mass (kg, 97.5%) contained within the
-polygons.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">fp_tab_kitt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span>  Species <span class="op">=</span> <span class="st">"Kittiwake"</span>,</span>
-<span>  fp_percent <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/math-generics.html" class="external-link">round</a></span><span class="op">(</span><span class="va">out_kitt</span><span class="op">$</span><span class="va">fp_ud_overlap</span> <span class="op">*</span> <span class="fl">100</span>, <span class="fl">4</span><span class="op">)</span>, <span class="co"># % prey consumption in footprint/s, 4 d.p.</span></span>
-<span>  fp_Estimate <span class="op">=</span> <span class="va">out_kitt</span><span class="op">$</span><span class="va">allbirds_prey_fp_est</span>, </span>
-<span>  fp_CI_Lower <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">out_kitt</span><span class="op">$</span><span class="va">allbirds_prey_fp_sim</span>, <span class="fl">0.025</span><span class="op">)</span><span class="op">)</span>, <span class="co"># 2.5%</span></span>
-<span>  fp_CI_Upper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">out_kitt</span><span class="op">$</span><span class="va">allbirds_prey_fp_sim</span>, <span class="fl">0.975</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="co"># 97.5%</span></span>
-<span></span>
-<span><span class="va">fp_tab_cogu</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span>  Species <span class="op">=</span> <span class="st">"Guillemot"</span>,</span>
-<span>  fp_percent <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/math-generics.html" class="external-link">round</a></span><span class="op">(</span><span class="va">out_cogu</span><span class="op">$</span><span class="va">fp_ud_overlap</span> <span class="op">*</span> <span class="fl">100</span>, <span class="fl">4</span><span class="op">)</span>, <span class="co"># % prey consumption in footprint/s, 4 d.p.</span></span>
-<span>  fp_Estimate <span class="op">=</span> <span class="va">out_cogu</span><span class="op">$</span><span class="va">allbirds_prey_fp_est</span>, </span>
-<span>  fp_CI_Lower <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">out_cogu</span><span class="op">$</span><span class="va">allbirds_prey_fp_sim</span>, <span class="fl">0.025</span><span class="op">)</span><span class="op">)</span>, <span class="co"># 2.5%</span></span>
-<span>  fp_CI_Upper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">out_cogu</span><span class="op">$</span><span class="va">allbirds_prey_fp_sim</span>, <span class="fl">0.975</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="co"># 97.5%</span></span>
-<span></span>
-<span><span class="va">fp_tab_razo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span>  Species <span class="op">=</span> <span class="st">"Razorbill"</span>,</span>
-<span>  fp_percent <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/math-generics.html" class="external-link">round</a></span><span class="op">(</span><span class="va">out_razo</span><span class="op">$</span><span class="va">fp_ud_overlap</span> <span class="op">*</span> <span class="fl">100</span>, <span class="fl">4</span><span class="op">)</span>, <span class="co"># % prey consumption in footprint/s, 4 d.p.</span></span>
-<span>  fp_Estimate <span class="op">=</span> <span class="va">out_razo</span><span class="op">$</span><span class="va">allbirds_prey_fp_est</span>, </span>
-<span>  fp_CI_Lower <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">out_razo</span><span class="op">$</span><span class="va">allbirds_prey_fp_sim</span>, <span class="fl">0.025</span><span class="op">)</span><span class="op">)</span>, <span class="co"># 2.5%</span></span>
-<span>  fp_CI_Upper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">out_razo</span><span class="op">$</span><span class="va">allbirds_prey_fp_sim</span>, <span class="fl">0.975</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="co"># 97.5%</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">fp_tab_kitt</span>, <span class="va">fp_tab_cogu</span>, <span class="va">fp_tab_razo</span><span class="op">)</span>, digits<span class="op">=</span><span class="fl">1</span>, caption <span class="op">=</span> <span class="st">"Polygon extraction results"</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
-<caption>Polygon extraction results</caption>
-<thead><tr class="header">
-<th align="left">Species</th>
-<th align="right">fp_percent</th>
-<th align="right">fp_Estimate</th>
-<th align="right">fp_CI_Lower</th>
-<th align="right">fp_CI_Upper</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">Kittiwake</td>
-<td align="right">7.0</td>
-<td align="right">336915.8</td>
-<td align="right">285593.6</td>
-<td align="right">399749.7</td>
-</tr>
-<tr class="even">
-<td align="left">Guillemot</td>
-<td align="right">4.3</td>
-<td align="right">243174.5</td>
-<td align="right">204421.7</td>
-<td align="right">426150.2</td>
-</tr>
-<tr class="odd">
-<td align="left">Razorbill</td>
-<td align="right">3.2</td>
+<td align="right">3.24</td>
 <td align="right">23257.7</td>
-<td align="right">17914.0</td>
-<td align="right">36329.3</td>
+<td align="right">17913.99</td>
+<td align="right">36329.28</td>
 </tr>
 </tbody>
 </table>
@@ -421,23 +388,13 @@ errors. The following examples illustrate the error messages produced
 under cases of mis-specification.</p>
 <p><br></p>
 <div class="section level4">
-<h4 id="incorrect-species-name">Incorrect species name<a class="anchor" aria-label="anchor" href="#incorrect-species-name"></a>
-</h4>
-<p><em>spmapper</em> explicitly checks whether the provided species
-names are valid (including capitalisation).</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/spmapper.html">spmapper</a></span><span class="op">(</span>spname <span class="op">=</span> <span class="st">"kittiwake"</span>, fppolys <span class="op">=</span> <span class="va">fppolys</span>, tooldir <span class="op">=</span> <span class="va">tooldir</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Error in spmapper(spname = "kittiwake", fppolys = fppolys, tooldir = tooldir): Invalid species name: must be 'Kittiwake', 'Guillemot' or 'Razorbill'!</span></span></code></pre>
-<p><br></p>
-</div>
-<div class="section level4">
 <h4 id="incorrect-path-to-tool">Incorrect path to tool<a class="anchor" aria-label="anchor" href="#incorrect-path-to-tool"></a>
 </h4>
-<p><em>spmapper</em> does not currently explicitly check if the path
-provided is correct/valid, but may yield sensible error messages if an
-incorrect path is specified.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/spmapper.html">spmapper</a></span><span class="op">(</span>spname <span class="op">=</span> <span class="st">"Kittiwake"</span>, fppolys <span class="op">=</span> <span class="va">fppolys</span>, tooldir <span class="op">=</span> <span class="st">"test"</span><span class="op">)</span></span></code></pre></div>
+<p>spmapper* does not currently explicitly check if the path provided is
+correct/valid, but may yield sensible error messages if an incorrect
+path is specified.</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/spmapper.html">spmapper</a></span><span class="op">(</span>fppolys <span class="op">=</span> <span class="va">fppolys</span>, tooldir <span class="op">=</span> <span class="st">"test"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Warning in file(file, "rt"): cannot open file 'test/fame_population_ests.csv':</span></span>
 <span><span class="co">## No such file or directory</span></span></code></pre>
 <pre><code><span><span class="co">## Error in file(file, "rt"): cannot open the connection</span></span></code></pre>

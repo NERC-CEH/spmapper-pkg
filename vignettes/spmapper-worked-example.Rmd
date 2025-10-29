@@ -51,9 +51,9 @@ library(ggplot2)
 library(patchwork)
 
 ```
-
+Define tool directory path - this is important to source the package functions, and for those functions to locate the input data!
 ```{r eval=FALSE}
-## Define tool directory path - this is important to source the package functions, and for those functions to locate the input data!
+## Define tool directory path
 tooldir <- system.file("extdata", package = "spmapper") # automatically find and define your file path - but do check the path is correct
 
 # tooldir <- file.path(".../spmapper") # alternatively, modify here to your package files directory if you have installed the package elsewhere
@@ -115,18 +115,25 @@ spmapplot(udmap, fppolys) + theme(legend.position = "none") # map colour scale w
 
 <br><br>
 
-## **Run primary function *spmapper()* ** - produces prey consumption maps for chosen species and optionally extracts quantities within user-specified polygons, if provided. 
+## **Run primary function *spmapper()* ** - produces prey consumption maps for all species and optionally extracts quantities within user-specified polygons, if provided. 
 
 <br>
 
-Specify species of interest with "spname = ", optional user-supplied polygons with "fppolys = ", and the directory to tool data with "tooldir = " (defined earlier under 'Load packages and functions'). The object returned (*e.g.* out_kitt) is a list object of the various inputs, quantities, and output prey consumption maps. 
+Optionally specify polygons with "fppolys = ". Users must specify the directory to tool data with "tooldir = " (defined earlier under 'Load packages and functions'). The object returned (assigned as the object named 'out' in this example) is a list object. This list contains 3 sub-lists (one per species) of the various inputs, quantities, and output prey consumption maps and extracted quantities. The species sub-lists are named by species, *e.g.* 'out\$Kittiwake'. The spmapper() output list also contains a dataframe summary of key results per species (named 'Summary', retrieved via 'out\$Summary'). The spmapper() function provides updates on its progress through the calculations. 
 
-```{r error = FALSE, warning= FALSE, message= FALSE}
-out_kitt <- spmapper(spname = "Kittiwake", fppolys = fppolys, tooldir = tooldir)
 
-out_cogu <- spmapper(spname = "Guillemot", fppolys = fppolys, tooldir = tooldir)
+```{r error = FALSE, warning=FALSE, message=FALSE}
+out <- spmapper(fppolys = fppolys, tooldir = tooldir)
 
-out_razo <- spmapper(spname = "Razorbill", fppolys = fppolys, tooldir = tooldir)
+```
+
+<br>
+
+Note, if you pass *spmapper()* a set of multiple polygons (*i.e.* a multipolygon object), spatial extractions will be performed and summed across all contained polygons. If you are interested in comparing two specific polygons - or two sets of polygons - you will need to run *spmapper()* separately for each, and then compare results. See example code below to run the tool for two individual or sets of input polygons, 'fppolys1' and 'fppolys2'. 
+
+```{r eval=FALSE}
+out1 <- spmapper(fppolys = fppolys1, tooldir = tooldir)
+out2 <- spmapper(fppolys = fppolys2, tooldir = tooldir)
 ```
 
 <br><br>
@@ -140,15 +147,15 @@ out_razo <- spmapper(spname = "Razorbill", fppolys = fppolys, tooldir = tooldir)
 
 
 # Plot all species prey consumption maps 
-(spmapplot(out_kitt$prey_cons_map, fppolys) + ggtitle("Kittiwake")) +
-(spmapplot(out_cogu$prey_cons_map, fppolys) + ggtitle("Guillemot")) +
-(spmapplot(out_razo$prey_cons_map, fppolys) + ggtitle("Razorbill")) + 
+(spmapplot(out$Kittiwake$prey_cons_map, fppolys) + ggtitle("Kittiwake")) +
+(spmapplot(out$Guillemot$prey_cons_map, fppolys) + ggtitle("Guillemot")) +
+(spmapplot(out$Razorbill$prey_cons_map, fppolys) + ggtitle("Razorbill")) + 
   patchwork::plot_layout(ncol = 1)
 ```
 
 ```{r, eval=FALSE}
 # Or plot a single species map, e.g. Razorbill
-spmapplot(out_razo$prey_cons_map, fppolys) + ggtitle("Razorbill")
+spmapplot(out$Razorbill$prey_cons_map, fppolys) + ggtitle("Razorbill")
 
 ```
 
@@ -158,23 +165,23 @@ spmapplot(out_razo$prey_cons_map, fppolys) + ggtitle("Razorbill")
 ## **Visualise prey mass estimates**
 The following code plots the distribution of prey mass estimates produced by *spmapper()*, and annotates the baseline estimate with a dashed line. 
 
-```{r, fig.margin=10, , fig.width = 10, fig.height = 3.2, dpi = 500}
+```{r, fig.margin=10, , fig.width = 10, fig.height = 3.1, dpi = 500}
 
-blki_p <- ggplot(data.frame(out_kitt$allbirds_prey_sim), aes(out_kitt$allbirds_prey_sim/1000)) +
+blki_p <- ggplot(data.frame(out$Kittiwake$allbirds_prey_sim), aes(out$Kittiwake$allbirds_prey_sim/1000)) +
   geom_histogram(bins = 50, color = "gray10", fill = "skyblue") +
-  geom_vline(xintercept = out_kitt$allbirds_prey_est/1000, color = "gray10", linetype = "longdash", linewidth = 1.1) +
+  geom_vline(xintercept = out$Kittiwake$allbirds_prey_est/1000, color = "gray10", linetype = "longdash", linewidth = 1.1) +
   labs(x = "Prey consumption mass, t", y = "Frequency", title = "Kittiwake") +
   theme_minimal()
 
-cogu_p <- ggplot(data.frame(out_cogu$allbirds_prey_sim), aes(out_cogu$allbirds_prey_sim/1000)) +
+cogu_p <- ggplot(data.frame(out$Guillemot$allbirds_prey_sim), aes(out$Guillemot$allbirds_prey_sim/1000)) +
   geom_histogram(bins = 50, color = "gray10", fill = "skyblue") +
-  geom_vline(xintercept = out_cogu$allbirds_prey_est/1000, color = "gray10", linetype = "longdash", linewidth = 1.1) +
+  geom_vline(xintercept = out$Guillemot$allbirds_prey_est/1000, color = "gray10", linetype = "longdash", linewidth = 1.1) +
   labs(x = "Prey consumption mass, t", y = "Frequency", title = "Guillemot") +
   theme_minimal()
 
-razo_p <- ggplot(data.frame(out_razo$allbirds_prey_sim), aes(out_razo$allbirds_prey_sim/1000)) +
+razo_p <- ggplot(data.frame(out$Razorbill$allbirds_prey_sim), aes(out$Razorbill$allbirds_prey_sim/1000)) +
   geom_histogram(bins = 50, color = "gray10", fill = "skyblue") +
-  geom_vline(xintercept = out_razo$allbirds_prey_est/1000, color = "gray10", linetype = "longdash", linewidth = 1.1) +
+  geom_vline(xintercept = out$Razorbill$allbirds_prey_est/1000, color = "gray10", linetype = "longdash", linewidth = 1.1) +
   labs(x = "Prey consumption mass, t", y = "Frequency", title = "Razorbill") +
   theme_minimal()
 
@@ -184,62 +191,24 @@ razo_p <- ggplot(data.frame(out_razo$allbirds_prey_sim), aes(out_razo$allbirds_p
 
 <br>
 
-## **View output tables**
+## **View key results**
 
-The folowing code produces a table of prey mass  consumption (kg) estimates for each species. *Estimate* refers to the baseline estimate, *CI_Lower* is the lower confidence interval (2.5%) and *CI_Upper* is the upper confidence interval (97.5%).
+The following code retrieves a table of  prey mass consumption (kg) estimates for each species and the results of the spatial extraction of prey consumption within polygons. Users can also access the full input/output data per species within the output sub-list for each (e.g. via 'out\$Kittiwake', and the entries therein).
 
-```{r}
-tab_kitt <- data.frame(
-  Species = "Kittiwake",
-  Estimate = out_kitt$allbirds_prey_est, 
-  CI_Lower = as.numeric(quantile(out_kitt$allbirds_prey_sim, 0.025)), 
-  CI_Upper = as.numeric(quantile(out_kitt$allbirds_prey_sim, 0.975)))
+*Estimate_kg* refers to the baseline *total* prey consumption (kg) estimate; *CI_Lower_kg* and *CI_Upper_kg* refer to the lower (2.5%) and upper (97.5%) confidence intervals, respectively.
 
-tab_cogu <- data.frame(
-  Species = "Guillemot",
-  Estimate = out_cogu$allbirds_prey_est, 
-  CI_Lower = as.numeric(quantile(out_cogu$allbirds_prey_sim, 0.025)), 
-  CI_Upper = as.numeric(quantile(out_cogu$allbirds_prey_sim, 0.975)))
+*fp_percent* is the percentage of total prey consumption contained *within the polygons*. *fp_Estimate_kg* is the baseline prey mass (kg) contained within the polygons;	*fp_CI_Lower_kg* and *fp_CI_Upper_kg* refer to the lower (2.5%) and upper (97.5%) confidence intervals, respectively.
 
-tab_razo <- data.frame(
-  Species = "Razorbill",
-  Estimate = out_razo$allbirds_prey_est, 
-  CI_Lower = as.numeric(quantile(out_razo$allbirds_prey_sim, 0.025)), 
-  CI_Upper = as.numeric(quantile(out_razo$allbirds_prey_sim, 0.975)))
 
-kable(rbind(tab_kitt, tab_cogu, tab_razo), digits = 2, caption = "Prey consumption mass, kg")
+
+```{r eval = FALSE}
+
+out$Summary
+
 ```
 
-<br>
-
-## **View polygon extraction results**
-
-The following code produces a table of the results of the spatial extraction of prey consumption within polygons. *fp_percent* is the percentage of total prey consumption, *fp_Estimate* is the baseline prey mass (kg),	*fp_CI_Lower* is the lower confidence interval for prey mass (kg, 2.5%), and *fp_CI_Upper* is the upper confidence interval for prey mass (kg, 97.5%) contained within the polygons.
-
-```{r}
-
-fp_tab_kitt <- data.frame(
-  Species = "Kittiwake",
-  fp_percent = round(out_kitt$fp_ud_overlap * 100, 4), # % prey consumption in footprint/s, 4 d.p.
-  fp_Estimate = out_kitt$allbirds_prey_fp_est, 
-  fp_CI_Lower = as.numeric(quantile(out_kitt$allbirds_prey_fp_sim, 0.025)), # 2.5%
-  fp_CI_Upper = as.numeric(quantile(out_kitt$allbirds_prey_fp_sim, 0.975))) # 97.5%
-
-fp_tab_cogu <- data.frame(
-  Species = "Guillemot",
-  fp_percent = round(out_cogu$fp_ud_overlap * 100, 4), # % prey consumption in footprint/s, 4 d.p.
-  fp_Estimate = out_cogu$allbirds_prey_fp_est, 
-  fp_CI_Lower = as.numeric(quantile(out_cogu$allbirds_prey_fp_sim, 0.025)), # 2.5%
-  fp_CI_Upper = as.numeric(quantile(out_cogu$allbirds_prey_fp_sim, 0.975))) # 97.5%
-
-fp_tab_razo <- data.frame(
-  Species = "Razorbill",
-  fp_percent = round(out_razo$fp_ud_overlap * 100, 4), # % prey consumption in footprint/s, 4 d.p.
-  fp_Estimate = out_razo$allbirds_prey_fp_est, 
-  fp_CI_Lower = as.numeric(quantile(out_razo$allbirds_prey_fp_sim, 0.025)), # 2.5%
-  fp_CI_Upper = as.numeric(quantile(out_razo$allbirds_prey_fp_sim, 0.975))) # 97.5%
-
-kable(rbind(fp_tab_kitt, fp_tab_cogu, fp_tab_razo), digits=1, caption = "Polygon extraction results")
+```{r echo = FALSE}
+kable(out$Summary, caption = "spmapper Key Results")
 
 ```
 
@@ -252,20 +221,11 @@ ___
 
 <br>
 
-### Incorrect species name
-*spmapper* explicitly checks whether the provided species names are valid (including capitalisation).
-
-```{r error=TRUE}
-spmapper(spname = "kittiwake", fppolys = fppolys, tooldir = tooldir)
-```
-
-<br>
-
 ### Incorrect path to tool
-*spmapper* does not currently explicitly check if the path provided is correct/valid, but may yield sensible error messages if an incorrect path is specified.
+spmapper* does not currently explicitly check if the path provided is correct/valid, but may yield sensible error messages if an incorrect path is specified.
 
 ```{r error=TRUE}
-spmapper(spname = "Kittiwake", fppolys = fppolys, tooldir = "test")
+spmapper(fppolys = fppolys, tooldir = "test")
 ```
 
 <br>
@@ -294,9 +254,9 @@ land_p <- st_sf(
   )
 )
 
-spmapplot(out_kitt$prey_cons_map, land_p)
+spmapplot(out$Kittiwake$prey_cons_map, land_p)
 
-spmapper(spname = "Kittiwake", fppolys = land_p, tooldir = tooldir)
+spmapper(fppolys = land_p, tooldir = tooldir)
 
 ```
 
@@ -323,14 +283,14 @@ small_p <- st_sf(
 
 tr_ext <- ext(725000, 1407000, 6653000, 7311000)
 
-spmapplot(out_kitt$prey_cons_map, small_p) + 
+spmapplot(out$Kittiwake$prey_cons_map, small_p) + 
   coord_sf(
     xlim = c(xmin(tr_ext), xmax(tr_ext)),
     ylim = c(ymin(tr_ext), ymax(tr_ext)),
     expand = FALSE
-  )
+  ) 
 
-spmapper(spname = "Kittiwake", fppolys = small_p, tooldir = tooldir)
+spmapper(fppolys = small_p, tooldir = tooldir)
 
 ```
 <br>
@@ -355,17 +315,17 @@ outside_p <- st_sf(
   )
 )
 
-ext_kitt <- ext(out_kitt$prey_cons_map) 
+ext_kitt <- ext(out$Kittiwake$prey_cons_map) 
 
-spmapplot(out_kitt$prey_cons_map, outside_p) + 
+spmapplot(out$Kittiwake$prey_cons_map, outside_p) + 
   geom_sf(data = outside_p,
           colour = "orchid2", fill = NA,
           alpha = 1, linewidth = 0.4) +
   coord_sf(xlim = c(138000, ext_kitt$xmax - 1000),
-           ylim = c(5980000, 7485000),
+           ylim = c(5990000, 7485000),
            expand = FALSE)
 
-spmapper(spname = "Kittiwake", fppolys = outside_p, tooldir = tooldir)
+spmapper(fppolys = outside_p, tooldir = tooldir)
 
 ```
 <br><br>

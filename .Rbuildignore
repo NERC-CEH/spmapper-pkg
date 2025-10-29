@@ -3,6 +3,7 @@
 ^favicon\.png$
 ^ecowings\.Rproj$
 ^\.Rproj\.user$
+
 # Ignore RStudio project files
 ^.*\.Rproj$
 ^\.Rhistory$
@@ -12,6 +13,8 @@
 # Ignore Git and GitHub workflow files
 ^\.gitignore$
 ^\.github/
+^NEWS\.md$
+^README\.md$
 
 # Ignore development and raw data folders
 ^dev/
@@ -21,6 +24,7 @@
 # Ignore pkgdown config and favicon (config may stay if needed, favicon usually not)
 ^_pkgdown\.yml$
 ^pkgdown/
+^man/figures/
 
 # Ignore built pkgdown site
 ^docs/
