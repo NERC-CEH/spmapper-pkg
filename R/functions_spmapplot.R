@@ -66,7 +66,7 @@ spmapplot <- function(rast, polyg = NULL){
 
     theme(axis.text.x = element_text(vjust=0.5, size=13),
           axis.text.y = element_text(size=13),
-          axis.title.x = element_text(size=13, margin = margin(t=10), face="bold"),
+          axis.title.x = element_text(size=13, margin = margin(b=10), face="bold"),
           axis.title.y = element_text(size=13, margin = margin(r=12), face="bold"),
           plot.title = element_text(size = 16),
 
