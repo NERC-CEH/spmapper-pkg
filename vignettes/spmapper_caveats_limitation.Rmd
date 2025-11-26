@@ -21,7 +21,7 @@ p {
 
 <br>
 
-This page outlines recommendations, appropriate applications, and important caveats relating to the use of *spmapper* and its outputs. **Users are asked to read this document fully (approximate read time: 3-5 minutes).**
+#### This page outlines recommendations, appropriate applications, and important caveats relating to the use of *spmapper* and its outputs. **Users are asked to read this document fully (approximate read time: 3-5 minutes).**
 
 
 <br>
@@ -47,6 +47,10 @@ Users may modify the input parameters for the prey intake model, but users must 
 
 <br>
 
+### *Visual gaps in mapped prey consumption may indicate extremely low, but non-zero prey consumption.*
+*spmapplot*() includes a lower limit to the colour scale for visualisation purposes. Note that in some instances this may produce visual gaps in the prey consumption maps where very low quantities of prey consumption are estimated. Users can extract consumption map object/s from *spmapper*() outputs (see methods) and plot them separately if desired. This concerns map visualisation only, not spatial extractions results.
+
+<br>
 
 ### *Use of spmapper at the appropriate spatial scale*
 *spmapper* concerns space use at a broad, shelf-seas scale, for seabird species networks for the UK and Ireland. *spmapper* generates prey consumption maps on a regular 2x2 km grid, in Lambert azimuthal equal-area projection. Users should not provide polygons or footprint shapefiles that are smaller than a single grid cell for *spmapper* to extract. The *spmapper*() function will return a warning if a polygon of insufficient size (*i.e.* smaller than a single grid cell) is provided.
@@ -72,6 +76,6 @@ Any realised impacts of OWFs on seabird foraging dynamics and energetics may als
 
 Leedham, O., Searle, K. R., Harris, M. P., Newell, M., Wanless, S., Mobbs, D. C., Butler, A. and Daunt, F. (2025) "Time-activity budgets and energetics of common guillemot, razorbill, Atlantic puffin, and black-legged kittiwake”, *NERC EDS Environmental Information Data Centre*.  https://doi.org/10.5285/07b1105a-4a14-47e3-b491-9af59be90aff 
 
-Wakefield, E. D., Owen, E., Baer, J., Carroll, M. J., Daunt, F., Dodd, S. G., Green, J. A., Guilford, T., Mavor, R. A., Miller, P. I., Newell, M. A., Newton, S. F., Robertson, G. S., Shoji, A., Soanes, L. M., Votier, S. C., Wanless, S. and Bolton, M. (2017) “Breeding density, fine-scale tracking, and large-scale modeling reveal the regional distribution of four seabird species.,” *Ecological Applications*, 27(7), pp. 2074–2091. doi: 10.1002/eap.1591.
+Wakefield, E. D., Owen, E., Baer, J., Carroll, M. J., Daunt, F., Dodd, S. G., Green, J. A., Guilford, T., Mavor, R. A., Miller, P. I., Newell, M. A., Newton, S. F., Robertson, G. S., Shoji, A., Soanes, L. M., Votier, S. C., Wanless, S. and Bolton, M. (2017) “Breeding density, fine-scale tracking, and large-scale modeling reveal the regional distribution of four seabird species.,” *Ecological Applications*, 27(7), pp. 2074–2091. https://doi.org/10.1002/eap.1591.
 
 <br>

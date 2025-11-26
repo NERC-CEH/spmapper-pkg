@@ -70,7 +70,7 @@ function loadGoogleAnalytics() {
 
     <a class="navbar-brand me-2" href="../index.html">spmapper</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -109,7 +109,7 @@ function loadGoogleAnalytics() {
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Recommendations, Caveats &amp; Limitations</h1>
             
-            <h4 data-toc-skip class="date">2025-10-29</h4>
+            <h4 data-toc-skip class="date">2025-11-26</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/NERC-CEH/spmapper-pkg/blob/HEAD/vignettes/spmapper_caveats_limitation.Rmd" class="external-link"><code>vignettes/spmapper_caveats_limitation.Rmd</code></a></small>
       <div class="d-none name"><code>spmapper_caveats_limitation.Rmd</code></div>
@@ -127,11 +127,14 @@ p {
 <h2 id="recommendations-caveats-limitations">Recommendations, Caveats &amp; Limitations<a class="anchor" aria-label="anchor" href="#recommendations-caveats-limitations"></a>
 </h2>
 <p><br></p>
-<p>This page outlines recommendations, appropriate applications, and
+<div class="section level5">
+<h5 id="this-page-outlines-recommendations-appropriate-applications-and-important-caveats-relating-to-the-use-of-spmapper-and-its-outputs--users-are-asked-to-read-this-document-fully-approximate-read-time-3-5-minutes-">This page outlines recommendations, appropriate applications, and
 important caveats relating to the use of <em>spmapper</em> and its
 outputs. <strong>Users are asked to read this document fully
-(approximate read time: 3-5 minutes).</strong></p>
+(approximate read time: 3-5 minutes).</strong><a class="anchor" aria-label="anchor" href="#this-page-outlines-recommendations-appropriate-applications-and-important-caveats-relating-to-the-use-of-spmapper-and-its-outputs--users-are-asked-to-read-this-document-fully-approximate-read-time-3-5-minutes-"></a>
+</h5>
 <p><br></p>
+</div>
 <div class="section level4">
 <h4 id="the-consequences-of-developing-in-areas-evaluated-using-spmapper-are-not-indicated-">
 <em>The consequences of developing in areas evaluated using</em>
@@ -188,6 +191,20 @@ estimates.</em><a class="anchor" aria-label="anchor" href="#modifying-input-para
 <p>Users may modify the input parameters for the prey intake model, but
 users must indicate these changes in any use of <em>spmapper</em>
 outputs, with full explanation of any changes from defaults.</p>
+<p><br></p>
+</div>
+<div class="section level4">
+<h4 id="visual-gaps-in-mapped-prey-consumption-may-indicate-extremely-low-but-non-zero-prey-consumption-">
+<em>Visual gaps in mapped prey consumption may indicate extremely
+low, but non-zero prey consumption.</em><a class="anchor" aria-label="anchor" href="#visual-gaps-in-mapped-prey-consumption-may-indicate-extremely-low-but-non-zero-prey-consumption-"></a>
+</h4>
+<p><em>spmapplot</em>() includes a lower limit to the colour scale for
+visualisation purposes. Note that in some instances this may produce
+visual gaps in the prey consumption maps where very low quantities of
+prey consumption are estimated. Users can extract consumption map
+object/s from <em>spmapper</em>() outputs (see methods) and plot them
+separately if desired. This concerns map visualisation only, not spatial
+extractions results.</p>
 <p><br></p>
 </div>
 <div class="section level4">
@@ -264,7 +281,7 @@ Newell, M. A., Newton, S. F., Robertson, G. S., Shoji, A., Soanes, L.
 M., Votier, S. C., Wanless, S. and Bolton, M. (2017) “Breeding density,
 fine-scale tracking, and large-scale modeling reveal the regional
 distribution of four seabird species.,” <em>Ecological
-Applications</em>, 27(7), pp. 2074–2091. doi: 10.1002/eap.1591.</p>
+Applications</em>, 27(7), pp. 2074–2091. <a href="https://doi.org/10.1002/eap.1591" class="external-link uri">https://doi.org/10.1002/eap.1591</a>.</p>
 <p><br></p>
 </div>
 </div>

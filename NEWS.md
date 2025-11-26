@@ -1,3 +1,14 @@
+# spmapper 0.9.3
+Release Date: 2025-11-26
+
+Updated population data.
+
+## Notes
+* This is a **GitHub-only release**; the package is not available on CRAN.
+* Feedback and bug reports are welcome: [GitHub Issues](https://github.com/NERC-CEH/spmapper-pkg/issues).
+
+---
+
 # spmapper 0.9.2
 Release Date: 2025-10-29
 

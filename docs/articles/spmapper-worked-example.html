@@ -70,7 +70,7 @@ function loadGoogleAnalytics() {
 
     <a class="navbar-brand me-2" href="../index.html">spmapper</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -109,7 +109,7 @@ function loadGoogleAnalytics() {
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Worked example</h1>
             
-            <h4 data-toc-skip class="date">2025-10-29</h4>
+            <h4 data-toc-skip class="date">2025-11-26</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/NERC-CEH/spmapper-pkg/blob/HEAD/vignettes/spmapper-worked-example.Rmd" class="external-link"><code>vignettes/spmapper-worked-example.Rmd</code></a></small>
       <div class="d-none name"><code>spmapper-worked-example.Rmd</code></div>
@@ -156,16 +156,18 @@ packages installed.</p>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/" class="external-link">knitr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/rnaturalearth/" class="external-link">rnaturalearth</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://sjmgarnier.github.io/viridis/" class="external-link">viridis</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com" class="external-link">patchwork</a></span><span class="op">)</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Warning: package 'ggplot2' was built under R version 4.5.2</span></span></code></pre>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com" class="external-link">patchwork</a></span><span class="op">)</span></span></code></pre></div>
 <p>Define tool directory path - this is important to source the package
 functions, and for those functions to locate the input data!</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Define tool directory path</span></span>
 <span><span class="va">tooldir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, package <span class="op">=</span> <span class="st">"spmapper"</span><span class="op">)</span> <span class="co"># automatically find and define your file path - but do check the path is correct</span></span>
 <span></span>
 <span><span class="co"># tooldir &lt;- file.path(".../spmapper") # alternatively, modify here to your package files directory if you have installed the package elsewhere</span></span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load package functions</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/invisible.html" class="external-link">invisible</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"functions_preymodel.R"</span>, package <span class="op">=</span> <span class="st">"spmapper"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/invisible.html" class="external-link">invisible</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"functions_spmapper.R"</span>, package <span class="op">=</span> <span class="st">"spmapper"</span><span class="op">)</span><span class="op">)</span></span>
@@ -190,11 +192,11 @@ System (CRS) of their loaded shapefiles.</strong> <em>spmapper</em>
 reprojects user polygons to align to the prey consumption maps.
 <em>spmapper</em> includes a function to plot prey consumption maps with
 the user polygons overlaid (see below).</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Specify shapefile/s</span></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>fppolys <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_read</span>(<span class="fu">file.path</span>()) <span class="co"># Add your filepath/s here. </span></span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="do">## Users must define the CRS of their loaded shapefile for spmapper to function!</span></span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>fppolys <span class="ot">&lt;-</span> <span class="fu">st_crs</span>([...]) <span class="co"># define source file CRS</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># Specify shapefile/s</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>fppolys <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_read</span>(<span class="fu">file.path</span>()) <span class="co"># Add your filepath/s here. </span></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="do">## Users must define the CRS of their loaded shapefile for spmapper to function!</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>fppolys <span class="ot">&lt;-</span> <span class="fu">st_crs</span>([...]) <span class="co"># define source file CRS</span></span></code></pre></div>
 <p><br></p>
 <div class="section level5">
 <h5 id="example-data-presented">
@@ -226,7 +228,7 @@ spmapper() output list also contains a dataframe summary of key results
 per species (named ‘Summary’, retrieved via ‘out$Summary’). The
 spmapper() function provides updates on its progress through the
 calculations.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/spmapper.html">spmapper</a></span><span class="op">(</span>fppolys <span class="op">=</span> <span class="va">fppolys</span>, tooldir <span class="op">=</span> <span class="va">tooldir</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## |---------|---------|---------|---------|=========================================                                          </span></span></code></pre>
 <pre><code><span><span class="co">## [1] "Completed 1 of 3 species: Kittiwake"</span></span>
@@ -242,7 +244,7 @@ interested in comparing two specific polygons - or two sets of polygons
 - you will need to run <em>spmapper()</em> separately for each, and then
 compare results. See example code below to run the tool for two
 individual or sets of input polygons, ‘fppolys1’ and ‘fppolys2’.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">out1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/spmapper.html">spmapper</a></span><span class="op">(</span>fppolys <span class="op">=</span> <span class="va">fppolys1</span>, tooldir <span class="op">=</span> <span class="va">tooldir</span><span class="op">)</span></span>
 <span><span class="va">out2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/spmapper.html">spmapper</a></span><span class="op">(</span>fppolys <span class="op">=</span> <span class="va">fppolys2</span>, tooldir <span class="op">=</span> <span class="va">tooldir</span><span class="op">)</span></span></code></pre></div>
 <p><br><br></p>
@@ -258,14 +260,14 @@ consumption map (raster, generated by <em>spmapper()</em>, contained in
 list outputs in the form out_kitt$<em>prey_cons_map</em>), the second
 optional argument is a polygon object (<em>e.g.</em> the user’s
 polygons, <em>fppolys</em>)</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Plot all species prey consumption maps </span></span>
 <span><span class="op">(</span><span class="fu"><a href="../reference/spmapplot.html">spmapplot</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">Kittiwake</span><span class="op">$</span><span class="va">prey_cons_map</span>, <span class="va">fppolys</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Kittiwake"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span><span class="op">(</span><span class="fu"><a href="../reference/spmapplot.html">spmapplot</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">Guillemot</span><span class="op">$</span><span class="va">prey_cons_map</span>, <span class="va">fppolys</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Guillemot"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span><span class="op">(</span><span class="fu"><a href="../reference/spmapplot.html">spmapplot</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">Razorbill</span><span class="op">$</span><span class="va">prey_cons_map</span>, <span class="va">fppolys</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Razorbill"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu">patchwork</span><span class="fu">::</span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html" class="external-link">plot_layout</a></span><span class="op">(</span>ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <p><img src="spmapper-worked-example_files/figure-html/unnamed-chunk-10-1.png" width="4500"></p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Or plot a single species map, e.g. Razorbill</span></span>
 <span><span class="fu"><a href="../reference/spmapplot.html">spmapplot</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">Razorbill</span><span class="op">$</span><span class="va">prey_cons_map</span>, <span class="va">fppolys</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Razorbill"</span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
@@ -277,7 +279,7 @@ polygons, <em>fppolys</em>)</p>
 <p>The following code plots the distribution of prey mass estimates
 produced by <em>spmapper()</em>, and annotates the baseline estimate
 with a dashed line.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">blki_p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">Kittiwake</span><span class="op">$</span><span class="va">allbirds_prey_sim</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">Kittiwake</span><span class="op">$</span><span class="va">allbirds_prey_sim</span><span class="op">/</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html" class="external-link">geom_histogram</a></span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">50</span>, color <span class="op">=</span> <span class="st">"gray10"</span>, fill <span class="op">=</span> <span class="st">"skyblue"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">out</span><span class="op">$</span><span class="va">Kittiwake</span><span class="op">$</span><span class="va">allbirds_prey_est</span><span class="op">/</span><span class="fl">1000</span>, color <span class="op">=</span> <span class="st">"gray10"</span>, linetype <span class="op">=</span> <span class="st">"longdash"</span>, linewidth <span class="op">=</span> <span class="fl">1.1</span><span class="op">)</span> <span class="op">+</span></span>
@@ -318,7 +320,7 @@ contained <em>within the polygons</em>. <em>fp_Estimate_kg</em> is the
 baseline prey mass (kg) contained within the polygons;
 <em>fp_CI_Lower_kg</em> and <em>fp_CI_Upper_kg</em> refer to the lower
 (2.5%) and upper (97.5%) confidence intervals, respectively.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">out</span><span class="op">$</span><span class="va">Summary</span></span></code></pre></div>
 <table class="table">
 <caption>spmapper Key Results</caption>
@@ -349,7 +351,7 @@ baseline prey mass (kg) contained within the polygons;
 <td align="right">4085681.9</td>
 <td align="right">5718792</td>
 <td align="right">6.99</td>
-<td align="right">336915.8</td>
+<td align="right">336915.83</td>
 <td align="right">285593.59</td>
 <td align="right">399749.74</td>
 </tr>
@@ -359,19 +361,19 @@ baseline prey mass (kg) contained within the polygons;
 <td align="right">4775665.0</td>
 <td align="right">9955648</td>
 <td align="right">4.28</td>
-<td align="right">243174.5</td>
+<td align="right">243174.53</td>
 <td align="right">204421.73</td>
 <td align="right">426150.25</td>
 </tr>
 <tr class="odd">
 <td align="left">Razorbill</td>
-<td align="right">718604.3</td>
-<td align="right">553496.9</td>
-<td align="right">1122483</td>
+<td align="right">692967.3</td>
+<td align="right">533750.2</td>
+<td align="right">1082437</td>
 <td align="right">3.24</td>
-<td align="right">23257.7</td>
-<td align="right">17913.99</td>
-<td align="right">36329.28</td>
+<td align="right">22427.96</td>
+<td align="right">17274.88</td>
+<td align="right">35033.19</td>
 </tr>
 </tbody>
 </table>
@@ -393,7 +395,7 @@ under cases of mis-specification.</p>
 <p>spmapper* does not currently explicitly check if the path provided is
 correct/valid, but may yield sensible error messages if an incorrect
 path is specified.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/spmapper.html">spmapper</a></span><span class="op">(</span>fppolys <span class="op">=</span> <span class="va">fppolys</span>, tooldir <span class="op">=</span> <span class="st">"test"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Warning in file(file, "rt"): cannot open file 'test/fame_population_ests.csv':</span></span>
 <span><span class="co">## No such file or directory</span></span></code></pre>
