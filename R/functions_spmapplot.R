@@ -73,12 +73,13 @@ spmapplot <- function(rast, polyg = NULL){
           panel.grid.major = element_blank(),
           panel.grid.minor = element_blank(),
 
-          plot.margin = margin(rep(7,4)),   # top, right, bottom, left
+          plot.margin = margin(7, 7, 7, 7),
           plot.background = element_rect(fill = "transparent", color = NA),   # Transparent  background
           panel.border = element_blank(),
 
-          legend.title = element_text(size = 10, hjust = 0, margin = margin(b = 15))
-    )
+          legend.title = element_text(size = 10, hjust = 0,
+                                      margin = margin(b = 15))
+        )
 
 
   ## ################################
