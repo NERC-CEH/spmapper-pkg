@@ -1,5 +1,5 @@
 Package: spmapper
-Title: spmapper
+Title: An R package spatial planning tool to indicate the foraging value of marine areas to breeding seabirds
 Version: 0.9.4
 Authors@R: c(
     person("Oliver", "Leedham", email = "olilee@ceh.ac.uk", role = "aut"),
