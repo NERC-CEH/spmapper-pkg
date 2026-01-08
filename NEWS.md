@@ -1,3 +1,14 @@
+# spmapper 0.9.5
+Release Date: 2026-01-08
+
+Updated UD files.
+
+## Notes
+* This is a **GitHub-only release**; the package is not available on CRAN.
+* Feedback and bug reports are welcome: [GitHub Issues](https://github.com/NERC-CEH/spmapper-pkg/issues).
+
+---
+
 # spmapper 0.9.4
 Release Date: 2025-11-26
 
